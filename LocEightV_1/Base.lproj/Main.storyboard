@@ -1,24 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="LocEightV_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="132" y="118"/>
+        </scene>
+        <!--Left Side Panel View Controller-->
+        <scene sceneID="RqL-c0-6ee">
+            <objects>
+                <viewController id="11a-jf-jfF" customClass="LeftSidePanelViewController" customModule="LocEightV_1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LMr-fp-iua">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwP-IY-C9N">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JG2-b7-w7g">
+                                        <rect key="frame" x="20" y="39" width="176" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="176" id="h04-jC-b9k"/>
+                                            <constraint firstAttribute="height" constant="42" id="jcS-MB-HEA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="AI8-VQ-i5e"/>
+                                    <constraint firstItem="JG2-b7-w7g" firstAttribute="centerY" secondItem="rwP-IY-C9N" secondAttribute="centerY" id="g9c-E0-5Vc"/>
+                                    <constraint firstItem="JG2-b7-w7g" firstAttribute="leading" secondItem="rwP-IY-C9N" secondAttribute="leading" constant="20" id="ji4-BT-6si"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gg-gC-uEr">
+                                <rect key="frame" x="20" y="140" width="165" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="TwW-Dr-BP1"/>
+                                    <constraint firstAttribute="height" constant="30" id="fKG-M5-doe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Locate vehicle"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lhc-s6-nng">
+                                <rect key="frame" x="20" y="190" width="180" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AXK-W1-xF7"/>
+                                    <constraint firstAttribute="width" constant="180" id="Auj-Hr-2ND"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Find parking garages"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-I3-kGH">
+                                <rect key="frame" x="20" y="240" width="165" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5cB-J4-Mb8"/>
+                                    <constraint firstAttribute="width" constant="165" id="QLx-wa-sKy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Find places to eat"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVS-lu-WuV">
+                                <rect key="frame" x="20" y="290" width="165" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="CSw-NZ-oCK"/>
+                                    <constraint firstAttribute="height" constant="30" id="kFm-7d-K7b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Find places to shop"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="dNY-I3-kGH" firstAttribute="leading" secondItem="zBc-4H-lBO" secondAttribute="leading" constant="20" id="2g6-YV-g4V"/>
+                            <constraint firstItem="dNY-I3-kGH" firstAttribute="top" secondItem="Lhc-s6-nng" secondAttribute="bottom" constant="20" id="3DH-EQ-LC5"/>
+                            <constraint firstItem="1Gg-gC-uEr" firstAttribute="leading" secondItem="zBc-4H-lBO" secondAttribute="leading" constant="20" id="5eC-dw-BT2"/>
+                            <constraint firstItem="Lhc-s6-nng" firstAttribute="leading" secondItem="zBc-4H-lBO" secondAttribute="leading" constant="20" id="JfG-IA-BID"/>
+                            <constraint firstItem="rwP-IY-C9N" firstAttribute="leading" secondItem="zBc-4H-lBO" secondAttribute="leading" id="Myo-Zb-QGo"/>
+                            <constraint firstItem="rwP-IY-C9N" firstAttribute="top" secondItem="LMr-fp-iua" secondAttribute="top" id="Q7T-2A-UBs"/>
+                            <constraint firstItem="aVS-lu-WuV" firstAttribute="top" secondItem="dNY-I3-kGH" secondAttribute="bottom" constant="20" id="Tf6-E1-zVY"/>
+                            <constraint firstItem="aVS-lu-WuV" firstAttribute="leading" secondItem="zBc-4H-lBO" secondAttribute="leading" constant="20" id="bQN-CS-Ufy"/>
+                            <constraint firstItem="Lhc-s6-nng" firstAttribute="top" secondItem="1Gg-gC-uEr" secondAttribute="bottom" constant="20" id="oFw-68-k8e"/>
+                            <constraint firstItem="rwP-IY-C9N" firstAttribute="trailing" secondItem="zBc-4H-lBO" secondAttribute="trailing" id="sNf-DO-dlF"/>
+                            <constraint firstItem="1Gg-gC-uEr" firstAttribute="top" secondItem="rwP-IY-C9N" secondAttribute="bottom" constant="20" id="vXc-7E-g1j"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zBc-4H-lBO"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qxL-ca-sI4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="956.52173913043487" y="117.85714285714285"/>
         </scene>
     </scenes>
 </document>
