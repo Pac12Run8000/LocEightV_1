@@ -25,7 +25,12 @@ class ContainerViewController: UIViewController {
     
     var homeViewController:HomeViewController!
     var leftViewcontroller:LeftSidePanelViewController!
-    var currentState:SlideOutState = .collapsed
+    var currentState:SlideOutState = .collapsed {
+        didSet {
+            let shouldShowShadow = (currentState != .collapsed)
+            shouldShowShadowForCenterViewcontroller(shouldShowShadow)
+        }
+    }
     var isHidden = false
     let centerpanelExpandedOffset:CGFloat = 160
     var centerController:UIViewController!
@@ -115,6 +120,14 @@ extension ContainerViewController:CenterViewControllerDelegate {
         }
     }
     
+    func shouldShowShadowForCenterViewcontroller(_ status:Bool) {
+        if status {
+            centerController.view.layer.shadowOpacity = 0.6
+        } else {
+            centerController.view.layer.shadowOpacity = 0.0
+        }
+    }
+    
     func hideWhiteCoverView() {
         centerController.view.removeGestureRecognizer(tap)
         for subview in self.centerController.view.subviews {
@@ -143,13 +156,13 @@ extension ContainerViewController:CenterViewControllerDelegate {
     }
     
     func animateStatusBar() {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.setNeedsStatusBarAppearanceUpdate()
         }, completion: nil)
     }
     
     func animateCenterPanelXPosition(targetPosition:CGFloat, completion:((Bool) -> Void)! = nil) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.centerController.view.frame.origin.x = targetPosition
         }, completion: completion)
     }
