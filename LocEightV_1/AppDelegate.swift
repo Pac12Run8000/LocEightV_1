@@ -11,7 +11,16 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    fileprivate var containerVC = ContainerViewController()
+    
+    var MenuContainerVC:ContainerViewController {
+        for scene in UIApplication.shared.connectedScenes {
+            if scene.activationState == .foregroundActive, let sceneDelegate = scene.delegate as? SceneDelegate {
+                return sceneDelegate.containerVC
+            }
+        }
+        return containerVC
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

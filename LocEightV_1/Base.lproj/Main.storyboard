@@ -10,22 +10,51 @@
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="LocEightV_1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="BYZ-38-t0r" customClass="HomeViewController" customModule="LocEightV_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="noE-t8-OsP">
+                                <rect key="frame" x="0.0" y="144" width="414" height="390"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="390" id="Gme-Wg-5z5"/>
+                                </constraints>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kos-pc-lEV">
+                                <rect key="frame" x="10" y="44" width="49" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="MD8-bN-26b"/>
+                                    <constraint firstAttribute="width" constant="49" id="i3d-6B-f9e"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="menuSliderBtn"/>
+                                <connections>
+                                    <action selector="menuButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oDZ-jM-S0j"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Kos-pc-lEV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Vz-ot-bXu"/>
+                            <constraint firstItem="Kos-pc-lEV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="REf-Rh-lVc"/>
+                            <constraint firstItem="noE-t8-OsP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="cdd-Vc-zLj"/>
+                            <constraint firstItem="noE-t8-OsP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="isI-wC-6Pr"/>
+                            <constraint firstItem="noE-t8-OsP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o3B-Ax-AEl"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="noE-t8-OsP" id="d1z-qp-fbq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="118"/>
+            <point key="canvasLocation" x="131.8840579710145" y="117.85714285714285"/>
         </scene>
         <!--Left Side Panel View Controller-->
         <scene sceneID="RqL-c0-6ee">
             <objects>
-                <viewController id="11a-jf-jfF" customClass="LeftSidePanelViewController" customModule="LocEightV_1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeftSidePanelViewController" id="11a-jf-jfF" customClass="LeftSidePanelViewController" customModule="LocEightV_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LMr-fp-iua">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -110,4 +139,7 @@
             <point key="canvasLocation" x="956.52173913043487" y="117.85714285714285"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menuSliderBtn" width="30" height="24"/>
+    </resources>
 </document>

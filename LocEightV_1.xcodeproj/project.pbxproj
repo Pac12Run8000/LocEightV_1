@@ -14,6 +14,8 @@
 		09B5050D2444D7FD000DA639 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09B5050B2444D7FD000DA639 /* LaunchScreen.storyboard */; };
 		09B505162444F327000DA639 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505152444F327000DA639 /* HomeViewController.swift */; };
 		09B505182445099C000DA639 /* LeftSidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505172445099C000DA639 /* LeftSidePanelViewController.swift */; };
+		09B5051A24450C79000DA639 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5051924450C79000DA639 /* ContainerViewController.swift */; };
+		09B5051D24451813000DA639 /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5051C24451813000DA639 /* CenterViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		09B5050E2444D7FD000DA639 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09B505152444F327000DA639 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		09B505172445099C000DA639 /* LeftSidePanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSidePanelViewController.swift; sourceTree = "<group>"; };
+		09B5051924450C79000DA639 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		09B5051C24451813000DA639 /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		09B504FF2444D7FC000DA639 /* LocEightV_1 */ = {
 			isa = PBXGroup;
 			children = (
+				09B5051B244517E9000DA639 /* Protocols */,
 				09B505142444F30C000DA639 /* Controllers */,
 				09B505002444D7FC000DA639 /* AppDelegate.swift */,
 				09B505022444D7FC000DA639 /* SceneDelegate.swift */,
@@ -74,8 +79,17 @@
 			children = (
 				09B505152444F327000DA639 /* HomeViewController.swift */,
 				09B505172445099C000DA639 /* LeftSidePanelViewController.swift */,
+				09B5051924450C79000DA639 /* ContainerViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		09B5051B244517E9000DA639 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				09B5051C24451813000DA639 /* CenterViewControllerDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +165,8 @@
 			files = (
 				09B505012444D7FC000DA639 /* AppDelegate.swift in Sources */,
 				09B505182445099C000DA639 /* LeftSidePanelViewController.swift in Sources */,
+				09B5051D24451813000DA639 /* CenterViewControllerDelegate.swift in Sources */,
+				09B5051A24450C79000DA639 /* ContainerViewController.swift in Sources */,
 				09B505032444D7FC000DA639 /* SceneDelegate.swift in Sources */,
 				09B505162444F327000DA639 /* HomeViewController.swift in Sources */,
 			);

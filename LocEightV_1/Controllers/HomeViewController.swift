@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import MapKit
 
 class HomeViewController: UIViewController {
+    
+    var delegate:CenterViewControllerDelegate?
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func menuButtonAction(_ sender: Any) {
+        delegate?.toggleLeftPanel()
+    }
+    
     
 }
