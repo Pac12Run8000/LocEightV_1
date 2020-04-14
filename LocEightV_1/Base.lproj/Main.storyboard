@@ -15,12 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="noE-t8-OsP">
-                                <rect key="frame" x="0.0" y="144" width="414" height="390"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="390" id="Gme-Wg-5z5"/>
-                                </constraints>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kos-pc-lEV">
                                 <rect key="frame" x="10" y="44" width="49" height="46"/>
                                 <constraints>
@@ -33,19 +27,13 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Vz-ot-bXu"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="REf-Rh-lVc"/>
-                            <constraint firstItem="noE-t8-OsP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="cdd-Vc-zLj"/>
-                            <constraint firstItem="noE-t8-OsP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="isI-wC-6Pr"/>
-                            <constraint firstItem="noE-t8-OsP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o3B-Ax-AEl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <outlet property="mapView" destination="noE-t8-OsP" id="d1z-qp-fbq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

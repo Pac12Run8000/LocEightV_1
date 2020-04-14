@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     
     var delegate:CenterViewControllerDelegate?
     
-    @IBOutlet weak var mapView: MKMapView!
+    
     
 
     override func viewDidLoad() {
