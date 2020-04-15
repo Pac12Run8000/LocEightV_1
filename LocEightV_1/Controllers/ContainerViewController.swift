@@ -14,11 +14,11 @@ enum SlideOutState {
     case leftPanelExpanded
 }
 
-enum showWhichViewController {
+enum ShowWhichViewController {
     case homeViewController
 }
 
-var showViewController:showWhichViewController = .homeViewController
+var showViewController:ShowWhichViewController = .homeViewController
 
 
 class ContainerViewController: UIViewController {
@@ -43,7 +43,7 @@ class ContainerViewController: UIViewController {
         
     }
     
-    func initCenter(screen:showWhichViewController) {
+    func initCenter(screen:ShowWhichViewController) {
         var presentingController:UIViewController
         
         showViewController = screen
