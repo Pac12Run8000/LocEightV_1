@@ -16,13 +16,14 @@ enum SlideOutState {
 
 enum ShowWhichViewController {
     case homeViewController
+    case locateVehicleViewController
 }
 
-var showViewController:ShowWhichViewController = .homeViewController
+
 
 
 class ContainerViewController: UIViewController {
-    
+    var locateVehicleViewController:LocateVehicleViewController!
     var homeViewController:HomeViewController!
     var leftViewcontroller:LeftSidePanelViewController!
     var currentState:SlideOutState = .collapsed {
@@ -38,22 +39,35 @@ class ContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        initCenter(screen: showViewController)
+        
+        initCenter(screen: .homeViewController)
         
     }
     
     func initCenter(screen:ShowWhichViewController) {
+
         var presentingController:UIViewController
-        
-        showViewController = screen
         
         if homeViewController == nil {
             homeViewController = UIStoryboard.homeViewController()
             homeViewController.delegate = self
         }
         
-        presentingController = homeViewController
+        if locateVehicleViewController == nil {
+            locateVehicleViewController = UIStoryboard.locateVehicleViewController()
+            locateVehicleViewController.delegate = self
+        }
+        
+        
+        
+
+        switch screen {
+        case .homeViewController:
+            presentingController = homeViewController
+        case .locateVehicleViewController:
+            presentingController = locateVehicleViewController
+        }
+        
         
         if let controller = centerController {
             controller.view.removeFromSuperview()
@@ -65,6 +79,8 @@ class ContainerViewController: UIViewController {
         view.addSubview(centerController.view)
         addChild(centerController)
         centerController.didMove(toParent: self)
+        
+        
         
     }
    
@@ -177,6 +193,10 @@ private extension UIStoryboard {
         
         return UIStoryboard(name: "Main", bundle: Bundle.main)
         
+    }
+    
+    class func locateVehicleViewController() -> LocateVehicleViewController? {
+        return mainStoryboard().instantiateViewController(identifier: "LocateVehicleViewController") as? LocateVehicleViewController
     }
     
     class func leftViewController() -> LeftSidePanelViewController? {

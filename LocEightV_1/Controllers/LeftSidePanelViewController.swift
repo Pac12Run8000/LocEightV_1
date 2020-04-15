@@ -21,7 +21,11 @@ class LeftSidePanelViewController: UIViewController {
     }
     
     @IBAction func locateVehicleAction(_ sender: UIButton) {
-        appDelegate.MenuContainerVC.toggleLeftPanel()
+        
+//        appDelegate.MenuContainerVC.animateLeftPanel(shouldExpand: false)
+//        appDelegate.MenuContainerVC.toggleLeftPanel()
+        appDelegate.MenuContainerVC.initCenter(screen: .locateVehicleViewController)
+        
         
     }
     
