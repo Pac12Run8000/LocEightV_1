@@ -13,7 +13,16 @@ class HomeViewController: UIViewController {
     
     var delegate:CenterViewControllerDelegate?
     
-    var menuFunctionState:MenuFunction?
+    var menuFunction:MenuFunction? {
+        didSet {
+            switch menuFunction {
+            case .locate_vehicle:
+                print("must locate your vehicle")
+            default:
+                print("Do nothing")
+            }
+        }
+    }
     
     
     

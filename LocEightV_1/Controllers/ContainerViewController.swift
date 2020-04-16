@@ -79,7 +79,9 @@ class ContainerViewController: UIViewController {
 
 extension ContainerViewController:CenterViewControllerDelegate {
     
-    
+    func configureHomeViewControllerForLocation() {
+        homeViewController.menuFunction = .locate_vehicle
+    }
     
     func toggleLeftPanel() {
         let notAlreadyExpanded = currentState != .leftPanelExpanded

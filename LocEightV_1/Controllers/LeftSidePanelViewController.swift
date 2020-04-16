@@ -24,7 +24,7 @@ class LeftSidePanelViewController: UIViewController {
     
     @IBAction func locateVehicleAction(_ sender: Any) {
         
-        
+        appdelegate.MenuContainerVC.configureHomeViewControllerForLocation()
         appdelegate.MenuContainerVC.toggleLeftPanel()
         
         
