@@ -13,6 +13,9 @@ class HomeViewController: UIViewController {
     
     var delegate:CenterViewControllerDelegate?
     
+    var menuFunctionState:MenuFunction?
+    
+    
     
     
     @IBOutlet weak var mapView: MKMapView!
@@ -23,7 +26,14 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         configureMapViewLayout()
+        
        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
     }
     
     @IBAction func menuButtonAction(_ sender: Any) {
@@ -46,3 +56,5 @@ extension HomeViewController {
     
     
 }
+
+

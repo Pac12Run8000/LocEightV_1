@@ -78,6 +78,9 @@ class ContainerViewController: UIViewController {
 }
 
 extension ContainerViewController:CenterViewControllerDelegate {
+    
+    
+    
     func toggleLeftPanel() {
         let notAlreadyExpanded = currentState != .leftPanelExpanded
         if notAlreadyExpanded {
@@ -185,7 +188,11 @@ private extension UIStoryboard {
     }
     
     class func homeViewController() -> HomeViewController? {
-        return mainStoryboard().instantiateViewController(identifier: "HomeViewController") as? HomeViewController
+        
+        var homeController = mainStoryboard().instantiateViewController(identifier: "HomeViewController") as? HomeViewController
+        return homeController
     }
     
 }
+
+

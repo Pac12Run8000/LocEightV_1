@@ -11,6 +11,8 @@ import UIKit
 class LeftSidePanelViewController: UIViewController {
     
     let appdelegate = AppDelegate.getAppDelegate()
+    var menu:MenuFunction?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,9 @@ class LeftSidePanelViewController: UIViewController {
     
     @IBAction func locateVehicleAction(_ sender: Any) {
         
+        
         appdelegate.MenuContainerVC.toggleLeftPanel()
+        
         
     }
     
