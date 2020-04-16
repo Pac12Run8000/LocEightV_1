@@ -10,7 +10,7 @@ import UIKit
 
 class LeftSidePanelViewController: UIViewController {
     
-    
+    let appdelegate = AppDelegate.getAppDelegate()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,12 @@ class LeftSidePanelViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-   
+    @IBAction func locateVehicleAction(_ sender: Any) {
+        
+        appdelegate.MenuContainerVC.toggleLeftPanel()
+        
+    }
+    
     
     
 
