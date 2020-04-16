@@ -23,11 +23,20 @@ class LeftSidePanelViewController: UIViewController {
     }
     
     @IBAction func locateVehicleAction(_ sender: Any) {
-        
-        appdelegate.MenuContainerVC.configureHomeViewControllerForLocation()
-        appdelegate.MenuContainerVC.toggleLeftPanel()
-        
-        
+        appdelegate.MenuContainerVC.configureHomeViewControllerForLocation(.locate_vehicle)
+    }
+    
+    @IBAction func parkingGarageAction(_ sender: Any) {
+        appdelegate.MenuContainerVC.configureHomeViewControllerForLocation(.find_parking_garage)
+    }
+    
+    
+    @IBAction func placesToEatAction(_ sender: Any) {
+        appdelegate.MenuContainerVC.configureHomeViewControllerForLocation(.find_eating_places)
+    }
+    
+    @IBAction func placesToShopAction(_ sender: Any) {
+        appdelegate.MenuContainerVC.configureHomeViewControllerForLocation(.find_shopping_places)
     }
     
     

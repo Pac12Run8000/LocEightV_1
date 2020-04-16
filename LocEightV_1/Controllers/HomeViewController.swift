@@ -18,6 +18,12 @@ class HomeViewController: UIViewController {
             switch menuFunction {
             case .locate_vehicle:
                 print("must locate your vehicle")
+            case .find_parking_garage:
+                print("find a parking garage downtown")
+            case .find_eating_places:
+                print("find a place to eat")
+            case .find_shopping_places:
+                print("find a place to shop")
             default:
                 print("Do nothing")
             }
