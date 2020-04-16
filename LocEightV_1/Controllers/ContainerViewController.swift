@@ -23,7 +23,7 @@ enum ShowWhichViewController {
 
 
 class ContainerViewController: UIViewController {
-    var locateVehicleViewController:LocateVehicleViewController!
+    
     var homeViewController:HomeViewController!
     var leftViewcontroller:LeftSidePanelViewController!
     var currentState:SlideOutState = .collapsed {
@@ -45,29 +45,12 @@ class ContainerViewController: UIViewController {
     }
     
     func initCenter(screen:ShowWhichViewController) {
-
-        var presentingController:UIViewController
         
         if homeViewController == nil {
             homeViewController = UIStoryboard.homeViewController()
             homeViewController.delegate = self
         }
-        
-        if locateVehicleViewController == nil {
-            locateVehicleViewController = UIStoryboard.locateVehicleViewController()
-            locateVehicleViewController.delegate = self
-        }
-        
-        
-        
 
-        switch screen {
-        case .homeViewController:
-            presentingController = homeViewController
-        case .locateVehicleViewController:
-            presentingController = locateVehicleViewController
-        }
-        
         
         if let controller = centerController {
             controller.view.removeFromSuperview()
@@ -75,7 +58,7 @@ class ContainerViewController: UIViewController {
         }
         
         
-        centerController = presentingController
+        centerController = homeViewController
         view.addSubview(centerController.view)
         addChild(centerController)
         centerController.didMove(toParent: self)
@@ -195,9 +178,7 @@ private extension UIStoryboard {
         
     }
     
-    class func locateVehicleViewController() -> LocateVehicleViewController? {
-        return mainStoryboard().instantiateViewController(identifier: "LocateVehicleViewController") as? LocateVehicleViewController
-    }
+    
     
     class func leftViewController() -> LeftSidePanelViewController? {
         return mainStoryboard().instantiateViewController(identifier: "LeftSidePanelViewController") as? LeftSidePanelViewController

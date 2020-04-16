@@ -16,7 +16,6 @@
 		09B505182445099C000DA639 /* LeftSidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505172445099C000DA639 /* LeftSidePanelViewController.swift */; };
 		09B5051A24450C79000DA639 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5051924450C79000DA639 /* ContainerViewController.swift */; };
 		09B5051D24451813000DA639 /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5051C24451813000DA639 /* CenterViewControllerDelegate.swift */; };
-		09B505212446901A000DA639 /* LocateVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505202446901A000DA639 /* LocateVehicleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +30,6 @@
 		09B505172445099C000DA639 /* LeftSidePanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSidePanelViewController.swift; sourceTree = "<group>"; };
 		09B5051924450C79000DA639 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		09B5051C24451813000DA639 /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
-		09B505202446901A000DA639 /* LocateVehicleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocateVehicleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 				09B505152444F327000DA639 /* HomeViewController.swift */,
 				09B505172445099C000DA639 /* LeftSidePanelViewController.swift */,
 				09B5051924450C79000DA639 /* ContainerViewController.swift */,
-				09B505202446901A000DA639 /* LocateVehicleViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -169,7 +166,6 @@
 				09B505012444D7FC000DA639 /* AppDelegate.swift in Sources */,
 				09B505182445099C000DA639 /* LeftSidePanelViewController.swift in Sources */,
 				09B5051D24451813000DA639 /* CenterViewControllerDelegate.swift in Sources */,
-				09B505212446901A000DA639 /* LocateVehicleViewController.swift in Sources */,
 				09B5051A24450C79000DA639 /* ContainerViewController.swift in Sources */,
 				09B505032444D7FC000DA639 /* SceneDelegate.swift in Sources */,
 				09B505162444F327000DA639 /* HomeViewController.swift in Sources */,
