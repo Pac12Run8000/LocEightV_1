@@ -68,6 +68,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func clearMapAction(_ sender: Any) {
         clearAllMKAnnotations()
+        defaultRegionForClearMap()
     }
     
     
@@ -106,6 +107,14 @@ extension HomeViewController {
     
     func configureLoadingVehicleLocation() {
         checkLocationServices()
+    }
+    
+    func defaultRegionForClearMap() {
+        let lat:CLLocationDegrees = 37.090240
+        let lon:CLLocationDegrees = -95.712891
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 5000000, longitudinalMeters: 5000000)
+        mapView.setRegion(region, animated: true)
     }
     
     func clearAllMKAnnotations() {
