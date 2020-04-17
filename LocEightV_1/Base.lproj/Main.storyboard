@@ -32,13 +32,39 @@
                                     <constraint firstAttribute="height" constant="480" id="B5c-uP-FNQ"/>
                                 </constraints>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IN-WP-YIF">
+                                <rect key="frame" x="10" y="590" width="140" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="4g6-bu-ncO"/>
+                                    <constraint firstAttribute="height" constant="30" id="wKR-Eg-JQg"/>
+                                </constraints>
+                                <state key="normal" title="Reset location"/>
+                                <connections>
+                                    <action selector="resetLocationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bDt-IV-oeR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w40-fU-7cp">
+                                <rect key="frame" x="10" y="630" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="gOq-qj-oyG"/>
+                                    <constraint firstAttribute="height" constant="30" id="vGx-wO-URD"/>
+                                </constraints>
+                                <state key="normal" title="Clear map"/>
+                                <connections>
+                                    <action selector="clearMapAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vlt-we-lMT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Vz-ot-bXu"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="REf-Rh-lVc"/>
+                            <constraint firstItem="w40-fU-7cp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="VKg-eu-Sjh"/>
+                            <constraint firstItem="4IN-WP-YIF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="Vbw-jB-hCn"/>
                             <constraint firstItem="Yb5-HW-FDw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="b1n-ur-LiO"/>
+                            <constraint firstItem="4IN-WP-YIF" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="eNu-Bc-SiU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yb5-HW-FDw" secondAttribute="trailing" constant="10" id="o0K-65-qgA"/>
+                            <constraint firstItem="w40-fU-7cp" firstAttribute="top" secondItem="4IN-WP-YIF" secondAttribute="bottom" constant="10" id="z56-9f-1lG"/>
                             <constraint firstItem="Yb5-HW-FDw" firstAttribute="top" secondItem="Kos-pc-lEV" secondAttribute="bottom" constant="10" id="zni-Ju-FSP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -148,7 +174,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxL-ca-sI4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="956.52173913043487" y="117.85714285714285"/>
+            <point key="canvasLocation" x="-643" y="118"/>
         </scene>
     </scenes>
     <resources>

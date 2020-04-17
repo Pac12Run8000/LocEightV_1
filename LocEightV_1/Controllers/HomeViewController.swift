@@ -62,6 +62,14 @@ class HomeViewController: UIViewController {
         delegate?.toggleLeftPanel()
     }
     
+    @IBAction func resetLocationAction(_ sender: Any) {
+        clearAllMKAnnotations()
+    }
+    
+    @IBAction func clearMapAction(_ sender: Any) {
+        clearAllMKAnnotations()
+    }
+    
     
 }
 
@@ -98,6 +106,11 @@ extension HomeViewController {
     
     func configureLoadingVehicleLocation() {
         checkLocationServices()
+    }
+    
+    func clearAllMKAnnotations() {
+        let allAnnotations = mapView.annotations
+        mapView.removeAnnotations(allAnnotations)
     }
     
     func setUpLocationManager() {
