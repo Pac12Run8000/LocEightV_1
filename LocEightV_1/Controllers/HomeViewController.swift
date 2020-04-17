@@ -64,6 +64,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func resetLocationAction(_ sender: Any) {
         clearAllMKAnnotations()
+        centerViewOnUserLocation()
     }
     
     @IBAction func clearMapAction(_ sender: Any) {
@@ -110,9 +111,7 @@ extension HomeViewController {
     }
     
     func defaultRegionForClearMap() {
-        let lat:CLLocationDegrees = 37.090240
-        let lon:CLLocationDegrees = -95.712891
-        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        let coordinate = CLLocationCoordinate2D(latitude: 37.090240, longitude:-95.712891)
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 5000000, longitudinalMeters: 5000000)
         mapView.setRegion(region, animated: true)
     }
