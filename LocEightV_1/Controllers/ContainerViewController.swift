@@ -192,7 +192,7 @@ private extension UIStoryboard {
     
     class func homeViewController() -> HomeViewController? {
         
-        var homeController = mainStoryboard().instantiateViewController(identifier: "HomeViewController") as? HomeViewController
+        let homeController = mainStoryboard().instantiateViewController(identifier: "HomeViewController") as? HomeViewController
         return homeController
     }
     
