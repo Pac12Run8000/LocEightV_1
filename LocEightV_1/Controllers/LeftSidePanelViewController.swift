@@ -16,10 +16,8 @@ class LeftSidePanelViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
 
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func locateVehicleAction(_ sender: Any) {
@@ -29,7 +27,6 @@ class LeftSidePanelViewController: UIViewController {
     @IBAction func parkingGarageAction(_ sender: Any) {
         appdelegate.MenuContainerVC.configureHomeViewControllerForLocation(.find_parking_garage)
     }
-    
     
     @IBAction func placesToEatAction(_ sender: Any) {
         appdelegate.MenuContainerVC.configureHomeViewControllerForLocation(.find_eating_places)

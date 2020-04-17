@@ -18,6 +18,7 @@
 		09B5051D24451813000DA639 /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5051C24451813000DA639 /* CenterViewControllerDelegate.swift */; };
 		09B505242447F25A000DA639 /* MenuFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505232447F25A000DA639 /* MenuFunctions.swift */; };
 		09B505292447F45A000DA639 /* LocationVehicleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505282447F45A000DA639 /* LocationVehicleDelegate.swift */; };
+		09B5052C24499C61000DA639 /* ParkingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5052B24499C61000DA639 /* ParkingAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		09B5051C24451813000DA639 /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
 		09B505232447F25A000DA639 /* MenuFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuFunctions.swift; sourceTree = "<group>"; };
 		09B505282447F45A000DA639 /* LocationVehicleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVehicleDelegate.swift; sourceTree = "<group>"; };
+		09B5052B24499C61000DA639 /* ParkingAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		09B504FF2444D7FC000DA639 /* LocEightV_1 */ = {
 			isa = PBXGroup;
 			children = (
+				09B5052A24499B0B000DA639 /* Views */,
 				09B505222447F22A000DA639 /* Enums */,
 				09B5051B244517E9000DA639 /* Protocols */,
 				09B505142444F30C000DA639 /* Controllers */,
@@ -104,6 +107,14 @@
 				09B505232447F25A000DA639 /* MenuFunctions.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		09B5052A24499B0B000DA639 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				09B5052B24499C61000DA639 /* ParkingAnnotation.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 				09B505182445099C000DA639 /* LeftSidePanelViewController.swift in Sources */,
 				09B505242447F25A000DA639 /* MenuFunctions.swift in Sources */,
 				09B5051D24451813000DA639 /* CenterViewControllerDelegate.swift in Sources */,
+				09B5052C24499C61000DA639 /* ParkingAnnotation.swift in Sources */,
 				09B505292447F45A000DA639 /* LocationVehicleDelegate.swift in Sources */,
 				09B5051A24450C79000DA639 /* ContainerViewController.swift in Sources */,
 				09B505032444D7FC000DA639 /* SceneDelegate.swift in Sources */,
