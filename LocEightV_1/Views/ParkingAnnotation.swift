@@ -10,13 +10,20 @@ import Foundation
 import MapKit
 
 class ParkingAnnotation: NSObject, MKAnnotation {
-    dynamic var coordinate: CLLocationCoordinate2D
     
     
-    init(coordinate:CLLocationCoordinate2D) {
+    
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle:String?
+    
+    init(coordinate:CLLocationCoordinate2D, title:String, subtitle:String) {
         self.coordinate = coordinate
-        super.init()
+        self.title = title
+        self.subtitle = subtitle
     }
+    
+    
 }
 
 

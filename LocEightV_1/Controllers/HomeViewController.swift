@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     var delegate:CenterViewControllerDelegate?
     let locationManager = CLLocationManager()
     let regionInMetersForVehicle:CLLocationDistance = 250
+    var parkingAnnotation:ParkingAnnotation!
     
     var menuFunction:MenuFunction? {
         didSet {
@@ -102,21 +103,20 @@ extension HomeViewController {
     func setUpLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        
     }
     
     func centerViewOnUserLocation() {
         
         if let location = locationManager.location?.coordinate {
-            let annotation = MKPointAnnotation()
+           
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
-            annotation.coordinate = location
-            annotation.title = "You parked here ..."
-            annotation.subtitle = "1810 san Jose Ave. San Francisco CA 94501"
-            mapView.addAnnotation(annotation)
+            
+            parkingAnnotation = ParkingAnnotation(coordinate: location, title: "You've parked here ...", subtitle: "1810 san Jose Ave Alameda CA 94501")
+            mapView.addAnnotation(parkingAnnotation)
             mapView.setRegion(region, animated: true)
         }
+        
+        
     }
     
     func checkLocationServices() {
@@ -173,6 +173,25 @@ extension HomeViewController:CLLocationManagerDelegate {
 
 // MARK:- MapView methods functionality
 extension HomeViewController:MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotationView = MKAnnotationView(annotation: parkingAnnotation, reuseIdentifier: "parking") as? MKAnnotationView else {
+            print("There was no parking annotation.")
+            return nil
+        }
+        
+        annotationView.image = UIImage(named: "currentLocationAnnotation")
+        
+
+        annotationView.isEnabled = true
+        annotationView.canShowCallout = true
+        let flyout = UIButton(type: .detailDisclosure)
+        annotationView.rightCalloutAccessoryView = flyout
+        
+        return annotationView
+    }
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
