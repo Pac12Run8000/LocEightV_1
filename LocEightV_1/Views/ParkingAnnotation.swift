@@ -9,11 +9,11 @@
 import Foundation
 import MapKit
 
-class CarAnnotation: NSObject, MKAnnotation {
+class ParkingAnnotation: NSObject, MKAnnotation {
     dynamic var coordinate: CLLocationCoordinate2D
     
     
-    init(coordinate:CLLocationCoordinate2D, title:String, description:String) {
+    init(coordinate:CLLocationCoordinate2D) {
         self.coordinate = coordinate
         super.init()
     }

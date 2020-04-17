@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     
     var delegate:CenterViewControllerDelegate?
     let locationManager = CLLocationManager()
+    let regionInMetersForVehicle:CLLocationDistance = 250
     
     var menuFunction:MenuFunction? {
         didSet {
@@ -102,19 +103,37 @@ extension HomeViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        print("Location Coords:\(locationManager.location?.coordinate)")
+        
+    }
+    
+    func centerViewOnUserLocation() {
+        
+        if let location = locationManager.location?.coordinate {
+            let annotation = MKPointAnnotation()
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
+            annotation.coordinate = location
+            annotation.title = "You parked here ..."
+            annotation.subtitle = "1810 san Jose Ave. San Francisco CA 94501"
+            mapView.addAnnotation(annotation)
+            mapView.setRegion(region, animated: true)
+        }
     }
     
     func checkLocationServices() {
         guard CLLocationManager.locationServicesEnabled() else {
             print("Location Services aren't enabled")
-            showAlert(title: "Device issue", msg: "Location Services aren't enabled.")
+            showAlert(title: "Device issue", msg: "Location Services aren't enabled. Location services may not exist on this device.")
             return
         }
         
         print("Location Services are ready.")
-        checkLocationAuthorization()
+       
         setUpLocationManager()
+        guard checkLocationAuthorization() else {
+            print("authorizeWhenInUse is false.")
+            return
+        }
+        centerViewOnUserLocation()
         
     }
     
@@ -122,7 +141,7 @@ extension HomeViewController {
         
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
-            mapView.showsUserLocation = true
+//            mapView.showsUserLocation = true
             return true
             break
         case .denied:
