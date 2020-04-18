@@ -48,15 +48,11 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         configureMapViewLayout()
-        
+
        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
+    
     
     @IBAction func menuButtonAction(_ sender: Any) {
         delegate?.toggleLeftPanel()
@@ -71,6 +67,20 @@ class HomeViewController: UIViewController {
         clearAllMKAnnotations()
         defaultRegionForClearMap()
     }
+    
+    @IBAction func segmentedActionMapType(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            mapView.mapType = .standard
+            break
+        case 1:
+            mapView.mapType = .satellite
+            break
+        default:
+            print("Do nothing")
+        }
+    }
+    
     
     
 }
@@ -196,6 +206,7 @@ extension HomeViewController:CLLocationManagerDelegate {
 extension HomeViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
         guard let annotationView = MKAnnotationView(annotation: parkingAnnotation, reuseIdentifier: "parking") as? MKAnnotationView else {
             print("There was no parking annotation.")
             return nil

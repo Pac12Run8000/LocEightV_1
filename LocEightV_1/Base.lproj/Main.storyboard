@@ -27,13 +27,13 @@
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Yb5-HW-FDw">
-                                <rect key="frame" x="10" y="100" width="394" height="480"/>
+                                <rect key="frame" x="10" y="114" width="394" height="480"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="480" id="B5c-uP-FNQ"/>
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IN-WP-YIF">
-                                <rect key="frame" x="10" y="590" width="140" height="30"/>
+                                <rect key="frame" x="10" y="604" width="140" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="4g6-bu-ncO"/>
                                     <constraint firstAttribute="height" constant="30" id="wKR-Eg-JQg"/>
@@ -44,7 +44,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w40-fU-7cp">
-                                <rect key="frame" x="10" y="630" width="150" height="30"/>
+                                <rect key="frame" x="10" y="644" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="gOq-qj-oyG"/>
                                     <constraint firstAttribute="height" constant="30" id="vGx-wO-URD"/>
@@ -54,18 +54,33 @@
                                     <action selector="clearMapAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vlt-we-lMT"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5Z8-6E-Ogc">
+                                <rect key="frame" x="132.5" y="64" width="149" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="GxC-Js-kk5"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="standard"/>
+                                    <segment title="satalite"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedActionMapType:" destination="BYZ-38-t0r" eventType="valueChanged" id="nQs-a4-gh5"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="5Z8-6E-Ogc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="20R-GH-aVA"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Vz-ot-bXu"/>
+                            <constraint firstItem="Yb5-HW-FDw" firstAttribute="top" secondItem="5Z8-6E-Ogc" secondAttribute="bottom" constant="20" id="JMD-xJ-fiP"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="REf-Rh-lVc"/>
                             <constraint firstItem="w40-fU-7cp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="VKg-eu-Sjh"/>
                             <constraint firstItem="4IN-WP-YIF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="Vbw-jB-hCn"/>
+                            <constraint firstItem="5Z8-6E-Ogc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WVO-HR-lDx"/>
                             <constraint firstItem="Yb5-HW-FDw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="b1n-ur-LiO"/>
                             <constraint firstItem="4IN-WP-YIF" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="eNu-Bc-SiU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yb5-HW-FDw" secondAttribute="trailing" constant="10" id="o0K-65-qgA"/>
                             <constraint firstItem="w40-fU-7cp" firstAttribute="top" secondItem="4IN-WP-YIF" secondAttribute="bottom" constant="10" id="z56-9f-1lG"/>
-                            <constraint firstItem="Yb5-HW-FDw" firstAttribute="top" secondItem="Kos-pc-lEV" secondAttribute="bottom" constant="10" id="zni-Ju-FSP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
