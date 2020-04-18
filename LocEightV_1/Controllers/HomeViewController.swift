@@ -55,6 +55,7 @@ class HomeViewController: UIViewController {
         
         configureMapViewLayout()
 
+
        
     }
     
@@ -133,6 +134,9 @@ extension HomeViewController {
     }
     
     func clearAllMKAnnotations() {
+
+    
+        
         let allAnnotations = mapView.annotations
         mapView.removeAnnotations(allAnnotations)
     }
@@ -144,10 +148,10 @@ extension HomeViewController {
     
     func centerViewOnUserLocation() {
         
+        if let location = locationManager.location?.coordinate, let lat = location.latitude as? CLLocationDegrees, let long = location.longitude as? CLLocationDegrees {
+            
+            
         
-        
-        if let location = locationManager.location?.coordinate {
-           
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
             
             parkingAnnotation = ParkingAnnotation(coordinate: location, title: "You've parked here ...", subtitle: "1810 san Jose Ave Alameda CA 94501")
@@ -170,11 +174,7 @@ extension HomeViewController {
         print("Location Services are ready.")
        
         setUpLocationManager()
-        
-       
-        locationManager.startUpdatingLocation()
         centerViewOnUserLocation()
-        
     }
     
     func checkLocationAuthorization() -> Bool {
