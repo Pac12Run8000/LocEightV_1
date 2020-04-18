@@ -47,6 +47,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.startUpdatingLocation()
+        guard checkLocationAuthorization() else {
+               print("authorizeWhenInUse is false.")
+               return
+        }
+        
         configureMapViewLayout()
 
        
@@ -138,6 +144,8 @@ extension HomeViewController {
     
     func centerViewOnUserLocation() {
         
+        
+        
         if let location = locationManager.location?.coordinate {
            
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
@@ -145,6 +153,8 @@ extension HomeViewController {
             parkingAnnotation = ParkingAnnotation(coordinate: location, title: "You've parked here ...", subtitle: "1810 san Jose Ave Alameda CA 94501")
             mapView.addAnnotation(parkingAnnotation)
             mapView.setRegion(region, animated: true)
+        } else {
+            print("Location Manager isn't working.")
         }
         
         
@@ -160,10 +170,9 @@ extension HomeViewController {
         print("Location Services are ready.")
        
         setUpLocationManager()
-        guard checkLocationAuthorization() else {
-            print("authorizeWhenInUse is false.")
-            return
-        }
+        
+       
+        locationManager.startUpdatingLocation()
         centerViewOnUserLocation()
         
     }
@@ -188,7 +197,7 @@ extension HomeViewController {
             return false
             break
         case .authorizedAlways:
-            return false
+            return true
             break
         }
     }
@@ -226,6 +235,7 @@ extension HomeViewController:MKMapViewDelegate {
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         
     }
     
