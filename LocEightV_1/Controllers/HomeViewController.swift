@@ -66,13 +66,16 @@ class HomeViewController: UIViewController {
         
 
         
-//        deleteAllOfAnnotationEntity()
-       
+
+
+        if let ae = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ae.lat as? Double, let long = ae.long as? Double, let title = ae.title, let subtitle = ae.subtitle {
+            centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subtitle)
+        }
         
-//       fetchAllOfAnnotationEntity()
+
         
         
-//        insertUpdateAnnotationEntity(lat: 1.9883, long: 299.00, title: "You're parked here.", subtitle: "1810 San Jose Ave San Francisco CA 94501")
+
         
         
 
@@ -94,6 +97,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func clearMapAction(_ sender: Any) {
+        deleteAllOfAnnotationEntity()
         clearAllMKAnnotations()
         defaultRegionForClearMap()
     }
@@ -157,9 +161,6 @@ extension HomeViewController {
     }
     
     func clearAllMKAnnotations() {
-
-    
-        
         let allAnnotations = mapView.annotations
         mapView.removeAnnotations(allAnnotations)
     }
@@ -169,22 +170,45 @@ extension HomeViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
+    func retrieveCenterLocationOfParkedCarFromCoreData() -> AnnotationEntity? {
+        var annotationEntity:AnnotationEntity?
+        var annotationEntityArray = [AnnotationEntity]()
+
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lat", ascending: true)]
+        
+        do {
+            annotationEntityArray = try managedObjectContext.fetch(fetchRequest) as! [AnnotationEntity]
+        } catch {
+            print("error:\(error.localizedDescription)")
+        }
+
+        
+        guard annotationEntityArray.count >= 1 else {
+            print("There is no AnnotationEntity.")
+            return nil
+        }
+        
+        
+        annotationEntity = annotationEntityArray[0] as? AnnotationEntity
+        return annotationEntity
+    }
+    
+    func centerViewOnUserLocation(lat:Double, long:Double, title:String, subtitle:String) {
+        if let lat = lat as? Double, let long = long as? Double, let title = title as? String, let subtitle = subtitle as? String, let location = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
+            
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
+            parkingAnnotation = ParkingAnnotation(coordinate: location, title: title, subtitle: subtitle)
+            mapView.addAnnotation(parkingAnnotation)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
     func centerViewOnUserLocation() {
         
         if let location = locationManager.location?.coordinate, let lat = location.latitude as? CLLocationDegrees, let long = location.longitude as? CLLocationDegrees {
             
-//            let driverEntity = AnnotationEntity(context: managedObjectContext)
-//            driverEntity.lat = lat
-//            driverEntity.long = long
-//            driverEntity.title = "You've parked here ..."
-//            driverEntity.subtitle = "1810 san Jose Ave Alameda CA 94501"
-//            do {
-//                try CoreDataStack.saveContext(context: managedObjectContext)
-//                print("Data was saved.")
-//            } catch {
-//                print("Error:\(error.localizedDescription)")
-//            }
-            
+            insertUpdateAnnotationEntity(lat: lat, long: long, title: "You are parked here ...", subtitle: "1810 san Jose Ave, Alameda CA 94501")
         
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
             
