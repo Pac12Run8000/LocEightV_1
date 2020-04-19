@@ -63,24 +63,13 @@ class HomeViewController: UIViewController {
         }
         
         configureMapViewLayout()
-        
-
-        
 
 
         if let ae = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ae.lat as? Double, let long = ae.long as? Double, let title = ae.title, let subtitle = ae.subtitle {
             centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subtitle)
         }
         
-
         
-        
-
-        
-        
-
-
-       
     }
     
     
@@ -108,7 +97,7 @@ class HomeViewController: UIViewController {
             mapView.mapType = .standard
             break
         case 1:
-            mapView.mapType = .satellite
+            mapView.mapType = .hybrid
             break
         default:
             print("Do nothing")
@@ -206,20 +195,48 @@ extension HomeViewController {
     
     func centerViewOnUserLocation() {
         
-        if let location = locationManager.location?.coordinate, let lat = location.latitude as? CLLocationDegrees, let long = location.longitude as? CLLocationDegrees {
+        if let location = locationManager.location?.coordinate, let lat = location.latitude as? CLLocationDegrees, let long = location.longitude as? CLLocationDegrees, let clLocation = CLLocation(latitude: lat, longitude: long) as? CLLocation {
             
-            insertUpdateAnnotationEntity(lat: lat, long: long, title: "You are parked here ...", subtitle: "1810 san Jose Ave, Alameda CA 94501")
-        
-            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
+            // MARK:-  This is where my placeMarks functionality goes ...
             
-            parkingAnnotation = ParkingAnnotation(coordinate: location, title: "You've parked here ...", subtitle: "1810 san Jose Ave Alameda CA 94501")
-            mapView.addAnnotation(parkingAnnotation)
-            mapView.setRegion(region, animated: true)
+            returnParkingLocationAddress(clLocation: clLocation) { (address, error) in
+                guard error == nil else {
+                    print("There was an error:\(error?.localizedDescription)")
+                    return
+                }
+//                print("\(address)")
+                self.insertUpdateAnnotationEntity(lat: lat, long: long, title: "You are parked here ...", subtitle:address)
+                
+                let region = MKCoordinateRegion(center: location, latitudinalMeters: self.regionInMetersForVehicle, longitudinalMeters: self.regionInMetersForVehicle)
+                    
+                self.parkingAnnotation = ParkingAnnotation(coordinate: location, title: "You are parked here ...", subtitle:address!)
+                self.mapView.addAnnotation(self.parkingAnnotation)
+                self.mapView.setRegion(region, animated: true)
+            }
+           
         } else {
             print("Location Manager isn't working.")
         }
         
         
+    }
+    
+    
+    func returnParkingLocationAddress(clLocation:CLLocation, completion handler:@escaping(_ address:String?,_ error:Error?) -> ()) {
+        var myAddress:String?
+        CLGeocoder().reverseGeocodeLocation(clLocation) { (placemarks, error) in
+            guard error == nil else {
+                print("There was an error:\(error?.localizedDescription)")
+                handler(nil, error)
+                return
+            }
+            if let place = placemarks![0] as? CLPlacemark {
+                myAddress = "\(place.subThoroughfare!) \(place.thoroughfare!), \(place.locality!), \(place.administrativeArea!), \(place.postalCode!) \(place.country!)"
+            }
+            
+            handler(myAddress, nil)
+        }
+    
     }
     
     func checkLocationServices() {
