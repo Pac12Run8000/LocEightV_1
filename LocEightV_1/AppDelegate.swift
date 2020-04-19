@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,6 +45,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     class func getAppDelegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
+    
+    lazy var persistantContainer:NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "LocEight")
+        container.loadPersistentStores { (storeDescription, error) in
+            if let error = error {
+                print("There was an error:\(error.localizedDescription)")
+            }
+        }
+        return container
+    }()
 
 
 }

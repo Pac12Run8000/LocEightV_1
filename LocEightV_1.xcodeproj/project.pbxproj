@@ -19,6 +19,8 @@
 		09B505242447F25A000DA639 /* MenuFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505232447F25A000DA639 /* MenuFunctions.swift */; };
 		09B505292447F45A000DA639 /* LocationVehicleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505282447F45A000DA639 /* LocationVehicleDelegate.swift */; };
 		09B5052C24499C61000DA639 /* ParkingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5052B24499C61000DA639 /* ParkingAnnotation.swift */; };
+		09B50530244B89B3000DA639 /* LocEight.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09B5052E244B89B3000DA639 /* LocEight.xcdatamodeld */; };
+		09B50532244B8B18000DA639 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B50531244B8B18000DA639 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		09B505232447F25A000DA639 /* MenuFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuFunctions.swift; sourceTree = "<group>"; };
 		09B505282447F45A000DA639 /* LocationVehicleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVehicleDelegate.swift; sourceTree = "<group>"; };
 		09B5052B24499C61000DA639 /* ParkingAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingAnnotation.swift; sourceTree = "<group>"; };
+		09B5052F244B89B3000DA639 /* LocEight.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocEight.xcdatamodel; sourceTree = "<group>"; };
+		09B50531244B8B18000DA639 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,7 @@
 		09B504FF2444D7FC000DA639 /* LocEightV_1 */ = {
 			isa = PBXGroup;
 			children = (
+				09B5052D244B8995000DA639 /* Model */,
 				09B5052A24499B0B000DA639 /* Views */,
 				09B505222447F22A000DA639 /* Enums */,
 				09B5051B244517E9000DA639 /* Protocols */,
@@ -115,6 +120,15 @@
 				09B5052B24499C61000DA639 /* ParkingAnnotation.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		09B5052D244B8995000DA639 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				09B5052E244B89B3000DA639 /* LocEight.xcdatamodeld */,
+				09B50531244B8B18000DA639 /* CoreDataStack.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,8 +208,10 @@
 				09B5051D24451813000DA639 /* CenterViewControllerDelegate.swift in Sources */,
 				09B5052C24499C61000DA639 /* ParkingAnnotation.swift in Sources */,
 				09B505292447F45A000DA639 /* LocationVehicleDelegate.swift in Sources */,
+				09B50532244B8B18000DA639 /* CoreDataStack.swift in Sources */,
 				09B5051A24450C79000DA639 /* ContainerViewController.swift in Sources */,
 				09B505032444D7FC000DA639 /* SceneDelegate.swift in Sources */,
+				09B50530244B89B3000DA639 /* LocEight.xcdatamodeld in Sources */,
 				09B505162444F327000DA639 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +410,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		09B5052E244B89B3000DA639 /* LocEight.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				09B5052F244B89B3000DA639 /* LocEight.xcdatamodel */,
+			);
+			currentVersion = 09B5052F244B89B3000DA639 /* LocEight.xcdatamodel */;
+			path = LocEight.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 09B504F52444D7FC000DA639 /* Project object */;
 }

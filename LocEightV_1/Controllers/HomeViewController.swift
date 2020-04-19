@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreData
 
 class HomeViewController: UIViewController {
     
@@ -16,6 +17,12 @@ class HomeViewController: UIViewController {
     let locationManager = CLLocationManager()
     let regionInMetersForVehicle:CLLocationDistance = 250
     var parkingAnnotation:ParkingAnnotation!
+    var managedObjectContext:NSManagedObjectContext!
+    
+    
+    var annotationEntityArray = [AnnotationEntity]()
+    
+    
     
     var menuFunction:MenuFunction? {
         didSet {
@@ -47,6 +54,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
+        
         locationManager.startUpdatingLocation()
         guard checkLocationAuthorization() else {
                print("authorizeWhenInUse is false.")
@@ -54,9 +63,81 @@ class HomeViewController: UIViewController {
         }
         
         configureMapViewLayout()
+        
+//        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
+//            let request = NSBatchDeleteRequest(fetchRequest: fetch)
+//        do {
+//            let result = try managedObjectContext!.execute(request)
+//            print("Deletion completed")
+//        } catch {
+//            print("Error:\(error.localizedDescription)")
+//        }
+        
+
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lat", ascending: true)]
+
+        do {
+            annotationEntityArray = try managedObjectContext.fetch(fetchRequest) as! [AnnotationEntity]
+        } catch {
+            print("There was an error retrieving the data.")
+        }
+
+        for item in annotationEntityArray {
+            print("item:\(item.lat), \(item.long), \(item.subtitle)")
+        }
+        
+       
+        
+        
+//        insertUpdateAnnotationEntity(lat: 1.9883, long: 299.00, title: "You're parked here.", subtitle: "1810 San Jose Ave Alameda CA 94501")
+        
+        
 
 
        
+    }
+    
+    func insertUpdateAnnotationEntity(lat:Double?, long:Double?, title:String?, subtitle:String?) {
+        var annotationEntity:AnnotationEntity!
+        var annotationArray = [AnnotationEntity]()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lat", ascending: true)]
+        
+        do {
+            try annotationArray = managedObjectContext.fetch(fetchRequest) as! [AnnotationEntity]
+            print("Fetch was successful")
+        } catch {
+            print("There was an error:\(error.localizedDescription)")
+        }
+        
+        if (annotationArray.count == 0) {
+            let annotationEntity = AnnotationEntity(context: managedObjectContext)
+            annotationEntity.lat = lat!
+            annotationEntity.long = long!
+            annotationEntity.title = title!
+            annotationEntity.subtitle = subtitle!
+            do {
+                try CoreDataStack.saveContext(context: managedObjectContext)
+                print("Save was successful")
+            } catch {
+                print("Error:\(error.localizedDescription)")
+            }
+            
+        } else {
+            annotationEntity = annotationArray[0]
+            annotationEntity.lat = lat!
+            annotationEntity.long = long!
+            annotationEntity.title = title!
+            annotationEntity.subtitle = subtitle!
+            
+            do {
+                try CoreDataStack.saveContext(context: managedObjectContext)
+            } catch {
+                print("Error:\(error.localizedDescription)")
+            }
+        }
+        
     }
     
     
@@ -150,6 +231,17 @@ extension HomeViewController {
         
         if let location = locationManager.location?.coordinate, let lat = location.latitude as? CLLocationDegrees, let long = location.longitude as? CLLocationDegrees {
             
+//            let driverEntity = AnnotationEntity(context: managedObjectContext)
+//            driverEntity.lat = lat
+//            driverEntity.long = long
+//            driverEntity.title = "You've parked here ..."
+//            driverEntity.subtitle = "1810 san Jose Ave Alameda CA 94501"
+//            do {
+//                try CoreDataStack.saveContext(context: managedObjectContext)
+//                print("Data was saved.")
+//            } catch {
+//                print("Error:\(error.localizedDescription)")
+//            }
             
         
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
