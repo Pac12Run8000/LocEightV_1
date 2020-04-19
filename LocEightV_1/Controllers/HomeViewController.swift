@@ -42,7 +42,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var resetButtonOutlet: UIButton!
     @IBOutlet weak var clearMapButtonOutlet: UIButton!
-    @IBOutlet weak var startingLocationOutlet: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +64,9 @@ class HomeViewController: UIViewController {
         
         configureResetButton()
         configureClearMapButton()
-        configureStartingButtonOutlet()
+        
+        
+        
         
     }
     
@@ -107,12 +109,7 @@ class HomeViewController: UIViewController {
 // MARK:- Configure mapView layout UI layout
 extension HomeViewController {
     
-    func configureStartingButtonOutlet() {
-        startingLocationOutlet.layer.borderWidth = 2
-        startingLocationOutlet.layer.masksToBounds = true
-        startingLocationOutlet.layer.cornerRadius = 9
-        startingLocationOutlet.layer.borderColor = UIColor.black.cgColor
-    }
+    
     
     func configureMapViewLayout() {
         
@@ -298,7 +295,13 @@ extension HomeViewController {
 // MARK:- CLLocationManagerDelegate functionality
 extension HomeViewController:CLLocationManagerDelegate {
     
-    
+      func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+           
+       }
+       
+       func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+           
+       }
     
 }
 
@@ -315,7 +318,6 @@ extension HomeViewController:MKMapViewDelegate {
         
         annotationView.image = UIImage(named: "destinationAnnotation")
         
-
         annotationView.isEnabled = true
         annotationView.canShowCallout = true
         let flyout = UIButton(type: .detailDisclosure)
@@ -323,17 +325,7 @@ extension HomeViewController:MKMapViewDelegate {
         
         return annotationView
     }
-    
-    
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
-    }
+   
     
 }
 
@@ -423,6 +415,8 @@ extension HomeViewController {
             print("Error:\(error.localizedDescription)")
         }
     }
+    
+    
     
     
 }
