@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
     var managedObjectContext:NSManagedObjectContext!
     
     
-    var annotationEntityArray = [AnnotationEntity]()
+    
     
     
     
@@ -64,33 +64,15 @@ class HomeViewController: UIViewController {
         
         configureMapViewLayout()
         
-//        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
-//            let request = NSBatchDeleteRequest(fetchRequest: fetch)
-//        do {
-//            let result = try managedObjectContext!.execute(request)
-//            print("Deletion completed")
-//        } catch {
-//            print("Error:\(error.localizedDescription)")
-//        }
+
         
-
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lat", ascending: true)]
-
-        do {
-            annotationEntityArray = try managedObjectContext.fetch(fetchRequest) as! [AnnotationEntity]
-        } catch {
-            print("There was an error retrieving the data.")
-        }
-
-        for item in annotationEntityArray {
-            print("item:\(item.lat), \(item.long), \(item.subtitle)")
-        }
-        
+//        deleteAllOfAnnotationEntity()
        
         
+//       fetchAllOfAnnotationEntity()
         
-//        insertUpdateAnnotationEntity(lat: 1.9883, long: 299.00, title: "You're parked here.", subtitle: "1810 San Jose Ave Alameda CA 94501")
+        
+//        insertUpdateAnnotationEntity(lat: 1.9883, long: 299.00, title: "You're parked here.", subtitle: "1810 San Jose Ave San Francisco CA 94501")
         
         
 
@@ -98,47 +80,7 @@ class HomeViewController: UIViewController {
        
     }
     
-    func insertUpdateAnnotationEntity(lat:Double?, long:Double?, title:String?, subtitle:String?) {
-        var annotationEntity:AnnotationEntity!
-        var annotationArray = [AnnotationEntity]()
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lat", ascending: true)]
-        
-        do {
-            try annotationArray = managedObjectContext.fetch(fetchRequest) as! [AnnotationEntity]
-            print("Fetch was successful")
-        } catch {
-            print("There was an error:\(error.localizedDescription)")
-        }
-        
-        if (annotationArray.count == 0) {
-            let annotationEntity = AnnotationEntity(context: managedObjectContext)
-            annotationEntity.lat = lat!
-            annotationEntity.long = long!
-            annotationEntity.title = title!
-            annotationEntity.subtitle = subtitle!
-            do {
-                try CoreDataStack.saveContext(context: managedObjectContext)
-                print("Save was successful")
-            } catch {
-                print("Error:\(error.localizedDescription)")
-            }
-            
-        } else {
-            annotationEntity = annotationArray[0]
-            annotationEntity.lat = lat!
-            annotationEntity.long = long!
-            annotationEntity.title = title!
-            annotationEntity.subtitle = subtitle!
-            
-            do {
-                try CoreDataStack.saveContext(context: managedObjectContext)
-            } catch {
-                print("Error:\(error.localizedDescription)")
-            }
-        }
-        
-    }
+    
     
     
     
@@ -346,6 +288,85 @@ extension HomeViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+}
+
+
+// MARK:- CoreData Functionality
+extension HomeViewController {
+    
+    func insertUpdateAnnotationEntity(lat:Double?, long:Double?, title:String?, subtitle:String?) {
+        var annotationEntity:AnnotationEntity!
+        var annotationUpdateEntity:AnnotationEntity!
+        var annotationArray = [AnnotationEntity]()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lat", ascending: true)]
+        
+        do {
+            try annotationArray = managedObjectContext.fetch(fetchRequest) as! [AnnotationEntity]
+            print("Fetch was successful")
+        } catch {
+            print("There was an error:\(error.localizedDescription)")
+        }
+        
+        if (annotationArray.count == 0) {
+            let annotationEntity = AnnotationEntity(context: managedObjectContext)
+            annotationEntity.lat = lat!
+            annotationEntity.long = long!
+            annotationEntity.title = title!
+            annotationEntity.subtitle = subtitle!
+            do {
+                try CoreDataStack.saveContext(context: managedObjectContext)
+                print("Save was successful")
+            } catch {
+                print("Error:\(error.localizedDescription)")
+            }
+            
+        } else {
+            annotationUpdateEntity = annotationArray[0]
+            annotationUpdateEntity.lat = lat!
+            annotationUpdateEntity.long = long!
+            annotationUpdateEntity.title = title!
+            annotationUpdateEntity.subtitle = subtitle!
+            
+            do {
+                try CoreDataStack.saveContext(context: managedObjectContext)
+            } catch {
+                print("Error:\(error.localizedDescription)")
+            }
+        }
+        
+    }
+    
+    
+    func fetchAllOfAnnotationEntity() {
+        var annotationEntityArray = [AnnotationEntity]()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lat", ascending: true)]
+
+           do {
+               annotationEntityArray = try managedObjectContext.fetch(fetchRequest) as! [AnnotationEntity]
+           } catch {
+               print("There was an error retrieving the data.")
+           }
+
+           for item in annotationEntityArray {
+               print("item:\(item.lat), \(item.long), \(item.subtitle)")
+           }
+    }
+    
+    
+    func deleteAllOfAnnotationEntity() {
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
+            let request = NSBatchDeleteRequest(fetchRequest: fetch)
+        do {
+            let result = try managedObjectContext!.execute(request)
+            print("Deletion completed")
+        } catch {
+            print("Error:\(error.localizedDescription)")
+        }
+    }
+    
+    
 }
 
 
