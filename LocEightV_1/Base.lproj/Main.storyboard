@@ -32,22 +32,22 @@
                                     <constraint firstAttribute="height" constant="480" id="B5c-uP-FNQ"/>
                                 </constraints>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IN-WP-YIF">
-                                <rect key="frame" x="10" y="604" width="140" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IN-WP-YIF">
+                                <rect key="frame" x="10" y="604" width="150" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="4g6-bu-ncO"/>
-                                    <constraint firstAttribute="height" constant="30" id="wKR-Eg-JQg"/>
+                                    <constraint firstAttribute="width" constant="150" id="4g6-bu-ncO"/>
+                                    <constraint firstAttribute="height" constant="60" id="wKR-Eg-JQg"/>
                                 </constraints>
-                                <state key="normal" title="Reset location"/>
+                                <state key="normal" title="Reset parking"/>
                                 <connections>
                                     <action selector="resetLocationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bDt-IV-oeR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w40-fU-7cp">
-                                <rect key="frame" x="10" y="644" width="150" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w40-fU-7cp">
+                                <rect key="frame" x="10" y="674" width="150" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="gOq-qj-oyG"/>
-                                    <constraint firstAttribute="height" constant="30" id="vGx-wO-URD"/>
+                                    <constraint firstAttribute="height" constant="60" id="vGx-wO-URD"/>
                                 </constraints>
                                 <state key="normal" title="Clear map"/>
                                 <connections>
@@ -67,10 +67,19 @@
                                     <action selector="segmentedActionMapType:" destination="BYZ-38-t0r" eventType="valueChanged" id="nQs-a4-gh5"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWx-Jg-mRi">
+                                <rect key="frame" x="254" y="604" width="150" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="0jT-8b-jF2"/>
+                                    <constraint firstAttribute="width" constant="150" id="Bez-g2-sRN"/>
+                                </constraints>
+                                <state key="normal" title="starting location"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5Z8-6E-Ogc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="20R-GH-aVA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hWx-Jg-mRi" secondAttribute="trailing" constant="10" id="37z-PP-CiJ"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Vz-ot-bXu"/>
                             <constraint firstItem="Yb5-HW-FDw" firstAttribute="top" secondItem="5Z8-6E-Ogc" secondAttribute="bottom" constant="20" id="JMD-xJ-fiP"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="REf-Rh-lVc"/>
@@ -80,12 +89,16 @@
                             <constraint firstItem="Yb5-HW-FDw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="b1n-ur-LiO"/>
                             <constraint firstItem="4IN-WP-YIF" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="eNu-Bc-SiU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yb5-HW-FDw" secondAttribute="trailing" constant="10" id="o0K-65-qgA"/>
+                            <constraint firstItem="hWx-Jg-mRi" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="yn8-iT-aOj"/>
                             <constraint firstItem="w40-fU-7cp" firstAttribute="top" secondItem="4IN-WP-YIF" secondAttribute="bottom" constant="10" id="z56-9f-1lG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="clearMapButtonOutlet" destination="w40-fU-7cp" id="LOX-9G-8Ji"/>
                         <outlet property="mapView" destination="Yb5-HW-FDw" id="ThM-4x-S2D"/>
+                        <outlet property="resetButtonOutlet" destination="4IN-WP-YIF" id="Snp-FJ-LC0"/>
+                        <outlet property="startingLocationOutlet" destination="hWx-Jg-mRi" id="gib-XG-dR3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -19,11 +19,6 @@ class HomeViewController: UIViewController {
     var parkingAnnotation:ParkingAnnotation!
     var managedObjectContext:NSManagedObjectContext!
     
-    
-    
-    
-    
-    
     var menuFunction:MenuFunction? {
         didSet {
             switch menuFunction {
@@ -44,13 +39,11 @@ class HomeViewController: UIViewController {
         }
     }
     
-    
-    
-    
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var resetButtonOutlet: UIButton!
+    @IBOutlet weak var clearMapButtonOutlet: UIButton!
+    @IBOutlet weak var startingLocationOutlet: UIButton!
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,6 +62,9 @@ class HomeViewController: UIViewController {
             centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subtitle)
         }
         
+        configureResetButton()
+        configureClearMapButton()
+        configureStartingButtonOutlet()
         
     }
     
@@ -108,8 +104,15 @@ class HomeViewController: UIViewController {
     
 }
 
-// MARK:- Configure mapView layout
+// MARK:- Configure mapView layout UI layout
 extension HomeViewController {
+    
+    func configureStartingButtonOutlet() {
+        startingLocationOutlet.layer.borderWidth = 2
+        startingLocationOutlet.layer.masksToBounds = true
+        startingLocationOutlet.layer.cornerRadius = 9
+        startingLocationOutlet.layer.borderColor = UIColor.black.cgColor
+    }
     
     func configureMapViewLayout() {
         
@@ -118,6 +121,20 @@ extension HomeViewController {
         mapView.layer.cornerRadius = 9
         mapView.layer.masksToBounds = true
         
+    }
+    
+    func configureResetButton() {
+        resetButtonOutlet.layer.borderWidth = 2
+        resetButtonOutlet.layer.cornerRadius = 9
+        resetButtonOutlet.layer.masksToBounds = true
+        resetButtonOutlet.layer.borderColor = UIColor.black.cgColor
+    }
+    
+    func configureClearMapButton() {
+        clearMapButtonOutlet.layer.borderWidth = 2
+        clearMapButtonOutlet.layer.cornerRadius = 9
+        clearMapButtonOutlet.layer.masksToBounds = true
+        clearMapButtonOutlet.layer.borderColor = UIColor.black.cgColor
     }
     
     
@@ -296,7 +313,7 @@ extension HomeViewController:MKMapViewDelegate {
             return nil
         }
         
-        annotationView.image = UIImage(named: "currentLocationAnnotation")
+        annotationView.image = UIImage(named: "destinationAnnotation")
         
 
         annotationView.isEnabled = true
