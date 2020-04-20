@@ -81,8 +81,8 @@ class HomeViewController: UIViewController {
         
         configureSwitch()
         
-        addStartLocationForAnnotationToMap()
-        mapView.showsUserLocation = true
+        
+//        mapView.showsUserLocation = true
         
         
     }
@@ -92,10 +92,10 @@ class HomeViewController: UIViewController {
         
         switch sender.isOn {
         case true:
-            
+            addStartLocationForAnnotationToMap()
             break
         case false:
-            
+            mapView.removeAnnotation(userAnnotation)
             break
         default:
             print("do nothing")
@@ -232,6 +232,16 @@ extension HomeViewController {
         return annotationEntity
     }
     
+    func addStartLocationForAnnotationToMap() {
+        guard let userLocation = locationManager.location?.coordinate else {
+            print("No userLocation is present.")
+            return
+        }
+        let tempCoords = CLLocationCoordinate2D(latitude: userLocation.latitude, longitude: userLocation.longitude)
+        userAnnotation = UserAnnotation(coordinate: tempCoords, title: "Starting Location", subtitle: "")
+        mapView.addAnnotation(userAnnotation)
+    }
+    
     func centerViewOnUserLocation(lat:Double, long:Double, title:String, subtitle:String) {
         if let lat = lat as? Double, let long = long as? Double, let title = title as? String, let subtitle = subtitle as? String, let location = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
             
@@ -273,11 +283,7 @@ extension HomeViewController {
         
     }
     
-    func addStartLocationForAnnotationToMap() {
-        let tempCoords = CLLocationCoordinate2D(latitude: 37.787810, longitude: -122.408670)
-        userAnnotation = UserAnnotation(coordinate: tempCoords, title: "Starting Location", subtitle: "")
-        mapView.addAnnotation(userAnnotation)
-    }
+    
     
     
     
@@ -365,6 +371,8 @@ extension HomeViewController:CLLocationManagerDelegate {
 // MARK:- MapView delegate and methods functionality
 extension HomeViewController:MKMapViewDelegate {
     
+    
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = .green
@@ -381,7 +389,7 @@ extension HomeViewController:MKMapViewDelegate {
                    view.isEnabled = true
                    view.canShowCallout = true
                    let flyout = UIButton(type: .detailDisclosure)
-            view.rightCalloutAccessoryView = flyout
+                   view.rightCalloutAccessoryView = flyout
                    return view
                } else if let annotation = annotation as? UserAnnotation {
                    let identifier = "user"
