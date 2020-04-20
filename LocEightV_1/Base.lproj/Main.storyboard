@@ -82,6 +82,9 @@
                                     <constraint firstAttribute="height" constant="31" id="Jjd-n5-sf3"/>
                                     <constraint firstAttribute="width" constant="47" id="Ljk-H2-cxI"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="currentLocatioSwitchAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="ue5-ef-5gF"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -106,8 +109,10 @@
                     </view>
                     <connections>
                         <outlet property="clearMapButtonOutlet" destination="w40-fU-7cp" id="LOX-9G-8Ji"/>
+                        <outlet property="locationDisplaySwitchOutlet" destination="Pzc-J8-B8X" id="m7i-4B-WJc"/>
                         <outlet property="mapView" destination="Yb5-HW-FDw" id="ThM-4x-S2D"/>
                         <outlet property="resetButtonOutlet" destination="4IN-WP-YIF" id="Snp-FJ-LC0"/>
+                        <outlet property="switchLabel" destination="dVG-Eg-rAg" id="TJ5-VI-o4K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

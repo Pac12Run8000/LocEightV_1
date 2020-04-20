@@ -16,7 +16,19 @@ class HomeViewController: UIViewController {
     var delegate:CenterViewControllerDelegate?
     let locationManager = CLLocationManager()
     let regionInMetersForVehicle:CLLocationDistance = 250
-    var parkingAnnotation:ParkingAnnotation!
+    var parkingAnnotation:ParkingAnnotation! {
+        didSet {
+            if parkingAnnotation == nil {
+                locationDisplaySwitchOutlet.isOn = false
+                locationDisplaySwitchOutlet.isEnabled = false
+                switchLabel.text = "<- reset parking"
+            } else {
+                locationDisplaySwitchOutlet.isEnabled = true
+                switchLabel.text = "Display current location."
+            }
+        }
+    }
+    var userAnnotation:UserAnnotation!
     var managedObjectContext:NSManagedObjectContext!
     
     var menuFunction:MenuFunction? {
@@ -42,7 +54,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var resetButtonOutlet: UIButton!
     @IBOutlet weak var clearMapButtonOutlet: UIButton!
-    
+    @IBOutlet weak var locationDisplaySwitchOutlet: UISwitch!
+    @IBOutlet weak var switchLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +63,7 @@ class HomeViewController: UIViewController {
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
         locationManager.startUpdatingLocation()
+        setUpLocationManager()
         guard checkLocationAuthorization() else {
                print("authorizeWhenInUse is false.")
                return
@@ -65,12 +79,29 @@ class HomeViewController: UIViewController {
         configureResetButton()
         configureClearMapButton()
         
+        configureSwitch()
         
+        addStartLocationForAnnotationToMap()
+        mapView.showsUserLocation = true
         
         
     }
     
     
+    @IBAction func currentLocatioSwitchAction(_ sender: UISwitch) {
+        
+        switch sender.isOn {
+        case true:
+            
+            break
+        case false:
+            
+            break
+        default:
+            print("do nothing")
+        }
+        
+    }
     
     
     
@@ -109,7 +140,10 @@ class HomeViewController: UIViewController {
 // MARK:- Configure mapView layout UI layout
 extension HomeViewController {
     
-    
+    func configureSwitch() {
+        locationDisplaySwitchOutlet.isOn = false
+        
+    }
     
     func configureMapViewLayout() {
         
@@ -164,6 +198,7 @@ extension HomeViewController {
     }
     
     func clearAllMKAnnotations() {
+        parkingAnnotation = nil
         let allAnnotations = mapView.annotations
         mapView.removeAnnotations(allAnnotations)
     }
@@ -202,6 +237,7 @@ extension HomeViewController {
             
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
             parkingAnnotation = ParkingAnnotation(coordinate: location, title: title, subtitle: subtitle)
+//            getTheParkedVehicleCoordinates(destinationCoordinate: location)
             mapView.addAnnotation(parkingAnnotation)
             mapView.setRegion(region, animated: true)
         }
@@ -212,6 +248,8 @@ extension HomeViewController {
         if let location = locationManager.location?.coordinate, let lat = location.latitude as? CLLocationDegrees, let long = location.longitude as? CLLocationDegrees, let clLocation = CLLocation(latitude: lat, longitude: long) as? CLLocation {
             
             // MARK:-  This is where my placeMarks functionality goes ...
+            
+            
             
             returnParkingLocationAddress(clLocation: clLocation) { (address, error) in
                 guard error == nil else {
@@ -235,6 +273,14 @@ extension HomeViewController {
         
     }
     
+    func addStartLocationForAnnotationToMap() {
+        let tempCoords = CLLocationCoordinate2D(latitude: 37.787810, longitude: -122.408670)
+        userAnnotation = UserAnnotation(coordinate: tempCoords, title: "Starting Location", subtitle: "")
+        mapView.addAnnotation(userAnnotation)
+    }
+    
+    
+    
     
     func returnParkingLocationAddress(clLocation:CLLocation, completion handler:@escaping(_ address:String?,_ error:Error?) -> ()) {
         var myAddress:String?
@@ -245,7 +291,15 @@ extension HomeViewController {
                 return
             }
             if let place = placemarks![0] as? CLPlacemark {
-                myAddress = "\(place.subThoroughfare!) \(place.thoroughfare!), \(place.locality!), \(place.administrativeArea!), \(place.postalCode!) \(place.country!)"
+                
+                if let subThouroughfare = place.subThoroughfare, let thoroughfare = place.thoroughfare, let locality = place.locality, let administrativeArea = place.administrativeArea, let postalCode = place.postalCode, let country = place.country {
+                    myAddress = "\(subThouroughfare) \(thoroughfare), \(locality), \(administrativeArea), \(postalCode) \(country)"
+                    
+                } else {
+                    myAddress = "Invalid address information"
+                }
+                
+
             }
             
             handler(myAddress, nil)
@@ -262,7 +316,7 @@ extension HomeViewController {
         
         print("Location Services are ready.")
        
-        setUpLocationManager()
+//        setUpLocationManager()
         centerViewOnUserLocation()
     }
     
@@ -296,6 +350,8 @@ extension HomeViewController {
 extension HomeViewController:CLLocationManagerDelegate {
     
       func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        print("locations:\(locations)")
            
        }
        
@@ -306,26 +362,40 @@ extension HomeViewController:CLLocationManagerDelegate {
 }
 
 
-// MARK:- MapView methods functionality
+// MARK:- MapView delegate and methods functionality
 extension HomeViewController:MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .green
+        return renderer
+    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        guard let annotationView = MKAnnotationView(annotation: parkingAnnotation, reuseIdentifier: "parking") as? MKAnnotationView else {
-            print("There was no parking annotation.")
-            return nil
-        }
-        
-        annotationView.image = UIImage(named: "destinationAnnotation")
-        
-        annotationView.isEnabled = true
-        annotationView.canShowCallout = true
-        let flyout = UIButton(type: .detailDisclosure)
-        annotationView.rightCalloutAccessoryView = flyout
-        
-        return annotationView
+        if let annotation = annotation as? ParkingAnnotation {
+                   let identifier = "parking"
+                   var view:MKAnnotationView
+                   view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                   view.image = UIImage(named: "destinationAnnotation")
+                   view.isEnabled = true
+                   view.canShowCallout = true
+                   let flyout = UIButton(type: .detailDisclosure)
+            view.rightCalloutAccessoryView = flyout
+                   return view
+               } else if let annotation = annotation as? UserAnnotation {
+                   let identifier = "user"
+                   var view:MKAnnotationView
+                   view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                   view.image = UIImage(named: "currentLocationAnnotation")
+                   view.isEnabled = true
+                   view.canShowCallout = true
+                    let flyout = UIButton(type: .detailDisclosure)
+                    view.rightCalloutAccessoryView = flyout
+                   return view
+               }
+               return nil
     }
-   
     
 }
 
@@ -419,6 +489,48 @@ extension HomeViewController {
     
     
     
+}
+
+
+// MARK:- This is the overlay functionality creation
+extension HomeViewController {
+    
+    func createOverlayForCoordinates(startingCoordinate:CLLocationCoordinate2D, destinationCoordinate:CLLocationCoordinate2D) {
+            
+    //        guard let startingCoordinate = locationManager.location?.coordinate else {
+    //            print("There is no starting coordinate.")
+    //            return
+    //        }
+            
+    //        let startingCoordinate = CLLocationCoordinate2D(latitude: 37.765740, longitude: -122.257350)
+    //        let destinationCoordinate = CLLocationCoordinate2D(latitude: 39.091690, longitude: -104.835430)
+            
+            let startingPlaceMark = MKPlacemark(coordinate: startingCoordinate)
+            let destinationPlaceMark = MKPlacemark(coordinate: destinationCoordinate)
+            
+            let startItem = MKMapItem(placemark: startingPlaceMark)
+            let destinationItem = MKMapItem(placemark: destinationPlaceMark)
+            
+            let destinationRequest = MKDirections.Request()
+            destinationRequest.source = startItem
+            destinationRequest.destination = destinationItem
+            destinationRequest.transportType = .automobile
+            destinationRequest.requestsAlternateRoutes = true
+            
+            let directions = MKDirections(request: destinationRequest)
+            directions.calculate { (response, error) in
+                guard error == nil else {
+                    print("There was an error:\(error?.localizedDescription)")
+                    return
+                }
+                
+                let route = response?.routes[0]
+                self.mapView.addOverlay(route!.polyline)
+        
+            }
+            
+            
+        }
 }
 
 
