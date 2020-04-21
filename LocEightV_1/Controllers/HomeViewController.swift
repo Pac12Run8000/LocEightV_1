@@ -103,6 +103,7 @@ class HomeViewController: UIViewController {
             addStartLocationForAnnotationToMap()
             break
         case false:
+            removeOverlays()
             mapView.removeAnnotation(userAnnotation)
             break
         default:
