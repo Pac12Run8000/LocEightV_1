@@ -28,7 +28,11 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    var userAnnotation:UserAnnotation!
+    var userAnnotation:UserAnnotation! {
+        didSet {
+            addOverlayForAnnotations()
+        }
+    }
     var managedObjectContext:NSManagedObjectContext!
     
     var menuFunction:MenuFunction? {
@@ -82,10 +86,14 @@ class HomeViewController: UIViewController {
         configureSwitch()
         
         
+        
+        
 //        mapView.showsUserLocation = true
         
         
     }
+    
+    
     
     
     @IBAction func currentLocatioSwitchAction(_ sender: UISwitch) {
@@ -110,11 +118,13 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func resetLocationAction(_ sender: Any) {
+        removeOverlays()
         clearAllMKAnnotations()
         centerViewOnUserLocation()
     }
     
     @IBAction func clearMapAction(_ sender: Any) {
+        removeOverlays()
         deleteAllOfAnnotationEntity()
         clearAllMKAnnotations()
         defaultRegionForClearMap()
@@ -375,7 +385,11 @@ extension HomeViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
-        renderer.strokeColor = .green
+        renderer.strokeColor = .red
+        renderer.fillColor = .blue
+        renderer.lineJoin = .round
+        renderer.lineCap = .round
+        
         return renderer
     }
     
@@ -502,6 +516,17 @@ extension HomeViewController {
 
 // MARK:- This is the overlay functionality creation
 extension HomeViewController {
+    
+    func addOverlayForAnnotations() {
+        if let userAnnotation = userAnnotation {
+            createOverlayForCoordinates(startingCoordinate: userAnnotation.coordinate, destinationCoordinate: parkingAnnotation.coordinate)
+        }
+    }
+    
+    func removeOverlays() {
+        let overlays = mapView.overlays
+        mapView.removeOverlays(overlays)
+    }
     
     func createOverlayForCoordinates(startingCoordinate:CLLocationCoordinate2D, destinationCoordinate:CLLocationCoordinate2D) {
             
