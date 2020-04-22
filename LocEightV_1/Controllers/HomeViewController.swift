@@ -101,6 +101,8 @@ class HomeViewController: UIViewController {
     
     @IBAction func currentLocatioSwitchAction(_ sender: UISwitch) {
         
+        mapView.showsUserLocation = sender.isOn 
+        
         switch sender.isOn {
         case true:
             addStartLocationForAnnotationToMap()
@@ -565,14 +567,14 @@ extension HomeViewController {
                 self.mapView.addOverlay(route!.polyline)
                 if let mapRect = route?.polyline.boundingMapRect {
                     
-                    var mapRectwithPadding = mapRect
-                    var wpadding = mapRectwithPadding.size.width * 0.25
-                    var hPadding = mapRectwithPadding.size.height * 0.25
+//                    var mapRectwithPadding = mapRect
+//                    var wpadding = mapRectwithPadding.size.width * 0.25
+//                    var hPadding = mapRectwithPadding.size.height * 0.25
+//
+//                    mapRectwithPadding.origin.x -= wpadding / 2
+//                    mapRectwithPadding.origin.y -= hPadding / 2
                     
-                    mapRectwithPadding.origin.x -= wpadding / 2
-                    mapRectwithPadding.origin.y -= hPadding / 2
-                    
-                    self.mapView.setVisibleMapRect(mapRectwithPadding, animated: true)
+                    self.mapView.setVisibleMapRect(mapRect, animated: true)
                     
                     
                 }
