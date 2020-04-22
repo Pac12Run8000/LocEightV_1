@@ -31,6 +31,9 @@ class HomeViewController: UIViewController {
     var userAnnotation:UserAnnotation! {
         didSet {
             addOverlayForAnnotations()
+            
+//            print("userAnnotation:\(userAnnotation.coordinate)")
+//            setRegionForTwoAnnotations(parkingAnnot: parkingAnnotation, userAnnot: userAnnotation)
         }
     }
     var managedObjectContext:NSManagedObjectContext!
@@ -368,7 +371,7 @@ extension HomeViewController:CLLocationManagerDelegate {
     
       func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        print("locations:\(locations)")
+//        print("locations:\(locations)")
            
        }
        
@@ -560,9 +563,23 @@ extension HomeViewController {
                 
                 let route = response?.routes[0]
                 self.mapView.addOverlay(route!.polyline)
-        
+                if let mapRect = route?.polyline.boundingMapRect {
+                    
+                    var mapRectwithPadding = mapRect
+                    var wpadding = mapRectwithPadding.size.width * 0.25
+                    var hPadding = mapRectwithPadding.size.height * 0.25
+                    
+                    mapRectwithPadding.origin.x -= wpadding / 2
+                    mapRectwithPadding.origin.y -= hPadding / 2
+                    
+                    self.mapView.setVisibleMapRect(mapRectwithPadding, animated: true)
+                    
+                    
+                }
+                
+
             }
-            
+        
             
         }
 }
