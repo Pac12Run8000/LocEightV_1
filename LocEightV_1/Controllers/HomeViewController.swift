@@ -18,14 +18,7 @@ class HomeViewController: UIViewController {
     let regionInMetersForVehicle:CLLocationDistance = 250
     var parkingAnnotation:ParkingAnnotation! {
         didSet {
-            if parkingAnnotation == nil {
-                locationDisplaySwitchOutlet.isOn = false
-                locationDisplaySwitchOutlet.isEnabled = false
-                switchLabel.text = "<- Set parking"
-            } else {
-                locationDisplaySwitchOutlet.isEnabled = true
-                switchLabel.text = "Display current location."
-            }
+            configureCurrentLocationSwitch()
         }
     }
     var userAnnotation:UserAnnotation! {
@@ -102,16 +95,7 @@ class HomeViewController: UIViewController {
         
     }
     
-    func configureCurrentLocationSwitch() {
-        if parkingAnnotation == nil {
-            locationDisplaySwitchOutlet.isOn = false
-            locationDisplaySwitchOutlet.isEnabled = false
-            switchLabel.text = "<- Set parking"
-        } else {
-            locationDisplaySwitchOutlet.isEnabled = true
-            switchLabel.text = "Display current location."
-        }
-    }
+    
     
     
     
@@ -126,7 +110,7 @@ class HomeViewController: UIViewController {
             break
         case false:
             removeOverlays()
-            retrieveCenterLocationOfParkedCarFromCoreData()
+            centerOnParkingAnnotation()
             mapView.removeAnnotation(userAnnotation)
             break
         default:
@@ -174,6 +158,17 @@ class HomeViewController: UIViewController {
 // MARK:- Configure mapView layout UI layout
 extension HomeViewController {
     
+    func configureCurrentLocationSwitch() {
+        if parkingAnnotation == nil {
+            locationDisplaySwitchOutlet.isOn = false
+            locationDisplaySwitchOutlet.isEnabled = false
+            switchLabel.text = "<- Set parking"
+        } else {
+            locationDisplaySwitchOutlet.isEnabled = true
+            switchLabel.text = "Display current location."
+        }
+    }
+    
     func configureSwitch() {
         locationDisplaySwitchOutlet.isOn = false
         
@@ -210,18 +205,32 @@ extension HomeViewController {
 extension HomeViewController {
     
     func configureFindingShoppingPlaces() {
-        
+        clearMapButtonOutlet.isHidden = true
+        resetButtonOutlet.isHidden = true
+        switchLabel.isHidden = true
+        locationDisplaySwitchOutlet.isHidden = true
     }
     
     func configureFindingEatingPlaces() {
-        
+        clearMapButtonOutlet.isHidden = true
+        resetButtonOutlet.isHidden = true
+        switchLabel.isHidden = true
+        locationDisplaySwitchOutlet.isHidden = true
     }
     
     func configureLoadingParkingGarages() {
-        
+        clearMapButtonOutlet.isHidden = true
+        resetButtonOutlet.isHidden = true
+        switchLabel.isHidden = true
+        locationDisplaySwitchOutlet.isHidden = true
     }
     
     func configureLoadingVehicleLocation() {
+       
+        clearMapButtonOutlet.isHidden = false
+        resetButtonOutlet.isHidden = false
+        switchLabel.isHidden = false
+        locationDisplaySwitchOutlet.isHidden = false
         checkLocationServices()
     }
     
@@ -274,6 +283,12 @@ extension HomeViewController {
         let tempCoords = CLLocationCoordinate2D(latitude: userLocation.latitude, longitude: userLocation.longitude)
         userAnnotation = UserAnnotation(coordinate: tempCoords, title: "Starting Location", subtitle: "")
         mapView.addAnnotation(userAnnotation)
+    }
+    
+    func centerOnParkingAnnotation() {
+        let coordinate = parkingAnnotation.coordinate
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
+        mapView.setRegion(region, animated: true)
     }
     
     func centerViewOnUserLocation(lat:Double, long:Double, title:String, subtitle:String) {
