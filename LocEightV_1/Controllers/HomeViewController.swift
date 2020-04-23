@@ -63,6 +63,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var clearMapButtonOutlet: UIButton!
     @IBOutlet weak var locationDisplaySwitchOutlet: UISwitch!
     @IBOutlet weak var switchLabel: UILabel!
+    @IBOutlet weak var mapViewHeightConstraintOutlet: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +93,8 @@ class HomeViewController: UIViewController {
         
         
         
+        
+        
 //        mapView.showsUserLocation = true
         
         
@@ -101,7 +105,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func currentLocatioSwitchAction(_ sender: UISwitch) {
         
-        mapView.showsUserLocation = sender.isOn 
+        mapView.showsUserLocation = sender.isOn
         
         switch sender.isOn {
         case true:
@@ -109,6 +113,7 @@ class HomeViewController: UIViewController {
             break
         case false:
             removeOverlays()
+            retrieveCenterLocationOfParkedCarFromCoreData()
             mapView.removeAnnotation(userAnnotation)
             break
         default:
@@ -162,7 +167,7 @@ extension HomeViewController {
     }
     
     func configureMapViewLayout() {
-        
+        mapViewHeightConstraintOutlet.constant = mapView.bounds.size.width
         mapView.delegate = self
         mapView.layer.borderWidth = 2
         mapView.layer.cornerRadius = 9

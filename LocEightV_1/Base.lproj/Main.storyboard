@@ -33,10 +33,10 @@
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IN-WP-YIF">
-                                <rect key="frame" x="10" y="604" width="150" height="60"/>
+                                <rect key="frame" x="10" y="604" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4g6-bu-ncO"/>
-                                    <constraint firstAttribute="height" constant="60" id="wKR-Eg-JQg"/>
+                                    <constraint firstAttribute="height" constant="40" id="wKR-Eg-JQg"/>
                                 </constraints>
                                 <state key="normal" title="Reset parking"/>
                                 <connections>
@@ -44,10 +44,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w40-fU-7cp">
-                                <rect key="frame" x="10" y="674" width="150" height="60"/>
+                                <rect key="frame" x="10" y="654" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="gOq-qj-oyG"/>
-                                    <constraint firstAttribute="height" constant="60" id="vGx-wO-URD"/>
+                                    <constraint firstAttribute="height" constant="40" id="vGx-wO-URD"/>
                                 </constraints>
                                 <state key="normal" title="Clear map"/>
                                 <connections>
@@ -111,6 +111,7 @@
                         <outlet property="clearMapButtonOutlet" destination="w40-fU-7cp" id="LOX-9G-8Ji"/>
                         <outlet property="locationDisplaySwitchOutlet" destination="Pzc-J8-B8X" id="m7i-4B-WJc"/>
                         <outlet property="mapView" destination="Yb5-HW-FDw" id="ThM-4x-S2D"/>
+                        <outlet property="mapViewHeightConstraintOutlet" destination="B5c-uP-FNQ" id="2Eb-Po-dGh"/>
                         <outlet property="resetButtonOutlet" destination="4IN-WP-YIF" id="Snp-FJ-LC0"/>
                         <outlet property="switchLabel" destination="dVG-Eg-rAg" id="TJ5-VI-o4K"/>
                     </connections>
