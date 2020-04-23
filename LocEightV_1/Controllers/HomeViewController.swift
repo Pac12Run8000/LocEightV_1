@@ -64,7 +64,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
-        
         menuFunction = .locate_vehicle
         
         checkLocationServices()
@@ -80,22 +79,15 @@ class HomeViewController: UIViewController {
         configureMapViewLayout()
 
         
-        if menuFunction == .locate_vehicle {
+
             if let ae = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ae.lat as? Double, let long = ae.long as? Double, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D, let title = ae.title, let subtitle = ae.subtitle {
                 
-                
-                
-                
-                
                 centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subtitle)
+
             } else {
-                centerOnParkingAnnotation()
-            }
+                mapView.removeAnnotations(mapView.annotations)
             
-        } else {
-            mapView.removeAnnotations(mapView.annotations)
-        
-        }
+            }
         
         configureResetButton()
         configureClearMapButton()
