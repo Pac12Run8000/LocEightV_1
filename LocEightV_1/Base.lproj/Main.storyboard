@@ -38,7 +38,7 @@
                                     <constraint firstAttribute="width" constant="150" id="4g6-bu-ncO"/>
                                     <constraint firstAttribute="height" constant="40" id="wKR-Eg-JQg"/>
                                 </constraints>
-                                <state key="normal" title="Reset parking"/>
+                                <state key="normal" title="Set parking"/>
                                 <connections>
                                     <action selector="resetLocationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bDt-IV-oeR"/>
                                 </connections>
@@ -67,17 +67,18 @@
                                     <action selector="segmentedActionMapType:" destination="BYZ-38-t0r" eventType="valueChanged" id="nQs-a4-gh5"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dispslay current location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVG-Eg-rAg">
-                                <rect key="frame" x="204" y="604" width="200" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display current location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVG-Eg-rAg">
+                                <rect key="frame" x="204" y="604" width="200" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="6Zy-Tb-SWb"/>
+                                    <constraint firstAttribute="height" constant="40" id="h7F-N4-9mS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pzc-J8-B8X">
-                                <rect key="frame" x="347" y="632" width="49" height="31"/>
+                                <rect key="frame" x="347" y="654" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Jjd-n5-sf3"/>
                                     <constraint firstAttribute="width" constant="47" id="Ljk-H2-cxI"/>

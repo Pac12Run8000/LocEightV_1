@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
             if parkingAnnotation == nil {
                 locationDisplaySwitchOutlet.isOn = false
                 locationDisplaySwitchOutlet.isEnabled = false
-                switchLabel.text = "<- reset parking"
+                switchLabel.text = "<- Set parking"
             } else {
                 locationDisplaySwitchOutlet.isEnabled = true
                 switchLabel.text = "Display current location."
@@ -71,6 +71,8 @@ class HomeViewController: UIViewController {
         
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
+        configureCurrentLocationSwitch()
+        
         locationManager.startUpdatingLocation()
         setUpLocationManager()
         guard checkLocationAuthorization() else {
@@ -98,6 +100,17 @@ class HomeViewController: UIViewController {
 //        mapView.showsUserLocation = true
         
         
+    }
+    
+    func configureCurrentLocationSwitch() {
+        if parkingAnnotation == nil {
+            locationDisplaySwitchOutlet.isOn = false
+            locationDisplaySwitchOutlet.isEnabled = false
+            switchLabel.text = "<- Set parking"
+        } else {
+            locationDisplaySwitchOutlet.isEnabled = true
+            switchLabel.text = "Display current location."
+        }
     }
     
     
