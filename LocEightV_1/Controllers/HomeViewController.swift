@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     
     var menuFunction:MenuFunction? {
         didSet {
+            
             switch menuFunction {
             case .locate_vehicle:
                 configureLoadingVehicleLocation()
@@ -61,9 +62,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
+        
+        menuFunction = .locate_vehicle
+        
+        checkLocationServices()
         configureCurrentLocationSwitch()
         
         locationManager.startUpdatingLocation()
@@ -75,9 +79,22 @@ class HomeViewController: UIViewController {
         
         configureMapViewLayout()
 
-
-        if let ae = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ae.lat as? Double, let long = ae.long as? Double, let title = ae.title, let subtitle = ae.subtitle {
-            centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subtitle)
+        
+        if menuFunction == .locate_vehicle {
+            if let ae = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ae.lat as? Double, let long = ae.long as? Double, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D, let title = ae.title, let subtitle = ae.subtitle {
+                
+                
+                
+                
+                
+                centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subtitle)
+            } else {
+                centerOnParkingAnnotation()
+            }
+            
+        } else {
+            mapView.removeAnnotations(mapView.annotations)
+        
         }
         
         configureResetButton()
@@ -209,6 +226,9 @@ extension HomeViewController {
         resetButtonOutlet.isHidden = true
         switchLabel.isHidden = true
         locationDisplaySwitchOutlet.isHidden = true
+        
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
     }
     
     func configureFindingEatingPlaces() {
@@ -216,6 +236,9 @@ extension HomeViewController {
         resetButtonOutlet.isHidden = true
         switchLabel.isHidden = true
         locationDisplaySwitchOutlet.isHidden = true
+        
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
     }
     
     func configureLoadingParkingGarages() {
@@ -223,15 +246,27 @@ extension HomeViewController {
         resetButtonOutlet.isHidden = true
         switchLabel.isHidden = true
         locationDisplaySwitchOutlet.isHidden = true
+        
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
+        
     }
     
     func configureLoadingVehicleLocation() {
-       
         clearMapButtonOutlet.isHidden = false
         resetButtonOutlet.isHidden = false
         switchLabel.isHidden = false
         locationDisplaySwitchOutlet.isHidden = false
-        checkLocationServices()
+        
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
+        
+        
+        
+        if let ai = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ai.lat as? Double, let long = ai.long as? Double, let title = ai.title, let subTitle = ai.subtitle {
+
+            centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subTitle)
+        }
     }
     
     func defaultRegionForClearMap() {
@@ -252,27 +287,17 @@ extension HomeViewController {
     }
     
     func retrieveCenterLocationOfParkedCarFromCoreData() -> AnnotationEntity? {
-        var annotationEntity:AnnotationEntity?
-        var annotationEntityArray = [AnnotationEntity]()
-
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lat", ascending: true)]
+  
+        let fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
+        fetchRequest.fetchLimit = 1
         
         do {
-            annotationEntityArray = try managedObjectContext.fetch(fetchRequest) as! [AnnotationEntity]
+            return try managedObjectContext.fetch(fetchRequest).first
         } catch {
             print("error:\(error.localizedDescription)")
         }
-
         
-        guard annotationEntityArray.count >= 1 else {
-            print("There is no AnnotationEntity.")
-            return nil
-        }
-        
-        
-        annotationEntity = annotationEntityArray[0] as? AnnotationEntity
-        return annotationEntity
+        return nil
     }
     
     func addStartLocationForAnnotationToMap() {
@@ -296,7 +321,7 @@ extension HomeViewController {
             
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
             parkingAnnotation = ParkingAnnotation(coordinate: location, title: title, subtitle: subtitle)
-//            getTheParkedVehicleCoordinates(destinationCoordinate: location)
+
             mapView.addAnnotation(parkingAnnotation)
             mapView.setRegion(region, animated: true)
         }
@@ -370,8 +395,10 @@ extension HomeViewController {
         }
         
         print("Location Services are ready.")
+        
        
-//        setUpLocationManager()
+       
+        setUpLocationManager()
         centerViewOnUserLocation()
     }
     
