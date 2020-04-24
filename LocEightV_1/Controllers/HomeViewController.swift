@@ -68,9 +68,10 @@ class HomeViewController: UIViewController {
         
         checkLocationServices()
         configureCurrentLocationSwitch()
-        
-        locationManager.startUpdatingLocation()
         setUpLocationManager()
+        locationManager.startUpdatingLocation()
+        
+        
         guard checkLocationAuthorization() else {
                print("authorizeWhenInUse is false.")
                return
@@ -94,12 +95,6 @@ class HomeViewController: UIViewController {
         
         configureSwitch()
         
-        
-        
-        
-        
-        
-//        mapView.showsUserLocation = true
         
         
     }
@@ -387,11 +382,7 @@ extension HomeViewController {
         }
         
         print("Location Services are ready.")
-        
-       
-       
-        setUpLocationManager()
-        centerViewOnUserLocation()
+
     }
     
     func checkLocationAuthorization() -> Bool {
