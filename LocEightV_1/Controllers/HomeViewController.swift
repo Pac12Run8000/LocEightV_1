@@ -568,14 +568,6 @@ extension HomeViewController {
     
     func createOverlayForCoordinates(startingCoordinate:CLLocationCoordinate2D, destinationCoordinate:CLLocationCoordinate2D) {
             
-    //        guard let startingCoordinate = locationManager.location?.coordinate else {
-    //            print("There is no starting coordinate.")
-    //            return
-    //        }
-            
-    //        let startingCoordinate = CLLocationCoordinate2D(latitude: 37.765740, longitude: -122.257350)
-    //        let destinationCoordinate = CLLocationCoordinate2D(latitude: 39.091690, longitude: -104.835430)
-            
             let startingPlaceMark = MKPlacemark(coordinate: startingCoordinate)
             let destinationPlaceMark = MKPlacemark(coordinate: destinationCoordinate)
             
@@ -590,6 +582,8 @@ extension HomeViewController {
             
             let directions = MKDirections(request: destinationRequest)
             directions.calculate { (response, error) in
+                
+                
                 guard error == nil else {
                     print("There was an error:\(error?.localizedDescription)")
                     return
@@ -597,14 +591,53 @@ extension HomeViewController {
                 
                 let route = response?.routes[0]
                 self.mapView.addOverlay(route!.polyline)
+                
                 if let mapRect = route?.polyline.boundingMapRect {
                     
                     self.mapView.setVisibleMapRect(mapRect, animated: true)
                     
                     
                 }
+                
+                
             }
         }
+    
+    
+    func shouldPresentLoadingView(status:Bool) {
+        var fadeView:UIView?
+        
+        if (status) {
+            fadeView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+            fadeView?.backgroundColor = UIColor(red: 2/255, green: 64/255, blue: 89/255, alpha: 1.0)
+            fadeView?.alpha = 0.0
+            fadeView?.tag = 99
+            
+            let spinner = UIActivityIndicatorView()
+            spinner.color = UIColor.white
+            spinner.style = .large
+            spinner.center = view.center
+            
+            view.addSubview(fadeView!)
+            fadeView?.addSubview(spinner)
+            
+            spinner.startAnimating()
+            fadeView?.fadeTo(alphaValue: 0.7, withDuration: 0.2)
+        } else {
+            for subview in view.subviews {
+                if subview.tag == 99 {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        subview.alpha = 0.0
+                    }) { (finished) in
+                        subview.removeFromSuperview()
+                    }
+                }
+            }
+        }
+    }
 }
+
+
+
 
 
