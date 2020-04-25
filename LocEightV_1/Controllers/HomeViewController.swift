@@ -13,10 +13,11 @@ import CoreData
 
 class HomeViewController: UIViewController {
     
+    
     var delegate:CenterViewControllerDelegate?
     let locationManager = CLLocationManager()
     let regionInMetersForVehicle:CLLocationDistance = 250
-    var mapItems:[MKMapItem]?
+    var mapItemsForAddresses:[MKMapItem]?
     var parkingAnnotation:ParkingAnnotation! {
         didSet {
             configureCurrentLocationSwitch()
@@ -33,6 +34,7 @@ class HomeViewController: UIViewController {
             
         }
     }
+    
     var managedObjectContext:NSManagedObjectContext!
     
     var menuFunction:MenuFunction? {
@@ -260,29 +262,97 @@ extension HomeViewController {
             return
         }
         
-//        returnParkingLocationAddress(clLocation: <#T##CLLocation#>, completion: <#T##(String?, Error?) -> ()#>)
-        
-        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
-        
-        userAnnotation = UserAnnotation(coordinate: coordinate, title: "You are here ..", subtitle: "This is your location")
-        self.mapView.addAnnotation(userAnnotation)
-        self.mapView.setRegion(region, animated: true)
+        let clLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         
         
         
+        returnLocationAddress(clLocation: clLocation) { (address, error) in
+            guard error == nil else {
+                print("There was an arror getting the address:\(error?.localizedDescription)")
+                return
+            }
+            var defaultAddress = address != nil ? address : "The address is missing for this location"
+            let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: self.regionInMetersForVehicle, longitudinalMeters: self.regionInMetersForVehicle)
+            
+            
+            self.userAnnotation = UserAnnotation(coordinate: coordinate, title: "You are here ..", subtitle: "\(defaultAddress!)")
+            self.mapView.addAnnotation(self.userAnnotation)
+            self.mapView.setRegion(region, animated: true)
+            
+            self.getRegionForMKMapItemPlaceMarks(region: region)
+        }
         
-//        mapItems = [MKMapItem]()
+       
+        
+        
         
 //        let request = MKLocalSearch.Request()
 //        request.naturalLanguageQuery = "Parking"
 //        request.region = mapView.region
-        
-//        let request = MKLocalSearch.Request()
-//        request.naturalLanguageQuery = destTextFieldOutlet.text
-//        request.region = mapView.region
-//
 //        let search = MKLocalSearch(request: request)
 //        search.start { (response, error) in
+//            guard error == nil else {
+//                print("There was an error getting mapItems:\(error?.localizedDescription)")
+//                return
+//            }
+//
+//            guard let mapItems = response?.mapItems, mapItems.count > 0 else {
+//                print("There were no mapItems.")
+//                return
+//            }
+//
+//            for mapItem in mapItems {
+//
+//                if let lat = mapItem.placemark.location?.coordinate.latitude, let long = mapItem.placemark.location?.coordinate.longitude, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
+//
+//                    print("coordinate:\(coordinate), title:\(mapItem.placemark.title)")
+//
+//                    let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "mapItem.placemark.title!", subtitle:" mapItem.placemark.subtitle!")
+//                    self.mapView.addAnnotation(garageAnnotation)
+//                }
+//            }
+//        }
+    }
+    
+    func getRegionForMKMapItemPlaceMarks(region:MKCoordinateRegion) {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = "Parking"
+        request.region = region
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            guard error == nil else {
+                print("There was an error getting mapItems:\(error?.localizedDescription)")
+                return
+            }
+            
+            guard let mapItems = response?.mapItems, mapItems.count > 0 else {
+                print("There were no mapItems.")
+                return
+            }
+            
+            for mapItem in mapItems {
+               
+                if let lat = mapItem.placemark.location?.coordinate.latitude, let long = mapItem.placemark.location?.coordinate.longitude, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
+                    
+//                    guard let placemark = mapItem.placemark as? MKPlacemark, let subtitle = placemark.subtitle else {
+//                        let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Garage here", subtitle: "Name not available")
+//                        self.mapView.addAnnotation(garageAnnotation)
+//                        return
+//                    }
+                    
+                    let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Garage here", subtitle: "subtitle")
+                    self.mapView.addAnnotation(garageAnnotation)
+
+//                    if let subTitle = mapItem.placemark.subtitle, let title = mapItem.placemark.title {
+//                        let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: title, subtitle: subTitle)
+//                        self.mapView.addAnnotation(garageAnnotation)
+//                    } else {
+//                        let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Garage here", subtitle: "Do not have the name.")
+//                        self.mapView.addAnnotation(garageAnnotation)
+//                    }
+                }
+            }
+        }
     }
     
     func configureLoadingVehicleLocation() {
@@ -367,7 +437,7 @@ extension HomeViewController {
             
             
             
-            returnParkingLocationAddress(clLocation: clLocation) { (address, error) in
+            returnLocationAddress(clLocation: clLocation) { (address, error) in
                 guard error == nil else {
                     print("There was an error:\(error?.localizedDescription)")
                     return
@@ -388,7 +458,7 @@ extension HomeViewController {
     }
     
     
-    func returnParkingLocationAddress(clLocation:CLLocation, completion handler:@escaping(_ address:String?,_ error:Error?) -> ()) {
+    func returnLocationAddress(clLocation:CLLocation, completion handler:@escaping(_ address:String?,_ error:Error?) -> ()) {
         
         var myAddress:String?
         CLGeocoder().reverseGeocodeLocation(clLocation) { (placemarks, error) in
@@ -498,7 +568,17 @@ extension HomeViewController:MKMapViewDelegate {
                     let flyout = UIButton(type: .detailDisclosure)
                     view.rightCalloutAccessoryView = flyout
                    return view
-               }
+                } else if let annotation = annotation as? GarageAnnotation {
+                    let identifier = "garage"
+                    var view:MKAnnotationView
+                    view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                    view.image = UIImage(named: "driverAnnotation")
+                    view.isEnabled = true
+                    view.canShowCallout = true
+                     let flyout = UIButton(type: .detailDisclosure)
+                     view.rightCalloutAccessoryView = flyout
+                    return view
+                }
                return nil
     }
     
