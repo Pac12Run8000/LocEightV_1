@@ -24,9 +24,6 @@ class HomeViewController: UIViewController {
     var userAnnotation:UserAnnotation! {
         didSet {
             addOverlayForAnnotations()
-            
-//            print("userAnnotation:\(userAnnotation.coordinate)")
-//            setRegionForTwoAnnotations(parkingAnnot: parkingAnnotation, userAnnot: userAnnotation)
         }
     }
     var managedObjectContext:NSManagedObjectContext!
@@ -62,6 +59,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureMapViewLayout()
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
         menuFunction = .locate_vehicle
@@ -77,18 +75,11 @@ class HomeViewController: UIViewController {
                return
         }
         
-        configureMapViewLayout()
+        
 
         
 
-            if let ae = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ae.lat as? Double, let long = ae.long as? Double, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D, let title = ae.title, let subtitle = ae.subtitle {
-                
-                centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subtitle)
 
-            } else {
-                mapView.removeAnnotations(mapView.annotations)
-            
-            }
         
         configureResetButton()
         configureClearMapButton()
@@ -162,6 +153,11 @@ class HomeViewController: UIViewController {
 // MARK:- Configure mapView layout UI layout
 extension HomeViewController {
     
+    func setDefaultForShowuserlocationAndSwitchoutlet() {
+        mapView.showsUserLocation = false
+        locationDisplaySwitchOutlet.isOn = false
+    }
+    
     func configureCurrentLocationSwitch() {
         if parkingAnnotation == nil {
             locationDisplaySwitchOutlet.isOn = false
@@ -205,7 +201,7 @@ extension HomeViewController {
 }
 
 
-// MARK:- Functionality for loading vehicle location
+// MARK:- Functionality for loading the controller based on menuFunction
 extension HomeViewController {
     
     func configureFindingShoppingPlaces() {
@@ -213,9 +209,11 @@ extension HomeViewController {
         resetButtonOutlet.isHidden = true
         switchLabel.isHidden = true
         locationDisplaySwitchOutlet.isHidden = true
+        setDefaultForShowuserlocationAndSwitchoutlet()
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)
+        defaultRegionForClearMap()
     }
     
     func configureFindingEatingPlaces() {
@@ -223,9 +221,11 @@ extension HomeViewController {
         resetButtonOutlet.isHidden = true
         switchLabel.isHidden = true
         locationDisplaySwitchOutlet.isHidden = true
+        setDefaultForShowuserlocationAndSwitchoutlet()
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)
+        defaultRegionForClearMap()
     }
     
     func configureLoadingParkingGarages() {
@@ -233,10 +233,11 @@ extension HomeViewController {
         resetButtonOutlet.isHidden = true
         switchLabel.isHidden = true
         locationDisplaySwitchOutlet.isHidden = true
+        setDefaultForShowuserlocationAndSwitchoutlet()
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)
-        
+        defaultRegionForClearMap()
     }
     
     func configureLoadingVehicleLocation() {
@@ -247,7 +248,6 @@ extension HomeViewController {
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)
-        
         
         
         if let ai = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ai.lat as? Double, let long = ai.long as? Double, let title = ai.title, let subTitle = ai.subtitle {
@@ -340,16 +340,11 @@ extension HomeViewController {
         } else {
             print("Location Manager isn't working.")
         }
-        
-        
     }
     
     
-    
-    
-    
-    
     func returnParkingLocationAddress(clLocation:CLLocation, completion handler:@escaping(_ address:String?,_ error:Error?) -> ()) {
+        
         var myAddress:String?
         CLGeocoder().reverseGeocodeLocation(clLocation) { (placemarks, error) in
             guard error == nil else {
@@ -365,13 +360,9 @@ extension HomeViewController {
                 } else {
                     myAddress = "Invalid address information"
                 }
-                
-
             }
-            
             handler(myAddress, nil)
         }
-    
     }
     
     func checkLocationServices() {
@@ -380,9 +371,7 @@ extension HomeViewController {
             showAlert(title: "Device issue", msg: "Location Services aren't enabled. Location services may not exist on this device.")
             return
         }
-        
         print("Location Services are ready.")
-
     }
     
     func checkLocationAuthorization() -> Bool {
@@ -610,22 +599,11 @@ extension HomeViewController {
                 self.mapView.addOverlay(route!.polyline)
                 if let mapRect = route?.polyline.boundingMapRect {
                     
-//                    var mapRectwithPadding = mapRect
-//                    var wpadding = mapRectwithPadding.size.width * 0.25
-//                    var hPadding = mapRectwithPadding.size.height * 0.25
-//
-//                    mapRectwithPadding.origin.x -= wpadding / 2
-//                    mapRectwithPadding.origin.y -= hPadding / 2
-                    
                     self.mapView.setVisibleMapRect(mapRect, animated: true)
                     
                     
                 }
-                
-
             }
-        
-            
         }
 }
 
