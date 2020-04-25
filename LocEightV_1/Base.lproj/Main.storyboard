@@ -87,10 +87,15 @@
                                     <action selector="currentLocatioSwitchAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="ue5-ef-5gF"/>
                                 </connections>
                             </switch>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="dct-zT-83J">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" red="0.0039215686269999999" green="0.08235294118" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5Z8-6E-Ogc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="20R-GH-aVA"/>
+                            <constraint firstItem="dct-zT-83J" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Hg-7c-nbY"/>
                             <constraint firstItem="dVG-Eg-rAg" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="5qw-Zl-sse"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dVG-Eg-rAg" secondAttribute="trailing" constant="10" id="7DZ-oR-0Qt"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Vz-ot-bXu"/>
@@ -104,11 +109,13 @@
                             <constraint firstItem="Pzc-J8-B8X" firstAttribute="top" secondItem="dVG-Eg-rAg" secondAttribute="bottom" constant="10" id="cdj-f8-azn"/>
                             <constraint firstItem="4IN-WP-YIF" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="eNu-Bc-SiU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yb5-HW-FDw" secondAttribute="trailing" constant="10" id="o0K-65-qgA"/>
+                            <constraint firstItem="dct-zT-83J" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ot0-6p-r9X"/>
                             <constraint firstItem="w40-fU-7cp" firstAttribute="top" secondItem="4IN-WP-YIF" secondAttribute="bottom" constant="10" id="z56-9f-1lG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="dct-zT-83J" id="pMn-VN-ch4"/>
                         <outlet property="clearMapButtonOutlet" destination="w40-fU-7cp" id="LOX-9G-8Ji"/>
                         <outlet property="locationDisplaySwitchOutlet" destination="Pzc-J8-B8X" id="m7i-4B-WJc"/>
                         <outlet property="mapView" destination="Yb5-HW-FDw" id="ThM-4x-S2D"/>

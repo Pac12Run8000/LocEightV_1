@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     var delegate:CenterViewControllerDelegate?
     let locationManager = CLLocationManager()
     let regionInMetersForVehicle:CLLocationDistance = 250
+    var mapItems:[MKMapItem]?
     var parkingAnnotation:ParkingAnnotation! {
         didSet {
             configureCurrentLocationSwitch()
@@ -23,7 +24,13 @@ class HomeViewController: UIViewController {
     }
     var userAnnotation:UserAnnotation! {
         didSet {
-            addOverlayForAnnotations()
+            switch menuFunction {
+            case .locate_vehicle:
+                addOverlayForAnnotations()
+            default:
+                print("I'm not drawing an overlay.")
+            }
+            
         }
     }
     var managedObjectContext:NSManagedObjectContext!
@@ -56,6 +63,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var switchLabel: UILabel!
     @IBOutlet weak var mapViewHeightConstraintOutlet: NSLayoutConstraint!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +82,7 @@ class HomeViewController: UIViewController {
                print("authorizeWhenInUse is false.")
                return
         }
+        activityIndicator.layer.cornerRadius = 5
         
         
 
@@ -237,7 +246,43 @@ extension HomeViewController {
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)
-        defaultRegionForClearMap()
+        
+        
+        searchForParkingGarages()
+    }
+    
+    
+    func searchForParkingGarages() {
+//        mapView.showsUserLocation = true
+        
+        guard let coordinate = locationManager.location?.coordinate else {
+            print("There are no coordinates.")
+            return
+        }
+        
+//        returnParkingLocationAddress(clLocation: <#T##CLLocation#>, completion: <#T##(String?, Error?) -> ()#>)
+        
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionInMetersForVehicle, longitudinalMeters: regionInMetersForVehicle)
+        
+        userAnnotation = UserAnnotation(coordinate: coordinate, title: "You are here ..", subtitle: "This is your location")
+        self.mapView.addAnnotation(userAnnotation)
+        self.mapView.setRegion(region, animated: true)
+        
+        
+        
+        
+//        mapItems = [MKMapItem]()
+        
+//        let request = MKLocalSearch.Request()
+//        request.naturalLanguageQuery = "Parking"
+//        request.region = mapView.region
+        
+//        let request = MKLocalSearch.Request()
+//        request.naturalLanguageQuery = destTextFieldOutlet.text
+//        request.region = mapView.region
+//
+//        let search = MKLocalSearch(request: request)
+//        search.start { (response, error) in
     }
     
     func configureLoadingVehicleLocation() {
@@ -567,6 +612,9 @@ extension HomeViewController {
     }
     
     func createOverlayForCoordinates(startingCoordinate:CLLocationCoordinate2D, destinationCoordinate:CLLocationCoordinate2D) {
+        
+        
+        activityIndicator.startAnimating()
             
             let startingPlaceMark = MKPlacemark(coordinate: startingCoordinate)
             let destinationPlaceMark = MKPlacemark(coordinate: destinationCoordinate)
@@ -595,7 +643,7 @@ extension HomeViewController {
                 if let mapRect = route?.polyline.boundingMapRect {
                     
                     self.mapView.setVisibleMapRect(mapRect, animated: true)
-                    
+                    self.activityIndicator.stopAnimating()
                     
                 }
                 
