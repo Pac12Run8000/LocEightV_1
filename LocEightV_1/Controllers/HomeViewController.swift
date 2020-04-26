@@ -334,22 +334,9 @@ extension HomeViewController {
                
                 if let lat = mapItem.placemark.location?.coordinate.latitude, let long = mapItem.placemark.location?.coordinate.longitude, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
                     
-//                    guard let placemark = mapItem.placemark as? MKPlacemark, let subtitle = placemark.subtitle else {
-//                        let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Garage here", subtitle: "Name not available")
-//                        self.mapView.addAnnotation(garageAnnotation)
-//                        return
-//                    }
-                    
-                    let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Garage here", subtitle: "subtitle")
+                    let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Garage here", subtitle: "\(mapItem.placemark.title ?? "Name not available")")
                     self.mapView.addAnnotation(garageAnnotation)
-
-//                    if let subTitle = mapItem.placemark.subtitle, let title = mapItem.placemark.title {
-//                        let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: title, subtitle: subTitle)
-//                        self.mapView.addAnnotation(garageAnnotation)
-//                    } else {
-//                        let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Garage here", subtitle: "Do not have the name.")
-//                        self.mapView.addAnnotation(garageAnnotation)
-//                    }
+                 
                 }
             }
         }
