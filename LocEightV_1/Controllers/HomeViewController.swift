@@ -218,7 +218,8 @@ extension HomeViewController {
     func configureFindingShoppingPlaces() {
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
-        switchLabel.isHidden = true
+        switchLabel.isHidden = false
+        switchLabel.text = "number of shopping places:"
         locationDisplaySwitchOutlet.isHidden = true
         setDefaultForShowuserlocationAndSwitchoutlet()
         
@@ -228,9 +229,13 @@ extension HomeViewController {
     }
     
     func configureFindingEatingPlaces() {
+        
+        
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
-        switchLabel.isHidden = true
+        
+        switchLabel.isHidden = false
+        switchLabel.text = "number of restaurants:"
         locationDisplaySwitchOutlet.isHidden = true
         setDefaultForShowuserlocationAndSwitchoutlet()
         
@@ -240,10 +245,13 @@ extension HomeViewController {
     }
     
     func configureLoadingParkingGarages() {
+        
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
-        switchLabel.isHidden = true
+        switchLabel.isHidden = false
+        
         locationDisplaySwitchOutlet.isHidden = true
+        
         setDefaultForShowuserlocationAndSwitchoutlet()
         
         mapView.removeAnnotations(mapView.annotations)
@@ -281,42 +289,11 @@ extension HomeViewController {
             
             self.getRegionForMKMapItemPlaceMarks(region: region)
         }
-        
-       
-        
-        
-        
-//        let request = MKLocalSearch.Request()
-//        request.naturalLanguageQuery = "Parking"
-//        request.region = mapView.region
-//        let search = MKLocalSearch(request: request)
-//        search.start { (response, error) in
-//            guard error == nil else {
-//                print("There was an error getting mapItems:\(error?.localizedDescription)")
-//                return
-//            }
-//
-//            guard let mapItems = response?.mapItems, mapItems.count > 0 else {
-//                print("There were no mapItems.")
-//                return
-//            }
-//
-//            for mapItem in mapItems {
-//
-//                if let lat = mapItem.placemark.location?.coordinate.latitude, let long = mapItem.placemark.location?.coordinate.longitude, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
-//
-//                    print("coordinate:\(coordinate), title:\(mapItem.placemark.title)")
-//
-//                    let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "mapItem.placemark.title!", subtitle:" mapItem.placemark.subtitle!")
-//                    self.mapView.addAnnotation(garageAnnotation)
-//                }
-//            }
-//        }
     }
     
     func getRegionForMKMapItemPlaceMarks(region:MKCoordinateRegion) {
         let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "Parking"
+        request.naturalLanguageQuery = "parking"
         request.region = region
         let search = MKLocalSearch(request: request)
         search.start { (response, error) in
@@ -334,12 +311,21 @@ extension HomeViewController {
                
                 if let lat = mapItem.placemark.location?.coordinate.latitude, let long = mapItem.placemark.location?.coordinate.longitude, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
                     
-                    let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Garage here", subtitle: "\(mapItem.placemark.title ?? "Name not available")")
+                    let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Park here.", subtitle: "\(mapItem.placemark.title ?? "Name not available")")
                     self.mapView.addAnnotation(garageAnnotation)
                  
                 }
             }
+            
+            if let garageAnnotationCount = self.mapView.annotations.filter({ $0 is GarageAnnotation }).count as? Int {
+                self.switchLabel.text = "parking locations: \(garageAnnotationCount)"
+            } else {
+                self.switchLabel.text = "There are no parking locations."
+            }
+            
         }
+        
+        
     }
     
     func configureLoadingVehicleLocation() {
@@ -587,46 +573,43 @@ extension HomeViewController {
 extension HomeViewController {
     
     func insertUpdateAnnotationEntity(lat:Double?, long:Double?, title:String?, subtitle:String?) {
-        var annotationEntity:AnnotationEntity!
-        var annotationUpdateEntity:AnnotationEntity!
-        var annotationArray = [AnnotationEntity]()
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lat", ascending: true)]
         
+        var annotationEntity:AnnotationEntity!
+        
+        let fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
+        fetchRequest.fetchLimit = 1
         do {
-            try annotationArray = managedObjectContext.fetch(fetchRequest) as! [AnnotationEntity]
-            print("Fetch was successful")
+            try annotationEntity = managedObjectContext.fetch(fetchRequest).first
         } catch {
-            print("There was an error:\(error.localizedDescription)")
+            print("There was an error fetching data:\(error.localizedDescription)")
         }
         
-        if (annotationArray.count == 0) {
+        if annotationEntity == nil {
             let annotationEntity = AnnotationEntity(context: managedObjectContext)
             annotationEntity.lat = lat!
             annotationEntity.long = long!
-            annotationEntity.title = title!
-            annotationEntity.subtitle = subtitle!
+            annotationEntity.title = title
+            annotationEntity.subtitle = subtitle
+            
             do {
                 try CoreDataStack.saveContext(context: managedObjectContext)
-                print("Save was successful")
+                print("successful data save.")
             } catch {
-                print("Error:\(error.localizedDescription)")
+                print("There was an error when saving:\(error.localizedDescription)")
             }
-            
         } else {
-            annotationUpdateEntity = annotationArray[0]
-            annotationUpdateEntity.lat = lat!
-            annotationUpdateEntity.long = long!
-            annotationUpdateEntity.title = title!
-            annotationUpdateEntity.subtitle = subtitle!
+            annotationEntity.lat = lat!
+            annotationEntity.long = long!
+            annotationEntity.title = title
+            annotationEntity.subtitle = subtitle
             
             do {
                 try CoreDataStack.saveContext(context: managedObjectContext)
+                print("successful data update.")
             } catch {
-                print("Error:\(error.localizedDescription)")
+                print("There was an error when saving:\(error.localizedDescription)")
             }
         }
-        
     }
     
     
