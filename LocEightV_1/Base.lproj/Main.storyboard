@@ -98,6 +98,9 @@
                                     <constraint firstAttribute="height" constant="40" id="uDE-BO-dCC"/>
                                 </constraints>
                                 <state key="normal" title="Take photo"/>
+                                <connections>
+                                    <action selector="takePhotoAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f89-ru-dqD"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

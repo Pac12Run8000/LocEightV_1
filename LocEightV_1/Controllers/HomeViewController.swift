@@ -144,10 +144,18 @@ class HomeViewController: UIViewController {
     
     
     @IBAction func clearMapAction(_ sender: Any) {
-        removeOverlays()
-        deleteAllOfAnnotationEntity()
-        clearAllMKAnnotations()
-        defaultRegionForClearMap()
+        
+        Alert.insureUserActionsAlert(vc: self, title: "Warning!", msg: "This action will clear your parking and current location. Do you want to do this?") { (areYouProceeding) in
+            
+            if areYouProceeding {
+                self.removeOverlays()
+                self.deleteAllOfAnnotationEntity()
+                self.clearAllMKAnnotations()
+                self.defaultRegionForClearMap()
+            }
+            
+        }
+        
     }
     
     @IBAction func segmentedActionMapType(_ sender: UISegmentedControl) {
@@ -162,6 +170,36 @@ class HomeViewController: UIViewController {
             print("Do nothing")
         }
     }
+    
+    
+    @IBAction func takePhotoAction(_ sender: Any) {
+        
+        ActionSheet.handleImageFunctionality(vc: self, title: "Taking a picture can help ...", message: "Take a picture of the garage level or your parking space number. These can help you find your parking space. Or you view an image that you've already taken.") { (imagePickerState) in
+            
+            switch imagePickerState {
+            case .photoLibrary:
+                break
+            case .camera:
+                break
+            case .showImage:
+                break
+            case .removeImage:
+                break
+            case .cancel:
+                self.dismiss(animated: true, completion: nil)
+                break
+            }
+            
+            
+        }
+        
+        
+        
+        
+    }
+    
+    
+    
     
     
     
