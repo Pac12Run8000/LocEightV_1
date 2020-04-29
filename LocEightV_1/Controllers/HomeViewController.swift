@@ -128,8 +128,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func resetLocationAction(_ sender: Any) {
         
-        insureUserActionsAlert(title: "Warning!", msg: "This action will delete your previous parking information and reset the location. Are you sure that you want to proceed?") { (areProceeding) in
-            
+        Alert.insureUserActionsAlert(vc: self, title: "Warning!", msg: "This action will delete your previous parking information and reset the location. Are you sure that you want to proceed?") { (areProceeding) in
             if areProceeding {
                 self.removeOverlays()
                 self.clearAllMKAnnotations()
@@ -138,20 +137,11 @@ class HomeViewController: UIViewController {
         }
         
 
+        
+
     }
     
-    func insureUserActionsAlert(title:String, msg:String, completionHandler:@escaping(_ areProceeding:Bool) -> ()) {
-        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Proceed", style: .default) { (action) in
-            completionHandler(true)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            completionHandler(false)
-        }
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
-    }
+    
     
     @IBAction func clearMapAction(_ sender: Any) {
         removeOverlays()
