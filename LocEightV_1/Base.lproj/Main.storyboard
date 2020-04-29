@@ -91,6 +91,14 @@
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                                 <color key="color" red="0.0039215686269999999" green="0.08235294118" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZC-K6-VM6">
+                                <rect key="frame" x="10" y="704" width="150" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="sBw-rY-4Xv"/>
+                                    <constraint firstAttribute="height" constant="40" id="uDE-BO-dCC"/>
+                                </constraints>
+                                <state key="normal" title="Take photo"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -110,6 +118,8 @@
                             <constraint firstItem="4IN-WP-YIF" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="eNu-Bc-SiU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yb5-HW-FDw" secondAttribute="trailing" constant="10" id="o0K-65-qgA"/>
                             <constraint firstItem="dct-zT-83J" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ot0-6p-r9X"/>
+                            <constraint firstItem="RZC-K6-VM6" firstAttribute="top" secondItem="w40-fU-7cp" secondAttribute="bottom" constant="10" id="spR-OG-xoM"/>
+                            <constraint firstItem="RZC-K6-VM6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="yqT-h4-mCt"/>
                             <constraint firstItem="w40-fU-7cp" firstAttribute="top" secondItem="4IN-WP-YIF" secondAttribute="bottom" constant="10" id="z56-9f-1lG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -122,6 +132,7 @@
                         <outlet property="mapViewHeightConstraintOutlet" destination="B5c-uP-FNQ" id="2Eb-Po-dGh"/>
                         <outlet property="resetButtonOutlet" destination="4IN-WP-YIF" id="Snp-FJ-LC0"/>
                         <outlet property="switchLabel" destination="dVG-Eg-rAg" id="TJ5-VI-o4K"/>
+                        <outlet property="takePhotoButtonOutlet" destination="RZC-K6-VM6" id="xvP-og-hsC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

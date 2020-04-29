@@ -64,8 +64,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var locationDisplaySwitchOutlet: UISwitch!
     @IBOutlet weak var switchLabel: UILabel!
     @IBOutlet weak var mapViewHeightConstraintOutlet: NSLayoutConstraint!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var takePhotoButtonOutlet: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,21 +80,15 @@ class HomeViewController: UIViewController {
         setUpLocationManager()
         locationManager.startUpdatingLocation()
         
-        
         guard checkLocationAuthorization() else {
                print("authorizeWhenInUse is false.")
                return
         }
         activityIndicator.layer.cornerRadius = 5
         
-        
-
-        
-
-
-        
         configureResetButton()
         configureClearMapButton()
+        configureTakePhotoButton()
         
         configureSwitch()
         
@@ -132,9 +127,30 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func resetLocationAction(_ sender: Any) {
-        removeOverlays()
-        clearAllMKAnnotations()
-        centerViewOnUserLocation()
+        
+        insureUserActionsAlert(title: "Warning!", msg: "This action will delete your previous parking information and reset the location. Are you sure that you want to proceed?") { (areProceeding) in
+            
+            if areProceeding {
+                self.removeOverlays()
+                self.clearAllMKAnnotations()
+                self.centerViewOnUserLocation()
+            }
+        }
+        
+
+    }
+    
+    func insureUserActionsAlert(title:String, msg:String, completionHandler:@escaping(_ areProceeding:Bool) -> ()) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Proceed", style: .default) { (action) in
+            completionHandler(true)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            completionHandler(false)
+        }
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
     
     @IBAction func clearMapAction(_ sender: Any) {
@@ -201,6 +217,13 @@ extension HomeViewController {
         resetButtonOutlet.layer.borderColor = UIColor.black.cgColor
     }
     
+    func configureTakePhotoButton() {
+        takePhotoButtonOutlet.layer.borderWidth = 2
+        takePhotoButtonOutlet.layer.cornerRadius = 9
+        takePhotoButtonOutlet.layer.masksToBounds = true
+        takePhotoButtonOutlet.layer.borderColor = UIColor.black.cgColor
+    }
+    
     func configureClearMapButton() {
         clearMapButtonOutlet.layer.borderWidth = 2
         clearMapButtonOutlet.layer.cornerRadius = 9
@@ -219,6 +242,7 @@ extension HomeViewController {
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
         switchLabel.isHidden = false
+        takePhotoButtonOutlet.isHidden = true
         switchLabel.text = "number of shopping places:"
         locationDisplaySwitchOutlet.isHidden = true
         setDefaultForShowuserlocationAndSwitchoutlet()
@@ -233,6 +257,7 @@ extension HomeViewController {
         
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
+        takePhotoButtonOutlet.isHidden = true
         
         switchLabel.isHidden = false
         switchLabel.text = "number of restaurants:"
@@ -246,11 +271,14 @@ extension HomeViewController {
     
     func configureLoadingParkingGarages() {
         
+//        mapView.pointOfInterestFilter = .some(MKPointOfInterestFilter(including: [.parking]))
+        
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
         switchLabel.isHidden = false
         
         locationDisplaySwitchOutlet.isHidden = true
+        takePhotoButtonOutlet.isHidden = true
         
         setDefaultForShowuserlocationAndSwitchoutlet()
         
@@ -263,7 +291,6 @@ extension HomeViewController {
     
     
     func searchForParkingGarages() {
-//        mapView.showsUserLocation = true
         
         guard let coordinate = locationManager.location?.coordinate else {
             print("There are no coordinates.")
@@ -295,7 +322,9 @@ extension HomeViewController {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = "parking"
         request.region = region
+//        request.resultTypes = .pointOfInterest
         let search = MKLocalSearch(request: request)
+        
         search.start { (response, error) in
             guard error == nil else {
                 print("There was an error getting mapItems:\(error?.localizedDescription)")
@@ -333,6 +362,7 @@ extension HomeViewController {
         resetButtonOutlet.isHidden = false
         switchLabel.isHidden = false
         locationDisplaySwitchOutlet.isHidden = false
+        takePhotoButtonOutlet.isHidden = false
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)
