@@ -55,6 +55,22 @@ struct ActionSheet {
         
     }
     
+    
+    static func displayUIImageInActionSheet(vc:UIViewController, imageToView:UIImage?) {
+        let displayImageAlertController = UIAlertController(title: "Image saved", message: "This is where the image is saved", preferredStyle: .actionSheet)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+        let noImageAction = UIAlertAction(title: "No image available", style: .default, handler: nil)
+        noImageAction.isEnabled = false
+        if let imageToView = imageToView {
+            displayImageAlertController.addImage(image:imageToView)
+        } else {
+            displayImageAlertController.addAction(noImageAction)
+        }
+        displayImageAlertController.addAction(okayAction)
+        vc.present(displayImageAlertController, animated: true, completion: nil)
+    }
+    
 }
 
 

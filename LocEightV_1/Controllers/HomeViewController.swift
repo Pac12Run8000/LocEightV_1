@@ -232,32 +232,22 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var imageToView:UIImage?
         
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            
+            imageToView = editedImage
         } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            
+            imageToView = image
         }
         
         
         self.dismiss(animated: true) {
-            
-            
-            let displayImageAlertController = UIAlertController(title: "Image saved", message: "This is where the image is saved", preferredStyle: .actionSheet)
-            
-            let image = UIImage(named: "IMG_8173")
-            
-            
-            let okayAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
-            
-            displayImageAlertController.addImage(image:image!)
-            displayImageAlertController.addAction(okayAction)
-            self.present(displayImageAlertController, animated: true, completion: nil)
-            
-            
+            ActionSheet.displayUIImageInActionSheet(vc: self, imageToView: imageToView)
         }
         
     }
+    
+    
     
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
