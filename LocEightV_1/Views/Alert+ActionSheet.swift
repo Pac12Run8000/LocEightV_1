@@ -89,8 +89,8 @@ extension UIAlertController {
         
         let scaledSize = CGSize(width: imageSize.width * ratio, height: imageSize.height * ratio)
         
-        let resizedImage = image.imageWithSize(size: scaledSize)
-        
+        var resizedImage = image.imageWithSize(size: scaledSize).withAlignmentRectInsets(UIEdgeInsets(top: -4, left: -35, bottom: -4, right: -35))
+
         
         let imageAction = UIAlertAction(title: "", style: .default, handler: nil)
         imageAction.isEnabled = false
