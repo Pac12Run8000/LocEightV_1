@@ -73,6 +73,8 @@ class HomeViewController: UIViewController {
         configureMapViewLayout()
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
+        
+        
         menuFunction = .locate_vehicle
         
         checkLocationServices()
@@ -182,6 +184,9 @@ class HomeViewController: UIViewController {
             switch imagePickerState {
             case .photoLibrary:
                 imagePickerController.sourceType = .photoLibrary
+                
+                
+                
                 self.present(imagePickerController, animated: true, completion: nil)
                 break
             case .camera:
@@ -267,10 +272,16 @@ extension HomeViewController {
     
     func configureCurrentLocationSwitch() {
         if parkingAnnotation == nil {
+            takePhotoButtonOutlet.isHidden = true
+            viewPhotoOutlet.isHidden = true
+            
             locationDisplaySwitchOutlet.isOn = false
             locationDisplaySwitchOutlet.isEnabled = false
             switchLabel.text = "<- Set parking"
+           
         } else {
+            takePhotoButtonOutlet.isHidden = false
+            viewPhotoOutlet.isHidden = false
             locationDisplaySwitchOutlet.isEnabled = true
             switchLabel.text = "Display current location."
         }
@@ -329,6 +340,8 @@ extension HomeViewController {
     func configureFindingShoppingPlaces() {
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
+        takePhotoButtonOutlet.isHidden = true
+        viewPhotoOutlet.isHidden = true
         switchLabel.isHidden = false
         takePhotoButtonOutlet.isHidden = true
         switchLabel.text = "number of shopping places:"
@@ -347,6 +360,9 @@ extension HomeViewController {
         resetButtonOutlet.isHidden = true
         takePhotoButtonOutlet.isHidden = true
         
+        takePhotoButtonOutlet.isHidden = true
+        viewPhotoOutlet.isHidden = true
+        
         switchLabel.isHidden = false
         switchLabel.text = "number of restaurants:"
         locationDisplaySwitchOutlet.isHidden = true
@@ -364,6 +380,9 @@ extension HomeViewController {
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
         switchLabel.isHidden = false
+        
+        takePhotoButtonOutlet.isHidden = true
+        viewPhotoOutlet.isHidden = true
         
         locationDisplaySwitchOutlet.isHidden = true
         takePhotoButtonOutlet.isHidden = true
@@ -451,6 +470,8 @@ extension HomeViewController {
         switchLabel.isHidden = false
         locationDisplaySwitchOutlet.isHidden = false
         takePhotoButtonOutlet.isHidden = false
+        takePhotoButtonOutlet.isHidden = false
+        viewPhotoOutlet.isHidden = false
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)

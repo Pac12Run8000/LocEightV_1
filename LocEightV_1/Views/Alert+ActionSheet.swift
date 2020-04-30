@@ -57,7 +57,7 @@ struct ActionSheet {
     
     
     static func displayUIImageInActionSheet(vc:UIViewController, imageToView:UIImage?) {
-        let displayImageAlertController = UIAlertController(title: "Image saved", message: "This is where the image is saved", preferredStyle: .actionSheet)
+        let displayImageAlertController = UIAlertController(title: "More location info", message: "Location information photo", preferredStyle: .actionSheet)
         
         let okayAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
         let noImageAction = UIAlertAction(title: "No image available", style: .default, handler: nil)
@@ -91,7 +91,6 @@ extension UIAlertController {
         
         var resizedImage = image.imageWithSize(size: scaledSize).withAlignmentRectInsets(UIEdgeInsets(top: -4, left: -35, bottom: -4, right: -35))
 
-        
         let imageAction = UIAlertAction(title: "", style: .default, handler: nil)
         imageAction.isEnabled = false
         imageAction.setValue(resizedImage.withRenderingMode(.alwaysOriginal), forKey: "image")
