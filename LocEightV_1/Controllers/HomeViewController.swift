@@ -243,12 +243,16 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
         self.dismiss(animated: true) {
             
             
-            let imageAlertController = UIAlertController(title: "Image saved", message: "This is where the image is saved", preferredStyle: .actionSheet)
+            let displayImageAlertController = UIAlertController(title: "Image saved", message: "This is where the image is saved", preferredStyle: .actionSheet)
+            
+            let image = UIImage(named: "IMG_8173")
+            
             
             let okayAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
             
-            imageAlertController.addAction(okayAction)
-            self.present(imageAlertController, animated: true, completion: nil)
+            displayImageAlertController.addImage(image:image!)
+            displayImageAlertController.addAction(okayAction)
+            self.present(displayImageAlertController, animated: true, completion: nil)
             
             
         }
