@@ -129,17 +129,14 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func resetLocationAction(_ sender: Any) {
-        
-        Alert.insureUserActionsAlert(vc: self, title: "Warning!", msg: "This action will delete your previous parking information and reset the location. Are you sure that you want to proceed?") { (areProceeding) in
+       
+        Alert.insureUserActionsAlert(vc: self, title: "Warning!", msg: "This action will delete all previous parking information and reset to your NEW current location. Are you sure that you want to proceed?") { (areProceeding) in
             if areProceeding {
                 self.removeOverlays()
                 self.clearAllMKAnnotations()
                 self.centerViewOnUserLocation()
             }
         }
-        
-
-        
 
     }
     
@@ -274,12 +271,14 @@ extension HomeViewController {
         if parkingAnnotation == nil {
             takePhotoButtonOutlet.isHidden = true
             viewPhotoOutlet.isHidden = true
+            clearMapButtonOutlet.isHidden = true
             
             locationDisplaySwitchOutlet.isOn = false
             locationDisplaySwitchOutlet.isEnabled = false
             switchLabel.text = "<- Set parking"
            
         } else {
+            clearMapButtonOutlet.isHidden = false
             takePhotoButtonOutlet.isHidden = false
             viewPhotoOutlet.isHidden = false
             locationDisplaySwitchOutlet.isEnabled = true
