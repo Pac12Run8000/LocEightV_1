@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapViewHeightConstraintOutlet: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var takePhotoButtonOutlet: UIButton!
-    
+    @IBOutlet weak var viewPhotoOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +89,7 @@ class HomeViewController: UIViewController {
         configureResetButton()
         configureClearMapButton()
         configureTakePhotoButton()
-        
+        configureViewPhotoOutlet()
         configureSwitch()
         
         
@@ -174,12 +174,26 @@ class HomeViewController: UIViewController {
     
     @IBAction func takePhotoAction(_ sender: Any) {
         
+        
         ActionSheet.handleImageFunctionality(vc: self, title: "Taking a picture can help ...", message: "Take a picture of the garage level or your parking space number. These can help you find your parking space. Or you view an image that you've already taken.") { (imagePickerState) in
+            
+            let imagePickerController = self.setImagePickerDelegate()
             
             switch imagePickerState {
             case .photoLibrary:
+                imagePickerController.sourceType = .photoLibrary
+                self.present(imagePickerController, animated: true, completion: nil)
                 break
             case .camera:
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    imagePickerController.sourceType = .camera
+                    self.present(imagePickerController, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Device error", message: "This device does not have a camera.", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                    alert.addAction(cancelAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
                 break
             case .showImage:
                 break
@@ -205,6 +219,50 @@ class HomeViewController: UIViewController {
     
 }
 
+
+// MARK:- UIImagePickerControllerDelegate functionality
+extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func setImagePickerDelegate() -> UIImagePickerController {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        return imagePickerController
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            
+        } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+        }
+        
+        
+        self.dismiss(animated: true) {
+            
+            
+            let imageAlertController = UIAlertController(title: "Image saved", message: "This is where the image is saved", preferredStyle: .actionSheet)
+            
+            let okayAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+            
+            imageAlertController.addAction(okayAction)
+            self.present(imageAlertController, animated: true, completion: nil)
+            
+            
+        }
+        
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+
 // MARK:- Configure mapView layout UI layout
 extension HomeViewController {
     
@@ -228,6 +286,14 @@ extension HomeViewController {
         locationDisplaySwitchOutlet.isOn = false
         
     }
+    
+    func configureViewPhotoOutlet() {
+        viewPhotoOutlet.layer.masksToBounds = true
+        viewPhotoOutlet.layer.borderWidth = 2
+        viewPhotoOutlet.layer.cornerRadius = 9
+        viewPhotoOutlet.layer.borderColor = UIColor.black.cgColor
+    }
+    
     
     func configureMapViewLayout() {
         mapViewHeightConstraintOutlet.constant = mapView.bounds.size.width
