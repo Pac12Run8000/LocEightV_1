@@ -56,10 +56,17 @@ struct ActionSheet {
     }
     
     
-    static func displayUIImageInActionSheet(vc:UIViewController, imageToView:UIImage?) {
+    static func displayUIImageInActionSheet(vc:UIViewController, imageToView:UIImage?, completion:@escaping(_ isSaving:Bool) -> ()) {
         let displayImageAlertController = UIAlertController(title: "More location info", message: "Location information photo", preferredStyle: .actionSheet)
         
-        let okayAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+        let okayAction = UIAlertAction(title: "Okay", style: .default) { (action) in
+            print("Saved info image.")
+            completion(true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            completion(false)
+        }
         let noImageAction = UIAlertAction(title: "No image available", style: .default, handler: nil)
         noImageAction.isEnabled = false
         if let imageToView = imageToView {
@@ -68,6 +75,7 @@ struct ActionSheet {
             displayImageAlertController.addAction(noImageAction)
         }
         displayImageAlertController.addAction(okayAction)
+        displayImageAlertController.addAction(cancelAction)
         vc.present(displayImageAlertController, animated: true, completion: nil)
     }
     

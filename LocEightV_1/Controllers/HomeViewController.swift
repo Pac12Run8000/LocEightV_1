@@ -244,7 +244,11 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         
         self.dismiss(animated: true) {
-            ActionSheet.displayUIImageInActionSheet(vc: self, imageToView: imageToView)
+            ActionSheet.displayUIImageInActionSheet(vc: self, imageToView: imageToView) { (isSavingToCoreData) in
+                if isSavingToCoreData {
+                    print("I am saving to core data.")
+                }
+            }
         }
         
     }
