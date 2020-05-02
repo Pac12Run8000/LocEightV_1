@@ -70,10 +70,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         configureMapViewLayout()
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
-        
+//        fetchAllOfAnnotationEntity()
         
         menuFunction = .locate_vehicle
         
@@ -244,9 +246,10 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         
         self.dismiss(animated: true) {
+            
             ActionSheet.displayUIImageInActionSheet(vc: self, imageToView: imageToView) { (isSavingToCoreData) in
                 if isSavingToCoreData {
-                    print("I am saving to core data.")
+                    self.updateImageForParkingInformation(image: imageToView!)
                 }
             }
         }
@@ -715,6 +718,34 @@ extension HomeViewController {
 // MARK:- CoreData Functionality
 extension HomeViewController {
     
+    func updateImageForParkingInformation(image:UIImage) -> Bool {
+        var annotationEntity:AnnotationEntity!
+        let fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
+        fetchRequest.fetchLimit = 1
+        do {
+            try annotationEntity = managedObjectContext.fetch(fetchRequest).first
+        } catch {
+            print("Fetch error:\(error.localizedDescription)")
+        }
+        
+        if annotationEntity == nil {
+            let annotationEntity = AnnotationEntity(context: managedObjectContext)
+            annotationEntity.image = image.jpegData(compressionQuality: 1.0)
+        } else {
+            annotationEntity.image = image.jpegData(compressionQuality: 1.0)
+        }
+        
+        do {
+            try CoreDataStack.saveContext(context: managedObjectContext)
+            print("Image Data was saved")
+            return true
+        } catch {
+            print("Update error:\(error.localizedDescription)")
+            return false
+        }
+        
+    }
+    
     func insertUpdateAnnotationEntity(lat:Double?, long:Double?, title:String?, subtitle:String?) {
         
         var annotationEntity:AnnotationEntity!
@@ -768,7 +799,7 @@ extension HomeViewController {
            }
 
            for item in annotationEntityArray {
-               print("item:\(item.lat), \(item.long), \(item.subtitle)")
+            print("item:\(item.lat), \(item.long), \(item.subtitle), image data:\(item.image)")
            }
     }
     

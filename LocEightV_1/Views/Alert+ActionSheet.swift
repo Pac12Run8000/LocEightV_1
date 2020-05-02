@@ -60,13 +60,13 @@ struct ActionSheet {
         let displayImageAlertController = UIAlertController(title: "More location info", message: "Location information photo", preferredStyle: .actionSheet)
         
         let okayAction = UIAlertAction(title: "Okay", style: .default) { (action) in
-            print("Saved info image.")
             completion(true)
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             completion(false)
         }
+        
         let noImageAction = UIAlertAction(title: "No image available", style: .default, handler: nil)
         noImageAction.isEnabled = false
         if let imageToView = imageToView {
