@@ -48,4 +48,21 @@ struct CoreDataStack {
         }
         
     }
+    
+    
+    static func fetchImage(managedObjectContext:NSManagedObjectContext) -> Bool {
+        var annotationEntity:AnnotationEntity!
+        let fetch = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
+        fetch.fetchLimit = 1
+        do {
+            try annotationEntity = managedObjectContext.fetch(fetch).first
+        } catch {
+            print("fetch error:\(error.localizedDescription)")
+        }
+        
+        if annotationEntity.image != nil {
+            return true
+        }
+        return false
+    }
 }

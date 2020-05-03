@@ -189,24 +189,15 @@ class HomeViewController: UIViewController {
                     imagePickerController.sourceType = .camera
                     self.present(imagePickerController, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(title: "Device error", message: "This device does not have a camera.", preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                    alert.addAction(cancelAction)
-                    self.present(alert, animated: true, completion: nil)
+                    Alert.alertNotification(vc: self, title: "Device error", message: "This device does not have a camera.", buttonTitle: "Ok", style: .alert)
                 }
                 break
             case .showImage:
-
-                if self.fetchImage(managedObjectContext: self.managedObjectContext) {
+                if CoreDataStack.fetchImage(managedObjectContext: self.managedObjectContext) {
                     self.performSegue(withIdentifier: "dispayImageSegue", sender: self)
                 } else {
-                    let alert = UIAlertController(title: "Missing Data", message: "You never saved an image to view. Go back to \"Take photo\" and save an image.", preferredStyle: .actionSheet)
-                    let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                    alert.addAction(cancelAction)
-                    self.present(alert, animated: true, completion: nil)
+                    Alert.alertNotification(vc: self, title: "Missing Data", message: "You never saved an image to view. Go back to \"Take photo\" and save an image.", buttonTitle: "Ok", style: .actionSheet)
                 }
-                
-                
                 break
             case .removeImage:
                 break
@@ -224,21 +215,7 @@ class HomeViewController: UIViewController {
     }
     
     
-    func fetchImage(managedObjectContext:NSManagedObjectContext) -> Bool {
-        var annotationEntity:AnnotationEntity!
-        let fetch = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
-        fetch.fetchLimit = 1
-        do {
-            try annotationEntity = managedObjectContext.fetch(fetch).first
-        } catch {
-            print("fetch error:\(error.localizedDescription)")
-        }
-        
-        if annotationEntity.image != nil {
-            return true
-        }
-        return false
-    }
+    
     
     
     

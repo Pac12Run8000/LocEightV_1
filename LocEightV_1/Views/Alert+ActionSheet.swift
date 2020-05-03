@@ -11,6 +11,13 @@ import UIKit
 
 struct Alert {
     
+    static func alertNotification(vc:UIViewController, title:String, message:String, buttonTitle:String, style:UIAlertController.Style ) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
+        let cancelAction = UIAlertAction(title: buttonTitle, style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        vc.present(alert, animated: true, completion: nil)
+    }
+    
     static func insureUserActionsAlert(vc:UIViewController, title:String, msg:String, completionHandler:@escaping(_ areProceeding:Bool) -> ()) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Proceed", style: .default) { (action) in
@@ -34,6 +41,9 @@ struct Alert {
 }
 
 struct ActionSheet {
+    
+    
+    
     
     static func handleImageFunctionality(vc:UIViewController, title:String, message:String, completion handler:@escaping(_ imagePickerState:ImagePickerState) -> ()) {
         let actionSheet = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
