@@ -19,7 +19,7 @@ struct CoreDataStack {
         }
     }
     
-    static func updateImageForParkingInformation(image:UIImage, managedObjectContext:NSManagedObjectContext) -> Bool {
+    static func updateImageForParkingInformation(image:UIImage, managedObjectContext:NSManagedObjectContext) {
         var annotationEntity:AnnotationEntity!
         let fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
         fetchRequest.fetchLimit = 1
@@ -41,10 +41,10 @@ struct CoreDataStack {
         do {
             try CoreDataStack.saveContext(context: managedObjectContext)
             print("transaction successful")
-            return true
+            
         } catch {
             print("Update error:\(error.localizedDescription)")
-            return false
+            
         }
         
     }
