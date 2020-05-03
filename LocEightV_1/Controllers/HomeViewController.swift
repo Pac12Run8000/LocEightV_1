@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapViewHeightConstraintOutlet: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var takePhotoButtonOutlet: UIButton!
-    @IBOutlet weak var viewPhotoOutlet: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +93,6 @@ class HomeViewController: UIViewController {
         configureResetButton()
         configureClearMapButton()
         configureTakePhotoButton()
-        configureViewPhotoOutlet()
         configureSwitch()
         
         
@@ -197,6 +196,7 @@ class HomeViewController: UIViewController {
                 }
                 break
             case .showImage:
+                self.performSegue(withIdentifier: "dispayImageSegue", sender: self)
                 break
             case .removeImage:
                 break
@@ -275,7 +275,6 @@ extension HomeViewController {
     func configureCurrentLocationSwitch() {
         if parkingAnnotation == nil {
             takePhotoButtonOutlet.isHidden = true
-            viewPhotoOutlet.isHidden = true
             clearMapButtonOutlet.isHidden = true
             
             locationDisplaySwitchOutlet.isOn = false
@@ -285,7 +284,6 @@ extension HomeViewController {
         } else {
             clearMapButtonOutlet.isHidden = false
             takePhotoButtonOutlet.isHidden = false
-            viewPhotoOutlet.isHidden = false
             locationDisplaySwitchOutlet.isEnabled = true
             switchLabel.text = "Display current location."
         }
@@ -296,12 +294,7 @@ extension HomeViewController {
         
     }
     
-    func configureViewPhotoOutlet() {
-        viewPhotoOutlet.layer.masksToBounds = true
-        viewPhotoOutlet.layer.borderWidth = 2
-        viewPhotoOutlet.layer.cornerRadius = 9
-        viewPhotoOutlet.layer.borderColor = UIColor.black.cgColor
-    }
+    
     
     
     func configureMapViewLayout() {
@@ -345,7 +338,6 @@ extension HomeViewController {
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
         takePhotoButtonOutlet.isHidden = true
-        viewPhotoOutlet.isHidden = true
         switchLabel.isHidden = false
         takePhotoButtonOutlet.isHidden = true
         switchLabel.text = "number of shopping places:"
@@ -365,7 +357,6 @@ extension HomeViewController {
         takePhotoButtonOutlet.isHidden = true
         
         takePhotoButtonOutlet.isHidden = true
-        viewPhotoOutlet.isHidden = true
         
         switchLabel.isHidden = false
         switchLabel.text = "number of restaurants:"
@@ -386,7 +377,6 @@ extension HomeViewController {
         switchLabel.isHidden = false
         
         takePhotoButtonOutlet.isHidden = true
-        viewPhotoOutlet.isHidden = true
         
         locationDisplaySwitchOutlet.isHidden = true
         takePhotoButtonOutlet.isHidden = true
@@ -475,7 +465,6 @@ extension HomeViewController {
         locationDisplaySwitchOutlet.isHidden = false
         takePhotoButtonOutlet.isHidden = false
         takePhotoButtonOutlet.isHidden = false
-        viewPhotoOutlet.isHidden = false
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)

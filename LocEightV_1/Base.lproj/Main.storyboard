@@ -102,14 +102,6 @@
                                     <action selector="takePhotoAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f89-ru-dqD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r58-Dg-7HW">
-                                <rect key="frame" x="10" y="754" width="150" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="PHh-0y-NhG"/>
-                                    <constraint firstAttribute="height" constant="40" id="pJo-Za-Jkr"/>
-                                </constraints>
-                                <state key="normal" title="View Photo"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -120,7 +112,6 @@
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Vz-ot-bXu"/>
                             <constraint firstItem="Yb5-HW-FDw" firstAttribute="top" secondItem="5Z8-6E-Ogc" secondAttribute="bottom" constant="20" id="JMD-xJ-fiP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Pzc-J8-B8X" secondAttribute="trailing" constant="20" id="JVd-rn-a2m"/>
-                            <constraint firstItem="r58-Dg-7HW" firstAttribute="top" secondItem="RZC-K6-VM6" secondAttribute="bottom" constant="10" id="R5m-J1-ybr"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="REf-Rh-lVc"/>
                             <constraint firstItem="w40-fU-7cp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="VKg-eu-Sjh"/>
                             <constraint firstItem="4IN-WP-YIF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="Vbw-jB-hCn"/>
@@ -128,7 +119,6 @@
                             <constraint firstItem="Yb5-HW-FDw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="b1n-ur-LiO"/>
                             <constraint firstItem="Pzc-J8-B8X" firstAttribute="top" secondItem="dVG-Eg-rAg" secondAttribute="bottom" constant="10" id="cdj-f8-azn"/>
                             <constraint firstItem="4IN-WP-YIF" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="eNu-Bc-SiU"/>
-                            <constraint firstItem="r58-Dg-7HW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="ezm-T8-3Ag"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yb5-HW-FDw" secondAttribute="trailing" constant="10" id="o0K-65-qgA"/>
                             <constraint firstItem="dct-zT-83J" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ot0-6p-r9X"/>
                             <constraint firstItem="RZC-K6-VM6" firstAttribute="top" secondItem="w40-fU-7cp" secondAttribute="bottom" constant="10" id="spR-OG-xoM"/>
@@ -146,12 +136,27 @@
                         <outlet property="resetButtonOutlet" destination="4IN-WP-YIF" id="Snp-FJ-LC0"/>
                         <outlet property="switchLabel" destination="dVG-Eg-rAg" id="TJ5-VI-o4K"/>
                         <outlet property="takePhotoButtonOutlet" destination="RZC-K6-VM6" id="xvP-og-hsC"/>
-                        <outlet property="viewPhotoOutlet" destination="r58-Dg-7HW" id="1jO-ov-BVg"/>
+                        <segue destination="XpM-py-DVY" kind="presentation" identifier="dispayImageSegue" id="IIW-1w-JeY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="117.85714285714285"/>
+        </scene>
+        <!--Display Image View Controller-->
+        <scene sceneID="9EO-uC-V3S">
+            <objects>
+                <viewController id="XpM-py-DVY" customClass="DisplayImageViewController" customModule="LocEightV_1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EMl-pr-duH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="9h2-Yp-D64"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="no1-nn-L8e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1197" y="118"/>
         </scene>
         <!--Left Side Panel View Controller-->
         <scene sceneID="RqL-c0-6ee">
