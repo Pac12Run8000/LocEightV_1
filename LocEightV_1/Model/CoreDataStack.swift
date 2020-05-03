@@ -13,6 +13,26 @@ import CoreData
 
 struct CoreDataStack {
     
+    static func imageFromCoreData(managedObjectContext:NSManagedObjectContext, imageView:UIImageView) {
+        var annotationEntity:AnnotationEntity!
+        var fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
+        fetchRequest.fetchLimit = 1
+        
+        do {
+            try annotationEntity = managedObjectContext.fetch(fetchRequest).first
+        } catch {
+            print("There was an error:\(error.localizedDescription)")
+        }
+        
+        if annotationEntity != nil {
+            if let infoData = annotationEntity.image {
+                DispatchQueue.main.async {
+                    imageView.image = UIImage(data: infoData)
+                }
+            }
+        }
+    }
+    
     static func saveContext(context:NSManagedObjectContext) throws {
         if context.hasChanges {
             try context.save()

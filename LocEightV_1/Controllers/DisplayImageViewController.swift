@@ -12,7 +12,7 @@ import CoreData
 class DisplayImageViewController: UIViewController {
     
     var managedObjectContext:NSManagedObjectContext!
-    var annotationEntity:AnnotationEntity!
+    
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
@@ -20,13 +20,7 @@ class DisplayImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
-//        fetchRequest.fetchLimit = 1
-//        do {
-//            try annotationEntity = managedObjectContext.fetch(fetchRequest).first
-//        } catch {
-//            print("There was an error fetching data:\(error.localizedDescription)")
-//        }
+
         
         
         
@@ -35,21 +29,8 @@ class DisplayImageViewController: UIViewController {
         
         imageViewHeightConstraint.constant = imageView.bounds.width
         
+        CoreDataStack.imageFromCoreData(managedObjectContext: managedObjectContext, imageView: imageView)
         
-        var fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
-        fetchRequest.fetchLimit = 1
-        
-        do {
-            try annotationEntity = managedObjectContext.fetch(fetchRequest).first
-        } catch {
-            print("There was an error:\(error.localizedDescription)")
-        }
-        
-        if annotationEntity != nil {
-            if let infoData = annotationEntity.image {
-                imageView.image = UIImage(data: infoData)
-            }
-        }
     }
     
     
