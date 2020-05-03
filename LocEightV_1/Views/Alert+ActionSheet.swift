@@ -24,6 +24,13 @@ struct Alert {
         vc.present(alert, animated: true, completion: nil)
     }
     
+    static func showAlert(vc:UIViewController, title:String, msg:String) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let action = UIAlertAction(title: "ok", style: .cancel, handler: nil)
+        alert.addAction(action)
+        vc.present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 struct ActionSheet {
@@ -84,6 +91,8 @@ struct ActionSheet {
 
 // MARK: Functionality to add image to actionsheet
 extension UIAlertController {
+    
+    
     
     func addImage(image:UIImage) {
         let maxSize = CGSize(width: 245, height: 300)

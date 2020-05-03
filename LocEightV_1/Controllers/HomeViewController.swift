@@ -249,6 +249,7 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
                     CoreDataStack.updateImageForParkingInformation(image: imageToView!, managedObjectContext: self.managedObjectContext)
                 }
             }
+            
         }
         
     }
@@ -598,7 +599,7 @@ extension HomeViewController {
     func checkLocationServices() {
         guard CLLocationManager.locationServicesEnabled() else {
             print("Location Services aren't enabled")
-            showAlert(title: "Device issue", msg: "Location Services aren't enabled. Location services may not exist on this device.")
+            Alert.showAlert(vc:self, title: "Device issue", msg: "Location Services aren't enabled. Location services may not exist on this device.")
             return
         }
         print("Location Services are ready.")
@@ -612,7 +613,7 @@ extension HomeViewController {
             return true
             break
         case .denied:
-             showAlert(title: "Security issue", msg: "You need to go to location services in your setting so that we can access your location.")
+            Alert.showAlert(vc:self, title: "Security issue", msg: "You need to go to location services in your setting so that we can access your location.")
              return false
             break
         case .notDetermined:
@@ -620,7 +621,7 @@ extension HomeViewController {
             return false
             break
         case .restricted:
-            showAlert(title: "Parental Restriction", msg: "Your parents or guardians have placed restrictions on your ability to access your location.")
+            Alert.showAlert(vc:self, title: "Parental Restriction", msg: "Your parents or guardians have placed restrictions on your ability to access your location.")
             return false
             break
         case .authorizedAlways:
@@ -700,22 +701,8 @@ extension HomeViewController:MKMapViewDelegate {
     
 }
 
-// MARK:- Turn location services on
-extension HomeViewController {
-    
-    func showAlert(title:String, msg:String) {
-        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        let action = UIAlertAction(title: "ok", style: .cancel, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-}
-
-
 // MARK:- CoreData Functionality
 extension HomeViewController {
-    
-    
     
     func insertUpdateAnnotationEntity(lat:Double?, long:Double?, title:String?, subtitle:String?) {
         
