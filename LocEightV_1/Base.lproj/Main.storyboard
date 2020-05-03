@@ -150,13 +150,31 @@
                     <view key="view" contentMode="scaleToFill" id="EMl-pr-duH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CP1-Ng-fAp">
+                                <rect key="frame" x="20" y="100" width="374" height="330"/>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="330" id="pLG-J4-BHW"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="CP1-Ng-fAp" firstAttribute="top" secondItem="9h2-Yp-D64" secondAttribute="top" constant="100" id="7pl-QS-eTU"/>
+                            <constraint firstItem="9h2-Yp-D64" firstAttribute="trailing" secondItem="CP1-Ng-fAp" secondAttribute="trailing" constant="20" id="HYu-xC-Mk5"/>
+                            <constraint firstItem="CP1-Ng-fAp" firstAttribute="leading" secondItem="9h2-Yp-D64" secondAttribute="leading" constant="20" id="gXB-bI-VWi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="9h2-Yp-D64"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="CP1-Ng-fAp" id="V44-Q0-gdp"/>
+                        <outlet property="imageViewHeightConstraint" destination="pLG-J4-BHW" id="lXx-01-Kja"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="no1-nn-L8e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="952" y="118"/>
+            <point key="canvasLocation" x="950.72463768115949" y="117.85714285714285"/>
         </scene>
         <!--Left Side Panel View Controller-->
         <scene sceneID="RqL-c0-6ee">

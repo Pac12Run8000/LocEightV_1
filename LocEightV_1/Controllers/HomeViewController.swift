@@ -196,7 +196,7 @@ class HomeViewController: UIViewController {
                 if CoreDataStack.fetchImage(managedObjectContext: self.managedObjectContext) {
                     self.performSegue(withIdentifier: "dispayImageSegue", sender: self)
                 } else {
-                    Alert.alertNotification(vc: self, title: "Missing Data", message: "You never saved an image to view. Go back to \"Take photo\" and save an image.", buttonTitle: "Ok", style: .actionSheet)
+                    Alert.alertNotification(vc: self, title: "Missing Data", message: "You never saved an image to view. Go back to \"Take photo\" and save an image.", buttonTitle: "Ok", style: .alert)
                 }
                 break
             case .removeImage:
