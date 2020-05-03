@@ -75,7 +75,7 @@ class HomeViewController: UIViewController {
         configureMapViewLayout()
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
-//        fetchAllOfAnnotationEntity()
+        fetchAllOfAnnotationEntity()
         
         menuFunction = .locate_vehicle
         
@@ -183,9 +183,6 @@ class HomeViewController: UIViewController {
             switch imagePickerState {
             case .photoLibrary:
                 imagePickerController.sourceType = .photoLibrary
-                
-                
-                
                 self.present(imagePickerController, animated: true, completion: nil)
                 break
             case .camera:
@@ -249,7 +246,7 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
             
             ActionSheet.displayUIImageInActionSheet(vc: self, imageToView: imageToView) { (isSavingToCoreData) in
                 if isSavingToCoreData {
-                    self.updateImageForParkingInformation(image: imageToView!)
+                    CoreDataStack.updateImageForParkingInformation(image: imageToView!, managedObjectContext: self.managedObjectContext)
                 }
             }
         }
@@ -718,33 +715,7 @@ extension HomeViewController {
 // MARK:- CoreData Functionality
 extension HomeViewController {
     
-    func updateImageForParkingInformation(image:UIImage) -> Bool {
-        var annotationEntity:AnnotationEntity!
-        let fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
-        fetchRequest.fetchLimit = 1
-        do {
-            try annotationEntity = managedObjectContext.fetch(fetchRequest).first
-        } catch {
-            print("Fetch error:\(error.localizedDescription)")
-        }
-        
-        if annotationEntity == nil {
-            let annotationEntity = AnnotationEntity(context: managedObjectContext)
-            annotationEntity.image = image.jpegData(compressionQuality: 1.0)
-        } else {
-            annotationEntity.image = image.jpegData(compressionQuality: 1.0)
-        }
-        
-        do {
-            try CoreDataStack.saveContext(context: managedObjectContext)
-            print("Image Data was saved")
-            return true
-        } catch {
-            print("Update error:\(error.localizedDescription)")
-            return false
-        }
-        
-    }
+    
     
     func insertUpdateAnnotationEntity(lat:Double?, long:Double?, title:String?, subtitle:String?) {
         
