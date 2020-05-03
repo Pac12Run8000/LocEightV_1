@@ -20,12 +20,7 @@ class DisplayImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
-        
-        
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
-        
         
         imageViewHeightConstraint.constant = imageView.bounds.width
         

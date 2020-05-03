@@ -200,6 +200,7 @@ class HomeViewController: UIViewController {
                 }
                 break
             case .removeImage:
+                CoreDataStack.removeImage(vc: self, managedObjectContext: self.managedObjectContext)
                 break
             case .cancel:
                 self.dismiss(animated: true, completion: nil)

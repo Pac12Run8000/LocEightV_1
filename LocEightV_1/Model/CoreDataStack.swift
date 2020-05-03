@@ -13,6 +13,29 @@ import CoreData
 
 struct CoreDataStack {
     
+    static func removeImage(vc:UIViewController, managedObjectContext:NSManagedObjectContext) {
+        var annotationEntity:AnnotationEntity!
+        
+        let fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
+        fetchRequest.fetchLimit = 1
+        do {
+            try annotationEntity = managedObjectContext.fetch(fetchRequest).first
+        } catch {
+            print("there was an error: \(error.localizedDescription)")
+        }
+        
+        if annotationEntity != nil {
+            annotationEntity.image = nil
+        }
+        
+        do {
+            try CoreDataStack.saveContext(context: managedObjectContext)
+            Alert.alertNotification(vc: vc, title: "Notification", message: "The image was deleted.", buttonTitle: "Ok", style: .alert)
+        } catch {
+            print("There was a save error:\(error.localizedDescription)")
+        }
+    }
+    
     static func imageFromCoreData(managedObjectContext:NSManagedObjectContext, imageView:UIImageView) {
         var annotationEntity:AnnotationEntity!
         var fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
