@@ -336,6 +336,44 @@ extension HomeViewController {
 // MARK:- Functionality for loading the controller based on menuFunction
 extension HomeViewController {
     
+    func configureLoadingParkingGarages() {
+        
+            clearMapButtonOutlet.isHidden = true
+            resetButtonOutlet.isHidden = true
+            switchLabel.isHidden = false
+            
+            takePhotoButtonOutlet.isHidden = true
+            
+            locationDisplaySwitchOutlet.isHidden = true
+            takePhotoButtonOutlet.isHidden = true
+            
+            setDefaultForShowuserlocationAndSwitchoutlet()
+            
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.removeOverlays(mapView.overlays)
+            
+            
+            searchForParkingGarages()
+        }
+    
+    func configureLoadingVehicleLocation() {
+        clearMapButtonOutlet.isHidden = false
+        resetButtonOutlet.isHidden = false
+        switchLabel.isHidden = false
+        locationDisplaySwitchOutlet.isHidden = false
+        takePhotoButtonOutlet.isHidden = false
+        takePhotoButtonOutlet.isHidden = false
+        
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
+        
+        
+        if let ai = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ai.lat as? Double, let long = ai.long as? Double, let title = ai.title, let subTitle = ai.subtitle {
+
+            centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subTitle)
+        }
+    }
+    
     func configureFindingShoppingPlaces() {
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
@@ -348,12 +386,11 @@ extension HomeViewController {
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)
-        defaultRegionForClearMap()
+        fetchShoppingRegion()
+//        defaultRegionForClearMap()
     }
     
     func configureFindingEatingPlaces() {
-        
-        
         clearMapButtonOutlet.isHidden = true
         resetButtonOutlet.isHidden = true
         takePhotoButtonOutlet.isHidden = true
@@ -379,46 +416,30 @@ extension HomeViewController {
 // MARK:- Functionality for loading annotations
 extension HomeViewController {
     
-    
-//    func getRegionForMKMapItemPlaceMarks(region:MKCoordinateRegion) {
-//            let request = MKLocalSearch.Request()
-//            request.naturalLanguageQuery = "parking"
-//            request.region = region
-//    //        request.resultTypes = .pointOfInterest
-//            let search = MKLocalSearch(request: request)
-//
-//            search.start { (response, error) in
-//                guard error == nil else {
-//                    print("There was an error getting mapItems:\(error?.localizedDescription)")
-//                    return
-//                }
-//
-//                guard let mapItems = response?.mapItems, mapItems.count > 0 else {
-//                    print("There were no mapItems.")
-//                    return
-//                }
-//
-//                for mapItem in mapItems {
-//
-//                    if let lat = mapItem.placemark.location?.coordinate.latitude, let long = mapItem.placemark.location?.coordinate.longitude, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
-//
-//                        let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Park here.", subtitle: "\(mapItem.placemark.title ?? "Name not available")")
-//                        self.mapView.addAnnotation(garageAnnotation)
-//
-//                    }
-//                }
-//
-//                if let garageAnnotationCount = self.mapView.annotations.filter({ $0 is GarageAnnotation }).count as? Int {
-//                    self.switchLabel.text = "parking locations: \(garageAnnotationCount)"
-//                } else {
-//                    self.switchLabel.text = "There are no parking locations."
-//                }
-//
-//            }
-//
-//
-//        }
-    
+    func fetchShoppingRegion() {
+        guard let coordinate = locationManager.location?.coordinate, let clLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) as? CLLocation else {
+            print("There are no coordinates.")
+            return
+        }
+        
+        returnLocationAndAddress(clLocation: clLocation) { (address, error) in
+            
+            guard error == nil else {
+                print("There was an error: \(error?.localizedDescription)")
+                return
+            }
+            
+            let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: self.regionInMetersForVehicle, longitudinalMeters: self.regionInMetersForVehicle)
+            
+            let defaultAddress = address != nil ? address : "The address is missing for this location"
+            
+            self.userAnnotation = UserAnnotation(coordinate: coordinate, title: "You are here ..", subtitle: "\(defaultAddress!)")
+            self.mapView.addAnnotation(self.userAnnotation)
+            self.mapView.setRegion(region, animated: true)
+            self.fetchShoppingAnnotations(region: region)
+            
+        }
+    }
     
     func fetchTheRestaurantRegion() {
         
@@ -446,6 +467,33 @@ extension HomeViewController {
         
     }
     
+    func fetchShoppingAnnotations(region:MKCoordinateRegion) {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = "shopping"
+        request.region = region
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            guard error == nil, response != nil else {
+                print("There was an error with the response:\(error?.localizedDescription)")
+                return
+            }
+            
+            guard let mapItems = response?.mapItems, mapItems.count > 0 else {
+                print("There were no mapItems.")
+                return
+            }
+            
+            for mapItem in mapItems {
+                if let lat = mapItem.placemark.coordinate.latitude as? CLLocationDegrees, let long = mapItem.placemark.coordinate.longitude as? CLLocationDegrees, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
+                    
+                    let shoppingAnnotation = ShoppingAnnotation(coordinate: coordinate, title: "Shop here: \(mapItem.name ?? "")", subtitle: "\(mapItem.placemark.title ?? "No name available")")
+                    self.mapView.addAnnotation(shoppingAnnotation)
+                }
+            }
+            
+        }
+    }
+    
     func fetchRestaurantAnnotations(region:MKCoordinateRegion) {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = "restaurant"
@@ -465,7 +513,7 @@ extension HomeViewController {
             for mapItem in mapItems {
                 if let lat = mapItem.placemark.coordinate.latitude as? CLLocationDegrees, let long = mapItem.placemark.coordinate.longitude as? CLLocationDegrees, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
                     
-                    let restaurantAnnotation = RestaurantAnnotation(coordinate: coordinate, title: "Eat here:", subtitle: "\(mapItem.placemark.title ?? "No name available")")
+                    let restaurantAnnotation = RestaurantAnnotation(coordinate: coordinate, title: "Eat here: \(mapItem.name ?? "")", subtitle: "\(mapItem.placemark.title ?? "No name available")")
                     self.mapView.addAnnotation(restaurantAnnotation)
                 }
             }
@@ -475,34 +523,9 @@ extension HomeViewController {
             } else {
                 self.switchLabel.text = "There are no Restaurant locations."
             }
-
-            
             
         }
     }
-    
-    func configureLoadingParkingGarages() {
-        
-//        mapView.pointOfInterestFilter = .some(MKPointOfInterestFilter(including: [.parking]))
-        
-        clearMapButtonOutlet.isHidden = true
-        resetButtonOutlet.isHidden = true
-        switchLabel.isHidden = false
-        
-        takePhotoButtonOutlet.isHidden = true
-        
-        locationDisplaySwitchOutlet.isHidden = true
-        takePhotoButtonOutlet.isHidden = true
-        
-        setDefaultForShowuserlocationAndSwitchoutlet()
-        
-        mapView.removeAnnotations(mapView.annotations)
-        mapView.removeOverlays(mapView.overlays)
-        
-        
-        searchForParkingGarages()
-    }
-    
     
     func searchForParkingGarages() {
         
@@ -571,23 +594,7 @@ extension HomeViewController {
         
     }
     
-    func configureLoadingVehicleLocation() {
-        clearMapButtonOutlet.isHidden = false
-        resetButtonOutlet.isHidden = false
-        switchLabel.isHidden = false
-        locationDisplaySwitchOutlet.isHidden = false
-        takePhotoButtonOutlet.isHidden = false
-        takePhotoButtonOutlet.isHidden = false
-        
-        mapView.removeAnnotations(mapView.annotations)
-        mapView.removeOverlays(mapView.overlays)
-        
-        
-        if let ai = retrieveCenterLocationOfParkedCarFromCoreData(), let lat = ai.lat as? Double, let long = ai.long as? Double, let title = ai.title, let subTitle = ai.subtitle {
-
-            centerViewOnUserLocation(lat: lat, long: long, title: title, subtitle: subTitle)
-        }
-    }
+    
     
     func defaultRegionForClearMap() {
         let coordinate = CLLocationCoordinate2D(latitude: 37.090240, longitude:-95.712891)
@@ -799,6 +806,16 @@ extension HomeViewController:MKMapViewDelegate {
                     return view
                 } else if let annotation = annotation as? RestaurantAnnotation {
                     let identifier = "restaurant"
+                    var view:MKAnnotationView
+                    view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                    view.image = UIImage(named: "destinationAnnotation")
+                    view.isEnabled = true
+                    view.canShowCallout = true
+                     let flyout = UIButton(type: .detailDisclosure)
+                     view.rightCalloutAccessoryView = flyout
+                    return view
+                } else if let annotation = annotation as? ShoppingAnnotation {
+                    let identifier = "shopping"
                     var view:MKAnnotationView
                     view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                     view.image = UIImage(named: "destinationAnnotation")
