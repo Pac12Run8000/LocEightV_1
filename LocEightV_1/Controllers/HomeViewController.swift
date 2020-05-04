@@ -374,12 +374,13 @@ extension HomeViewController {
     
     func searchForRestaurants() {
         
-        guard let coordinate = locationManager.location?.coordinate else {
+        guard let coordinate = locationManager.location?.coordinate, let clLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) as? CLLocation else {
             print("There are no coordinates.")
             return
         }
         
         print("Coordinate:\(coordinate)")
+        
     }
     
     func configureLoadingParkingGarages() {
