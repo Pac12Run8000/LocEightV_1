@@ -11,6 +11,7 @@
 		092DC09424594042007A724B /* Alert+ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC09324594042007A724B /* Alert+ActionSheet.swift */; };
 		092DC09624595430007A724B /* ImagePickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC09524595430007A724B /* ImagePickerState.swift */; };
 		092DC098245F2F70007A724B /* DisplayImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC097245F2F70007A724B /* DisplayImageViewController.swift */; };
+		092DC09A245F92FF007A724B /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC099245F92FF007A724B /* RestaurantAnnotation.swift */; };
 		09B505012444D7FC000DA639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505002444D7FC000DA639 /* AppDelegate.swift */; };
 		09B505032444D7FC000DA639 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505022444D7FC000DA639 /* SceneDelegate.swift */; };
 		09B505082444D7FC000DA639 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09B505062444D7FC000DA639 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		092DC09324594042007A724B /* Alert+ActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+ActionSheet.swift"; sourceTree = "<group>"; };
 		092DC09524595430007A724B /* ImagePickerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerState.swift; sourceTree = "<group>"; };
 		092DC097245F2F70007A724B /* DisplayImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayImageViewController.swift; sourceTree = "<group>"; };
+		092DC099245F92FF007A724B /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
 		09B504FD2444D7FC000DA639 /* LocEightV_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocEightV_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09B505002444D7FC000DA639 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09B505022444D7FC000DA639 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				09B5052B24499C61000DA639 /* ParkingAnnotation.swift */,
 				09B50533244CD046000DA639 /* UserAnnotation.swift */,
 				092DC06F2454AB99007A724B /* GarageAnnotation.swift */,
+				092DC099245F92FF007A724B /* RestaurantAnnotation.swift */,
 				092DC09324594042007A724B /* Alert+ActionSheet.swift */,
 			);
 			path = Views;
@@ -235,6 +238,7 @@
 				09B505292447F45A000DA639 /* LocationVehicleDelegate.swift in Sources */,
 				09B50532244B8B18000DA639 /* CoreDataStack.swift in Sources */,
 				092DC09624595430007A724B /* ImagePickerState.swift in Sources */,
+				092DC09A245F92FF007A724B /* RestaurantAnnotation.swift in Sources */,
 				092DC09424594042007A724B /* Alert+ActionSheet.swift in Sources */,
 				09B5051A24450C79000DA639 /* ContainerViewController.swift in Sources */,
 				09B505032444D7FC000DA639 /* SceneDelegate.swift in Sources */,
