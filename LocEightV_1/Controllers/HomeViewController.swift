@@ -369,17 +369,32 @@ extension HomeViewController {
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)
-        searchForRestaurants()
+        fetchTheRegion()
     }
     
-    func searchForRestaurants() {
+    func fetchTheRegion() {
         
         guard let coordinate = locationManager.location?.coordinate, let clLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) as? CLLocation else {
             print("There are no coordinates.")
             return
         }
         
-        print("Coordinate:\(coordinate)")
+        returnLocationAndAddress(clLocation: clLocation) { (address, error) in
+            
+            guard error == nil else {
+                print("There was an error: \(error?.localizedDescription)")
+                return
+            }
+            
+            let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: self.regionInMetersForVehicle, longitudinalMeters: self.regionInMetersForVehicle)
+            
+            let defaultAddress = address != nil ? address : "The address is missing for this location"
+            
+            self.userAnnotation = UserAnnotation(coordinate: coordinate, title: "You are here ..", subtitle: "\(defaultAddress!)")
+            self.mapView.addAnnotation(self.userAnnotation)
+            self.mapView.setRegion(region, animated: true)
+            
+        }
         
     }
     
@@ -417,7 +432,7 @@ extension HomeViewController {
         
         
         
-        returnLocationAddress(clLocation: clLocation) { (address, error) in
+        returnLocationAndAddress(clLocation: clLocation) { (address, error) in
             guard error == nil else {
                 print("There was an arror getting the address:\(error?.localizedDescription)")
                 return
@@ -557,7 +572,7 @@ extension HomeViewController {
             
             
             
-            returnLocationAddress(clLocation: clLocation) { (address, error) in
+            returnLocationAndAddress(clLocation: clLocation) { (address, error) in
                 guard error == nil else {
                     print("There was an error:\(error?.localizedDescription)")
                     return
@@ -578,7 +593,7 @@ extension HomeViewController {
     }
     
     
-    func returnLocationAddress(clLocation:CLLocation, completion handler:@escaping(_ address:String?,_ error:Error?) -> ()) {
+    func returnLocationAndAddress(clLocation:CLLocation, completion handler:@escaping(_ address:String?,_ error:Error?) -> ()) {
         
         var myAddress:String?
         CLGeocoder().reverseGeocodeLocation(clLocation) { (placemarks, error) in
