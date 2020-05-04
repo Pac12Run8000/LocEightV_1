@@ -369,10 +369,58 @@ extension HomeViewController {
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.removeOverlays(mapView.overlays)
-        fetchTheRegion()
+        fetchTheRestaurantRegion()
     }
     
-    func fetchTheRegion() {
+}
+
+
+ 
+// MARK:- Functionality for loading annotations
+extension HomeViewController {
+    
+    
+//    func getRegionForMKMapItemPlaceMarks(region:MKCoordinateRegion) {
+//            let request = MKLocalSearch.Request()
+//            request.naturalLanguageQuery = "parking"
+//            request.region = region
+//    //        request.resultTypes = .pointOfInterest
+//            let search = MKLocalSearch(request: request)
+//
+//            search.start { (response, error) in
+//                guard error == nil else {
+//                    print("There was an error getting mapItems:\(error?.localizedDescription)")
+//                    return
+//                }
+//
+//                guard let mapItems = response?.mapItems, mapItems.count > 0 else {
+//                    print("There were no mapItems.")
+//                    return
+//                }
+//
+//                for mapItem in mapItems {
+//
+//                    if let lat = mapItem.placemark.location?.coordinate.latitude, let long = mapItem.placemark.location?.coordinate.longitude, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
+//
+//                        let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Park here.", subtitle: "\(mapItem.placemark.title ?? "Name not available")")
+//                        self.mapView.addAnnotation(garageAnnotation)
+//
+//                    }
+//                }
+//
+//                if let garageAnnotationCount = self.mapView.annotations.filter({ $0 is GarageAnnotation }).count as? Int {
+//                    self.switchLabel.text = "parking locations: \(garageAnnotationCount)"
+//                } else {
+//                    self.switchLabel.text = "There are no parking locations."
+//                }
+//
+//            }
+//
+//
+//        }
+    
+    
+    func fetchTheRestaurantRegion() {
         
         guard let coordinate = locationManager.location?.coordinate, let clLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) as? CLLocation else {
             print("There are no coordinates.")
@@ -393,9 +441,44 @@ extension HomeViewController {
             self.userAnnotation = UserAnnotation(coordinate: coordinate, title: "You are here ..", subtitle: "\(defaultAddress!)")
             self.mapView.addAnnotation(self.userAnnotation)
             self.mapView.setRegion(region, animated: true)
-            
+            self.fetchRestaurantAnnotations(region: region)
         }
         
+    }
+    
+    func fetchRestaurantAnnotations(region:MKCoordinateRegion) {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = "restaurant"
+        request.region = region
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            guard error == nil else {
+                print("There was an error fetching responses: \(error?.localizedDescription)")
+                return
+            }
+            
+            guard let mapItems = response?.mapItems, mapItems.count > 0 else {
+                print("There were no mapItems.")
+                return
+            }
+            
+            for mapItem in mapItems {
+                if let lat = mapItem.placemark.coordinate.latitude as? CLLocationDegrees, let long = mapItem.placemark.coordinate.longitude as? CLLocationDegrees, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
+                    
+                    let restaurantAnnotation = RestaurantAnnotation(coordinate: coordinate, title: "Eat here:", subtitle: "\(mapItem.placemark.title ?? "No name available")")
+                    self.mapView.addAnnotation(restaurantAnnotation)
+                }
+            }
+            
+            if let restaurantAnnotationCount = self.mapView.annotations.filter({ $0 is RestaurantAnnotation }).count as? Int {
+                self.switchLabel.text = "Restaurant locations: \(restaurantAnnotationCount)"
+            } else {
+                self.switchLabel.text = "There are no Restaurant locations."
+            }
+
+            
+            
+        }
     }
     
     func configureLoadingParkingGarages() {
@@ -709,6 +792,16 @@ extension HomeViewController:MKMapViewDelegate {
                     var view:MKAnnotationView
                     view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                     view.image = UIImage(named: "driverAnnotation")
+                    view.isEnabled = true
+                    view.canShowCallout = true
+                     let flyout = UIButton(type: .detailDisclosure)
+                     view.rightCalloutAccessoryView = flyout
+                    return view
+                } else if let annotation = annotation as? RestaurantAnnotation {
+                    let identifier = "restaurant"
+                    var view:MKAnnotationView
+                    view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                    view.image = UIImage(named: "destinationAnnotation")
                     view.isEnabled = true
                     view.canShowCallout = true
                      let flyout = UIButton(type: .detailDisclosure)
