@@ -486,9 +486,15 @@ extension HomeViewController {
             for mapItem in mapItems {
                 if let lat = mapItem.placemark.coordinate.latitude as? CLLocationDegrees, let long = mapItem.placemark.coordinate.longitude as? CLLocationDegrees, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
                     
-                    let shoppingAnnotation = ShoppingAnnotation(coordinate: coordinate, title: "Shop here: \(mapItem.name ?? "")", subtitle: "\(mapItem.placemark.title ?? "No name available")")
+                    let shoppingAnnotation = ShoppingAnnotation(coordinate: coordinate, title: "\(mapItem.name ?? "")", subtitle: "\(mapItem.placemark.title ?? "No name available")")
                     self.mapView.addAnnotation(shoppingAnnotation)
                 }
+            }
+            
+            if let shoppingAnnotationCount = self.mapView.annotations.filter({ $0 is ShoppingAnnotation }).count as? Int {
+                self.switchLabel.text = "Shopping locations: \(shoppingAnnotationCount)"
+            } else {
+                self.switchLabel.text = "There are no Shopping locations."
             }
             
         }
@@ -513,7 +519,7 @@ extension HomeViewController {
             for mapItem in mapItems {
                 if let lat = mapItem.placemark.coordinate.latitude as? CLLocationDegrees, let long = mapItem.placemark.coordinate.longitude as? CLLocationDegrees, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
                     
-                    let restaurantAnnotation = RestaurantAnnotation(coordinate: coordinate, title: "Eat here: \(mapItem.name ?? "")", subtitle: "\(mapItem.placemark.title ?? "No name available")")
+                    let restaurantAnnotation = RestaurantAnnotation(coordinate: coordinate, title: "\(mapItem.name ?? "")", subtitle: "\(mapItem.placemark.title ?? "No name available")")
                     self.mapView.addAnnotation(restaurantAnnotation)
                 }
             }
@@ -577,7 +583,9 @@ extension HomeViewController {
                
                 if let lat = mapItem.placemark.location?.coordinate.latitude, let long = mapItem.placemark.location?.coordinate.longitude, let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long) as? CLLocationCoordinate2D {
                     
-                    let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Park here.", subtitle: "\(mapItem.placemark.title ?? "Name not available")")
+                    
+                    
+                    let garageAnnotation = GarageAnnotation(coordinate: coordinate, title: "Park here:", subtitle: "\(mapItem.placemark.title ?? "Name not available")")
                     self.mapView.addAnnotation(garageAnnotation)
                  
                 }
@@ -826,6 +834,31 @@ extension HomeViewController:MKMapViewDelegate {
                     return view
                 }
                return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        guard let annotation = view.annotation as? MKAnnotation, let coordinate = annotation.coordinate as? CLLocationCoordinate2D else {
+            print("There are no coordinates")
+            return
+        }
+        let regionDistance:CLLocationDistance = 1000
+       
+        let regionSpan = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+        
+        let options = [MKLaunchOptionsMapCenterKey:NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey:NSValue(mkCoordinateSpan: regionSpan.span)]
+        let placeMark = MKPlacemark(coordinate: coordinate)
+        let mapItem = MKMapItem(placemark: placeMark)
+        if let title = annotation.title {
+            mapItem.name = title
+        } else {
+            mapItem.name = "Cannot fetch name of location."
+        }
+        mapItem.openInMaps(launchOptions: options)
+        
+        
+
+        
     }
     
 }
