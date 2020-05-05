@@ -32,7 +32,7 @@
                                     <constraint firstAttribute="height" constant="480" id="B5c-uP-FNQ"/>
                                 </constraints>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IN-WP-YIF">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IN-WP-YIF" customClass="LocEightButton" customModule="LocEightV_1" customModuleProvider="target">
                                 <rect key="frame" x="10" y="604" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4g6-bu-ncO"/>
@@ -43,7 +43,7 @@
                                     <action selector="resetLocationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bDt-IV-oeR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w40-fU-7cp">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w40-fU-7cp" customClass="LocEightButton" customModule="LocEightV_1" customModuleProvider="target">
                                 <rect key="frame" x="10" y="654" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="gOq-qj-oyG"/>
@@ -91,7 +91,7 @@
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                                 <color key="color" red="0.0039215686269999999" green="0.08235294118" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZC-K6-VM6">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZC-K6-VM6" customClass="LocEightButton" customModule="LocEightV_1" customModuleProvider="target">
                                 <rect key="frame" x="10" y="704" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="sBw-rY-4Xv"/>

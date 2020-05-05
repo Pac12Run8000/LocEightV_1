@@ -89,10 +89,6 @@ class HomeViewController: UIViewController {
                return
         }
         activityIndicator.layer.cornerRadius = 5
-        
-        configureResetButton()
-        configureClearMapButton()
-        configureTakePhotoButton()
         configureSwitch()
         
         
@@ -307,28 +303,6 @@ extension HomeViewController {
         mapView.layer.masksToBounds = true
         
     }
-    
-    func configureResetButton() {
-        resetButtonOutlet.layer.borderWidth = 2
-        resetButtonOutlet.layer.cornerRadius = 9
-        resetButtonOutlet.layer.masksToBounds = true
-        resetButtonOutlet.layer.borderColor = UIColor.black.cgColor
-    }
-    
-    func configureTakePhotoButton() {
-        takePhotoButtonOutlet.layer.borderWidth = 2
-        takePhotoButtonOutlet.layer.cornerRadius = 9
-        takePhotoButtonOutlet.layer.masksToBounds = true
-        takePhotoButtonOutlet.layer.borderColor = UIColor.black.cgColor
-    }
-    
-    func configureClearMapButton() {
-        clearMapButtonOutlet.layer.borderWidth = 2
-        clearMapButtonOutlet.layer.cornerRadius = 9
-        clearMapButtonOutlet.layer.masksToBounds = true
-        clearMapButtonOutlet.layer.borderColor = UIColor.black.cgColor
-    }
-    
     
 }
 
