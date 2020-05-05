@@ -58,6 +58,7 @@ class HomeViewController: UIViewController {
         }
     }
     
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var resetButtonOutlet: UIButton!
     @IBOutlet weak var clearMapButtonOutlet: UIButton!
@@ -71,6 +72,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         
         configureMapViewLayout()
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
