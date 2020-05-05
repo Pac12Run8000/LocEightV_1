@@ -93,6 +93,7 @@ class HomeViewController: UIViewController {
         
         
         
+        
     }
     
     
@@ -298,9 +299,10 @@ extension HomeViewController {
     func configureMapViewLayout() {
         mapViewHeightConstraintOutlet.constant = mapView.bounds.size.width
         mapView.delegate = self
-        mapView.layer.borderWidth = 2
+        mapView.layer.borderWidth = 3
         mapView.layer.cornerRadius = 9
         mapView.layer.masksToBounds = true
+        mapView.layer.borderColor = UIColor.pink.cgColor
         
     }
     
