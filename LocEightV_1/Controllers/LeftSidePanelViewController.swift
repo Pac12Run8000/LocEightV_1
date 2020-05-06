@@ -13,7 +13,12 @@ class LeftSidePanelViewController: UIViewController {
     let appdelegate = AppDelegate.getAppDelegate()
     var menu:MenuFunction?
     
-
+    @IBOutlet weak var locateVehicleButtonOutlet: UIButton!
+    @IBOutlet weak var parkingButtonOutlet: UIButton!
+    @IBOutlet weak var restaurantButtonOutlet: UIButton!
+    @IBOutlet weak var shoppingPlacesOutlet: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
