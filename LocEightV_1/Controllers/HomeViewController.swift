@@ -93,6 +93,11 @@ class HomeViewController: UIViewController {
         activityIndicator.layer.cornerRadius = 5
         configureSwitch()
         
+        locationDisplaySwitchOutlet.layer.borderWidth = 1
+        locationDisplaySwitchOutlet.layer.masksToBounds = true
+        locationDisplaySwitchOutlet.layer.cornerRadius = 15
+        
+        
         
         
         

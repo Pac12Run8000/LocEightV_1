@@ -111,9 +111,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pzc-J8-B8X">
-                                <rect key="frame" x="347" y="654" width="49" height="31"/>
+                                <rect key="frame" x="347" y="654" width="49" height="30"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.36078431370000003" blue="0.63529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="Jjd-n5-sf3"/>
+                                    <constraint firstAttribute="height" constant="30" id="Jjd-n5-sf3"/>
                                     <constraint firstAttribute="width" constant="47" id="Ljk-H2-cxI"/>
                                 </constraints>
                                 <connections>
