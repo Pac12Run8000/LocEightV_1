@@ -26,6 +26,14 @@ class DisplayImageViewController: UIViewController {
         
         CoreDataStack.imageFromCoreData(managedObjectContext: managedObjectContext, imageView: imageView)
         
+        imageView.layer.borderColor = UIColor.pink.cgColor
+        imageView.layer.borderWidth = 3
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 8
+        
+        view.backgroundColor = UIColor.cyanLightBlue
+        
+        
     }
     
     
