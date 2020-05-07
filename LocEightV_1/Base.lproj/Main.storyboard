@@ -15,6 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="building_pattern_1" translatesAutoresizingMaskIntoConstraints="NO" id="thi-LJ-5vZ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0t-Oz-UeI">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="UTv-cE-8mX">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kos-pc-lEV">
                                 <rect key="frame" x="10" y="44" width="49" height="46"/>
                                 <constraints>
@@ -107,7 +118,7 @@
                                     <constraint firstAttribute="height" constant="40" id="h7F-N4-9mS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" red="0.0039215686269999999" green="0.08235294118" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.043137254899999998" green="0.61960784310000006" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pzc-J8-B8X">
@@ -157,23 +168,31 @@
                         <constraints>
                             <constraint firstItem="5Z8-6E-Ogc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="20R-GH-aVA"/>
                             <constraint firstItem="dct-zT-83J" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Hg-7c-nbY"/>
+                            <constraint firstItem="x0t-Oz-UeI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4Dr-0r-Wi1"/>
                             <constraint firstItem="dVG-Eg-rAg" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="5qw-Zl-sse"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dVG-Eg-rAg" secondAttribute="trailing" constant="10" id="7DZ-oR-0Qt"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Vz-ot-bXu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="thi-LJ-5vZ" secondAttribute="bottom" id="AVP-3L-hYX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="thi-LJ-5vZ" secondAttribute="trailing" id="DSi-K5-oIJ"/>
                             <constraint firstItem="Yb5-HW-FDw" firstAttribute="top" secondItem="5Z8-6E-Ogc" secondAttribute="bottom" constant="20" id="JMD-xJ-fiP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Pzc-J8-B8X" secondAttribute="trailing" constant="20" id="JVd-rn-a2m"/>
                             <constraint firstItem="Kos-pc-lEV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="REf-Rh-lVc"/>
                             <constraint firstItem="w40-fU-7cp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="VKg-eu-Sjh"/>
                             <constraint firstItem="4IN-WP-YIF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="Vbw-jB-hCn"/>
                             <constraint firstItem="5Z8-6E-Ogc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WVO-HR-lDx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="x0t-Oz-UeI" secondAttribute="bottom" id="Xcd-f6-o1t"/>
                             <constraint firstItem="Yb5-HW-FDw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="b1n-ur-LiO"/>
                             <constraint firstItem="Pzc-J8-B8X" firstAttribute="top" secondItem="dVG-Eg-rAg" secondAttribute="bottom" constant="10" id="cdj-f8-azn"/>
+                            <constraint firstItem="x0t-Oz-UeI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dUN-IN-lMR"/>
                             <constraint firstItem="4IN-WP-YIF" firstAttribute="top" secondItem="Yb5-HW-FDw" secondAttribute="bottom" constant="10" id="eNu-Bc-SiU"/>
+                            <constraint firstItem="thi-LJ-5vZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jvF-Jd-YnI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yb5-HW-FDw" secondAttribute="trailing" constant="10" id="o0K-65-qgA"/>
                             <constraint firstItem="dct-zT-83J" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ot0-6p-r9X"/>
+                            <constraint firstItem="thi-LJ-5vZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="pme-Cu-7i2"/>
                             <constraint firstItem="RZC-K6-VM6" firstAttribute="top" secondItem="w40-fU-7cp" secondAttribute="bottom" constant="10" id="spR-OG-xoM"/>
                             <constraint firstItem="RZC-K6-VM6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="yqT-h4-mCt"/>
                             <constraint firstItem="w40-fU-7cp" firstAttribute="top" secondItem="4IN-WP-YIF" secondAttribute="bottom" constant="10" id="z56-9f-1lG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="x0t-Oz-UeI" secondAttribute="trailing" id="zQy-3V-Lph"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -335,6 +354,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="building_pattern_1" width="4000" height="5000"/>
         <image name="menuSliderBtn" width="30" height="24"/>
     </resources>
 </document>
