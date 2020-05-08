@@ -32,7 +32,7 @@
                                     <constraint firstAttribute="height" constant="46" id="MD8-bN-26b"/>
                                     <constraint firstAttribute="width" constant="49" id="i3d-6B-f9e"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="menuSliderBtn"/>
+                                <state key="normal" image="sidebar.left" catalog="system"/>
                                 <connections>
                                     <action selector="menuButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oDZ-jM-S0j"/>
                                 </connections>
@@ -355,6 +355,6 @@
     </scenes>
     <resources>
         <image name="building_pattern_1" width="4000" height="5000"/>
-        <image name="menuSliderBtn" width="30" height="24"/>
+        <image name="sidebar.left" catalog="system" width="64" height="46"/>
     </resources>
 </document>

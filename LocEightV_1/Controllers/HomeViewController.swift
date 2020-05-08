@@ -789,7 +789,7 @@ extension HomeViewController:MKMapViewDelegate {
                     let identifier = "garage"
                     var view:MKAnnotationView
                     view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                    view.image = UIImage(named: "driverAnnotation")
+                    view.image = UIImage(named: "parking")
                     view.isEnabled = true
                     view.canShowCallout = true
                      let flyout = UIButton(type: .detailDisclosure)
@@ -799,7 +799,7 @@ extension HomeViewController:MKMapViewDelegate {
                     let identifier = "restaurant"
                     var view:MKAnnotationView
                     view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                    view.image = UIImage(named: "destinationAnnotation")
+                    view.image = UIImage(named: "restaurants")
                     view.isEnabled = true
                     view.canShowCallout = true
                      let flyout = UIButton(type: .detailDisclosure)
@@ -809,7 +809,7 @@ extension HomeViewController:MKMapViewDelegate {
                     let identifier = "shopping"
                     var view:MKAnnotationView
                     view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                    view.image = UIImage(named: "destinationAnnotation")
+                    view.image = UIImage(named: "shopping")
                     view.isEnabled = true
                     view.canShowCallout = true
                      let flyout = UIButton(type: .detailDisclosure)
