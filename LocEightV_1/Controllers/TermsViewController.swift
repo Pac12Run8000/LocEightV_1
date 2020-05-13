@@ -16,13 +16,18 @@ class TermsViewController: UIViewController {
     
     @IBOutlet weak var webKitView: WKWebView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureUILayout()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
-
+        view.backgroundColor = UIColor.blue2
+        
         
     }
     
@@ -43,14 +48,15 @@ class TermsViewController: UIViewController {
 
 }
 
-// MARK:- CoreData functionality
+// MARK:-
 extension TermsViewController {
-
     
-    
-    
-
+    func configureUILayout() {
+        webKitView.loadHTMLString(TermsAndConditions.getTermsAndConditionsText(), baseURL: nil)
+    }
     
 }
+
+
 
 
