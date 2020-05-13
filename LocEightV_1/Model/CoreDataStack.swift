@@ -62,6 +62,17 @@ struct CoreDataStack {
         }
     }
     
+    static func deleteAllOfAnnotationEntity(managedObjectContext:NSManagedObjectContext) {
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "AnnotationEntity")
+            let request = NSBatchDeleteRequest(fetchRequest: fetch)
+        do {
+            let result = try managedObjectContext.execute(request)
+            print("Deletion completed")
+        } catch {
+            print("Error:\(error.localizedDescription)")
+        }
+    }
+    
     static func updateImageForParkingInformation(image:UIImage, managedObjectContext:NSManagedObjectContext) {
         var annotationEntity:AnnotationEntity!
         let fetchRequest = NSFetchRequest<AnnotationEntity>(entityName: "AnnotationEntity")
@@ -107,5 +118,69 @@ struct CoreDataStack {
             return true
         }
         return false
+    }
+    
+    static func fetchTermsIsConfirmed(managedObjectContext:NSManagedObjectContext, completion:@escaping(_ isConfirmed:Bool,_ error:Error?) -> ()) {
+        var termsEntity:TermsEntity!
+        
+        let fetchRequest = NSFetchRequest<TermsEntity>(entityName: "TermsEntity")
+        fetchRequest.fetchLimit = 1
+
+           do {
+            termsEntity = try managedObjectContext.fetch(fetchRequest).first
+           } catch {
+               print("There was an error retrieving the data.")
+           }
+           guard (termsEntity as? TermsEntity) != nil else {
+                print("core data hasn't been set so, not confirmed.")
+                completion(false, nil)
+                return
+           }
+        
+        if let isConfirmed = termsEntity.confirmed as? Bool, isConfirmed == false {
+            completion(false, nil)
+        } else {
+            completion(true, nil)
+        }
+
+           print("isConfirmed:\(termsEntity.confirmed == true ? "confirmed" : "not confirmed")")
+    }
+    
+    
+    static func deleteTermsEntity(managedObjectContext:NSManagedObjectContext) {
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "TermsEntity")
+        let batchRequest = NSBatchDeleteRequest(fetchRequest: fetch)
+        do {
+            try managedObjectContext.execute(batchRequest)
+            print("Deleted the terms confirmation")
+        } catch {
+            print("error:\(error.localizedDescription)")
+        }
+    }
+    
+    static func confirmTerms(managedObjectContext:NSManagedObjectContext, completion:@escaping(_ success:Bool,_ error:Error?) -> ()) {
+        var termsEntity:TermsEntity!
+        let fetchRequest = NSFetchRequest<TermsEntity>(entityName: "TermsEntity")
+        fetchRequest.fetchLimit = 1
+        do {
+            try termsEntity = managedObjectContext.fetch(fetchRequest).first
+        } catch {
+            print("There is an error:\(error.localizedDescription)")
+        }
+        
+        if termsEntity == nil {
+            let termsEntity = TermsEntity(context: managedObjectContext)
+            termsEntity.confirmed = true
+        } else {
+            termsEntity.confirmed = true
+        }
+        
+        do {
+            try CoreDataStack.saveContext(context: managedObjectContext)
+            completion(true, nil)
+        } catch {
+            completion(false, error)
+            print("There was an error saving the terms data")
+        }
     }
 }

@@ -15,6 +15,7 @@
 		092DC09C245FF37E007A724B /* ShoppingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC09B245FF37E007A724B /* ShoppingAnnotation.swift */; };
 		092DC09E2460DB5D007A724B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC09D2460DB5D007A724B /* ColorPalette.swift */; };
 		092DC0A02461CE68007A724B /* LocEightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC09F2461CE68007A724B /* LocEightButton.swift */; };
+		095AD2B6246B0F2100486929 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AD2B5246B0F2100486929 /* TermsViewController.swift */; };
 		09B505012444D7FC000DA639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505002444D7FC000DA639 /* AppDelegate.swift */; };
 		09B505032444D7FC000DA639 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505022444D7FC000DA639 /* SceneDelegate.swift */; };
 		09B505082444D7FC000DA639 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09B505062444D7FC000DA639 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		092DC09B245FF37E007A724B /* ShoppingAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingAnnotation.swift; sourceTree = "<group>"; };
 		092DC09D2460DB5D007A724B /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		092DC09F2461CE68007A724B /* LocEightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocEightButton.swift; sourceTree = "<group>"; };
+		095AD2B5246B0F2100486929 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		09B504FD2444D7FC000DA639 /* LocEightV_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocEightV_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09B505002444D7FC000DA639 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09B505022444D7FC000DA639 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				09B5051924450C79000DA639 /* ContainerViewController.swift */,
 				092DC097245F2F70007A724B /* DisplayImageViewController.swift */,
 				09BE7EBF2465C13700FB6C14 /* LaunchViewController.swift */,
+				095AD2B5246B0F2100486929 /* TermsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				095AD2B6246B0F2100486929 /* TermsViewController.swift in Sources */,
 				09B505012444D7FC000DA639 /* AppDelegate.swift in Sources */,
 				09B505182445099C000DA639 /* LeftSidePanelViewController.swift in Sources */,
 				09B505242447F25A000DA639 /* MenuFunctions.swift in Sources */,

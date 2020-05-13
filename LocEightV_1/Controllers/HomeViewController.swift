@@ -77,6 +77,12 @@ class HomeViewController: UIViewController {
         configureMapViewLayout()
         managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistantContainer.viewContext
         
+        
+        
+//        deleteAllOfAnnotationEntity()
+//        CoreDataStack.deleteTermsEntity(managedObjectContext: managedObjectContext)
+        
+        
         fetchAllOfAnnotationEntity()
         
         menuFunction = .locate_vehicle
@@ -103,9 +109,19 @@ class HomeViewController: UIViewController {
         
     }
     
-    
-    
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        CoreDataStack.fetchTermsIsConfirmed(managedObjectContext: managedObjectContext) { (isConfirmed, err) in
+            
+            print("Is Confirmed: \(isConfirmed)")
+            if !isConfirmed {
+                self.presentTermsAndConditions()
+            }
+            
+        }
+        
+    }
     
     
     @IBAction func currentLocatioSwitchAction(_ sender: UISwitch) {
@@ -224,6 +240,13 @@ class HomeViewController: UIViewController {
     
     
     
+}
+// MARK:- Presenting the terms and conditions rule or terms of use
+extension HomeViewController {
+    
+    func presentTermsAndConditions() {
+        performSegue(withIdentifier: "termsSegue", sender: self)
+    }
 }
 
 

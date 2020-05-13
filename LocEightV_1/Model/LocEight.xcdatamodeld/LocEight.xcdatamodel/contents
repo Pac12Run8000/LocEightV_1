@@ -7,7 +7,11 @@
         <attribute name="subtitle" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="TermsEntity" representedClassName=".TermsEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="confirmed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
     <elements>
         <element name="AnnotationEntity" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="TermsEntity" positionX="-63" positionY="18" width="128" height="58"/>
     </elements>
 </model>

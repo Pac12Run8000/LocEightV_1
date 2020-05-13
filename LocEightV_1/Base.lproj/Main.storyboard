@@ -206,6 +206,7 @@
                         <outlet property="switchLabel" destination="dVG-Eg-rAg" id="TJ5-VI-o4K"/>
                         <outlet property="takePhotoButtonOutlet" destination="RZC-K6-VM6" id="xvP-og-hsC"/>
                         <segue destination="XpM-py-DVY" kind="presentation" identifier="dispayImageSegue" id="IIW-1w-JeY"/>
+                        <segue destination="GLM-7s-qke" kind="presentation" identifier="termsSegue" modalPresentationStyle="fullScreen" id="6HC-Wd-xhM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -351,6 +352,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxL-ca-sI4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-643" y="118"/>
+        </scene>
+        <!--Terms View Controller-->
+        <scene sceneID="c1i-GU-sK4">
+            <objects>
+                <viewController id="GLM-7s-qke" customClass="TermsViewController" customModule="LocEightV_1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SOe-rv-H6M">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vew-aU-AUx">
+                                <rect key="frame" x="0.0" y="74" width="414" height="638"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-Zf-bhp">
+                                <rect key="frame" x="20" y="732" width="374" height="35"/>
+                                <color key="backgroundColor" red="0.0078431372550000003" green="0.094117647060000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="dFB-6X-v3t"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="I agree the the terms of use.">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="termsButtonAction:" destination="GLM-7s-qke" eventType="touchUpInside" id="lv9-6k-qI1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vew-aU-AUx" firstAttribute="trailing" secondItem="U9R-Wi-eMd" secondAttribute="trailing" id="JyA-sK-bnK"/>
+                            <constraint firstItem="vew-aU-AUx" firstAttribute="leading" secondItem="U9R-Wi-eMd" secondAttribute="leading" id="W9M-te-dGf"/>
+                            <constraint firstItem="2iB-Zf-bhp" firstAttribute="leading" secondItem="U9R-Wi-eMd" secondAttribute="leading" constant="20" id="dDK-bv-pqx"/>
+                            <constraint firstItem="2iB-Zf-bhp" firstAttribute="top" secondItem="vew-aU-AUx" secondAttribute="bottom" constant="20" id="iQX-vd-slD"/>
+                            <constraint firstItem="vew-aU-AUx" firstAttribute="top" secondItem="U9R-Wi-eMd" secondAttribute="top" constant="30" id="pgg-PQ-mob"/>
+                            <constraint firstItem="U9R-Wi-eMd" firstAttribute="bottom" secondItem="vew-aU-AUx" secondAttribute="bottom" constant="150" id="u26-Zp-vI9"/>
+                            <constraint firstItem="U9R-Wi-eMd" firstAttribute="trailing" secondItem="2iB-Zf-bhp" secondAttribute="trailing" constant="20" id="weh-UG-l9l"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="U9R-Wi-eMd"/>
+                    </view>
+                    <connections>
+                        <outlet property="webKitView" destination="vew-aU-AUx" id="0ra-Mi-wOQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zL5-MP-VfC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-643.47826086956525" y="892.63392857142856"/>
         </scene>
     </scenes>
     <resources>
