@@ -48,7 +48,7 @@ class TermsViewController: UIViewController {
 
 }
 
-// MARK:-
+// MARK:- UI Layout
 extension TermsViewController {
     
     func configureUILayout() {
