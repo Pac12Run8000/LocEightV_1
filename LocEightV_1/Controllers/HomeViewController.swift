@@ -103,6 +103,7 @@ class HomeViewController: UIViewController {
         locationDisplaySwitchOutlet.layer.borderWidth = 1
         locationDisplaySwitchOutlet.layer.masksToBounds = true
         locationDisplaySwitchOutlet.layer.cornerRadius = 15
+        locationDisplaySwitchOutlet.layer.masksToBounds = true
         
         
         
