@@ -15,6 +15,7 @@
 		092DC09C245FF37E007A724B /* ShoppingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC09B245FF37E007A724B /* ShoppingAnnotation.swift */; };
 		092DC09E2460DB5D007A724B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC09D2460DB5D007A724B /* ColorPalette.swift */; };
 		092DC0A02461CE68007A724B /* LocEightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC09F2461CE68007A724B /* LocEightButton.swift */; };
+		0956B4722475D2E100E0E4D5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0956B4712475D2E100E0E4D5 /* WebKit.framework */; };
 		095AD2B6246B0F2100486929 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AD2B5246B0F2100486929 /* TermsViewController.swift */; };
 		095AD2B8246B873200486929 /* TermsAndConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095AD2B7246B873200486929 /* TermsAndConditions.swift */; };
 		09B505012444D7FC000DA639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B505002444D7FC000DA639 /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 		092DC09B245FF37E007A724B /* ShoppingAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingAnnotation.swift; sourceTree = "<group>"; };
 		092DC09D2460DB5D007A724B /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		092DC09F2461CE68007A724B /* LocEightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocEightButton.swift; sourceTree = "<group>"; };
+		0956B4712475D2E100E0E4D5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		095AD2B5246B0F2100486929 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		095AD2B7246B873200486929 /* TermsAndConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditions.swift; sourceTree = "<group>"; };
 		09B504FD2444D7FC000DA639 /* LocEightV_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocEightV_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0956B4722475D2E100E0E4D5 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,11 +88,20 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0956B4702475D2E100E0E4D5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0956B4712475D2E100E0E4D5 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		09B504F42444D7FC000DA639 = {
 			isa = PBXGroup;
 			children = (
 				09B504FF2444D7FC000DA639 /* LocEightV_1 */,
 				09B504FE2444D7FC000DA639 /* Products */,
+				0956B4702475D2E100E0E4D5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -422,7 +434,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GroverTech.LocEightV-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -440,7 +452,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GroverTech.LocEightV-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
