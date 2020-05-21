@@ -170,6 +170,7 @@ class HomeViewController: UIViewController {
         Alert.insureUserActionsAlert(vc: self, title: "Warning!", msg: "This action will clear your parking and current location. Do you want to do this?") { (areYouProceeding) in
             
             if areYouProceeding {
+                self.mapView.showsUserLocation = false
                 self.removeOverlays()
                 self.deleteAllOfAnnotationEntity()
                 self.clearAllMKAnnotations()
