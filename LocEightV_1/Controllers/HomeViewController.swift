@@ -627,7 +627,7 @@ extension HomeViewController {
     
     func setUpLocationManager() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
     }
     
     func retrieveCenterLocationOfParkedCarFromCoreData() -> AnnotationEntity? {
