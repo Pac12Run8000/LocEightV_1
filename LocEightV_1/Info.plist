@@ -15,17 +15,17 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>LocEight needs to access your camera for this functionality.</string>
+	<string>LocEight needs to access your camera so that you can take pictures that provide more informations about where you parked your vehicle.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location information is requested to set a placemark for your parking space.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>LocEight needs to access your photo library for this functionality.</string>
+	<string>LocEight needs to access your photo library so that you can take access photos that provide more informations about where you parked your vehicle.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
