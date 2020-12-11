@@ -155,6 +155,7 @@ class HomeViewController: UIViewController {
        
         Alert.insureUserActionsAlert(vc: self, title: "Warning!", msg: "This action will delete all previous parking information and reset to your NEW current location. Are you sure that you want to proceed?") { (areProceeding) in
             if areProceeding {
+                
                 self.removeOverlays()
                 self.clearAllMKAnnotations()
                 self.centerViewOnUserLocation()
@@ -673,6 +674,8 @@ extension HomeViewController {
     
     func centerViewOnUserLocation() {
         
+        
+        
         if let location = locationManager.location?.coordinate, let lat = location.latitude as? CLLocationDegrees, let long = location.longitude as? CLLocationDegrees, let clLocation = CLLocation(latitude: lat, longitude: long) as? CLLocation {
             
             // MARK:-  This is where my placeMarks functionality goes ...
@@ -744,6 +747,7 @@ extension HomeViewController {
             break
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
+            
             return false
             break
         case .restricted:

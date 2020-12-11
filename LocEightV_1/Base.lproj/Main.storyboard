@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -70,7 +72,7 @@
                                     <action selector="resetLocationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bDt-IV-oeR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w40-fU-7cp" customClass="LocEightButton" customModule="LocEightV_1" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w40-fU-7cp" customClass="LocEightButton" customModule="LocEightV_1" customModuleProvider="target">
                                 <rect key="frame" x="10" y="654" width="150" height="40"/>
                                 <color key="backgroundColor" red="0.043137254901960784" green="0.61960784313725492" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -123,11 +125,12 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pzc-J8-B8X">
                                 <rect key="frame" x="347" y="654" width="49" height="30"/>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.36078431370000003" blue="0.63529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Jjd-n5-sf3"/>
                                     <constraint firstAttribute="width" constant="47" id="Ljk-H2-cxI"/>
                                 </constraints>
+                                <color key="onTintColor" red="0.99842144690000001" green="0.46208797089999998" blue="0.51878210619999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" red="0.015686274510000001" green="0.74901960779999999" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="currentLocatioSwitchAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="ue5-ef-5gF"/>
                                 </connections>
@@ -136,7 +139,7 @@
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                                 <color key="color" red="0.0039215686269999999" green="0.08235294118" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZC-K6-VM6" customClass="LocEightButton" customModule="LocEightV_1" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZC-K6-VM6" customClass="LocEightButton" customModule="LocEightV_1" customModuleProvider="target">
                                 <rect key="frame" x="10" y="704" width="150" height="40"/>
                                 <color key="backgroundColor" red="0.043137254901960784" green="0.61960784313725492" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -164,6 +167,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.043137254901960784" green="0.61960784313725492" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="5Z8-6E-Ogc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="20R-GH-aVA"/>
@@ -194,7 +198,6 @@
                             <constraint firstItem="w40-fU-7cp" firstAttribute="top" secondItem="4IN-WP-YIF" secondAttribute="bottom" constant="10" id="z56-9f-1lG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="x0t-Oz-UeI" secondAttribute="trailing" id="zQy-3V-Lph"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="dct-zT-83J" id="pMn-VN-ch4"/>
@@ -229,13 +232,13 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="9h2-Yp-D64"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="CP1-Ng-fAp" firstAttribute="top" secondItem="9h2-Yp-D64" secondAttribute="top" constant="100" id="7pl-QS-eTU"/>
                             <constraint firstItem="9h2-Yp-D64" firstAttribute="trailing" secondItem="CP1-Ng-fAp" secondAttribute="trailing" constant="20" id="HYu-xC-Mk5"/>
                             <constraint firstItem="CP1-Ng-fAp" firstAttribute="leading" secondItem="9h2-Yp-D64" secondAttribute="leading" constant="20" id="gXB-bI-VWi"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="9h2-Yp-D64"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="CP1-Ng-fAp" id="V44-Q0-gdp"/>
@@ -275,7 +278,7 @@
                                     <constraint firstItem="JG2-b7-w7g" firstAttribute="leading" secondItem="rwP-IY-C9N" secondAttribute="leading" constant="20" id="ji4-BT-6si"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gg-gC-uEr">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gg-gC-uEr">
                                 <rect key="frame" x="20" y="140" width="165" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="165" id="TwW-Dr-BP1"/>
@@ -289,7 +292,7 @@
                                     <action selector="locateVehicleAction:" destination="11a-jf-jfF" eventType="touchUpInside" id="uqf-0e-HnL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lhc-s6-nng">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lhc-s6-nng">
                                 <rect key="frame" x="20" y="190" width="180" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="AXK-W1-xF7"/>
@@ -303,7 +306,7 @@
                                     <action selector="parkingGarageAction:" destination="11a-jf-jfF" eventType="touchUpInside" id="PWR-gp-AqB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-I3-kGH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-I3-kGH">
                                 <rect key="frame" x="20" y="240" width="165" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="5cB-J4-Mb8"/>
@@ -317,7 +320,7 @@
                                     <action selector="placesToEatAction:" destination="11a-jf-jfF" eventType="touchUpInside" id="oWD-iY-SSM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVS-lu-WuV">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVS-lu-WuV">
                                 <rect key="frame" x="20" y="290" width="165" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="165" id="CSw-NZ-oCK"/>
@@ -332,6 +335,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="zBc-4H-lBO"/>
                         <color key="backgroundColor" red="0.043137254899999998" green="0.61960784310000006" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="dNY-I3-kGH" firstAttribute="leading" secondItem="zBc-4H-lBO" secondAttribute="leading" constant="20" id="2g6-YV-g4V"/>
@@ -346,7 +350,6 @@
                             <constraint firstItem="rwP-IY-C9N" firstAttribute="trailing" secondItem="zBc-4H-lBO" secondAttribute="trailing" id="sNf-DO-dlF"/>
                             <constraint firstItem="1Gg-gC-uEr" firstAttribute="top" secondItem="rwP-IY-C9N" secondAttribute="bottom" constant="20" id="vXc-7E-g1j"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="zBc-4H-lBO"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxL-ca-sI4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -369,7 +372,7 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-Zf-bhp" customClass="LocEightButton" customModule="LocEightV_1" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-Zf-bhp" customClass="LocEightButton" customModule="LocEightV_1" customModuleProvider="target">
                                 <rect key="frame" x="20" y="732" width="374" height="35"/>
                                 <color key="backgroundColor" red="0.0078431372550000003" green="0.094117647060000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -395,7 +398,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="U9R-Wi-eMd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vew-aU-AUx" firstAttribute="trailing" secondItem="U9R-Wi-eMd" secondAttribute="trailing" id="JyA-sK-bnK"/>
                             <constraint firstItem="vew-aU-AUx" firstAttribute="leading" secondItem="U9R-Wi-eMd" secondAttribute="leading" id="W9M-te-dGf"/>
@@ -405,7 +409,6 @@
                             <constraint firstItem="U9R-Wi-eMd" firstAttribute="bottom" secondItem="vew-aU-AUx" secondAttribute="bottom" constant="150" id="u26-Zp-vI9"/>
                             <constraint firstItem="U9R-Wi-eMd" firstAttribute="trailing" secondItem="2iB-Zf-bhp" secondAttribute="trailing" constant="20" id="weh-UG-l9l"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="U9R-Wi-eMd"/>
                     </view>
                     <connections>
                         <outlet property="webKitView" destination="vew-aU-AUx" id="0ra-Mi-wOQ"/>
@@ -416,8 +419,25 @@
             <point key="canvasLocation" x="-643.47826086956525" y="892.63392857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="2iB-Zf-bhp">
+            <size key="intrinsicContentSize" width="265" height="33"/>
+        </designable>
+        <designable name="4IN-WP-YIF">
+            <size key="intrinsicContentSize" width="91" height="36"/>
+        </designable>
+        <designable name="RZC-K6-VM6">
+            <size key="intrinsicContentSize" width="47" height="36"/>
+        </designable>
+        <designable name="w40-fU-7cp">
+            <size key="intrinsicContentSize" width="82" height="36"/>
+        </designable>
+    </designables>
     <resources>
         <image name="building_pattern_1" width="4000" height="5000"/>
         <image name="sidebar.left" catalog="system" width="128" height="93"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
